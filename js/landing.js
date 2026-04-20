@@ -14,7 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Portal 3D tilt ---
   document.querySelectorAll('.portal').forEach(portal => {
+    let clearTimer = null;
+
     portal.addEventListener('mousemove', (e) => {
+      if (clearTimer) { clearTimeout(clearTimer); clearTimer = null; }
       const rect = portal.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -26,6 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     portal.addEventListener('mouseleave', () => {
       portal.style.transform = 'perspective(800px) rotateY(0) rotateX(0) translateY(0)';
       portal.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s ease, border-color 0.4s ease';
+      // After the return animation finishes, drop the inline transform so the
+      // card is no longer promoted to a GPU layer (prevents blurry text).
+      clearTimer = setTimeout(() => {
+        portal.style.transform = '';
+        clearTimer = null;
+      }, 650);
     });
   });
 
