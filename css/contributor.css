@@ -1,0 +1,274 @@
+/* ============================================
+   CONTRIBUTOR PAGE
+   ============================================ */
+
+:root {
+  --accent: var(--accent-contributor);
+  --accent-soft: var(--accent-contributor-soft);
+  --accent-glow: var(--accent-contributor-glow);
+}
+
+body {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+body.loaded { opacity: 1; }
+
+/* --- Bento Project Grid --- */
+.projects-bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(280px, auto);
+  gap: var(--space-md);
+}
+
+/* Featured card spans 2 columns */
+.project-card--featured {
+  grid-column: span 2;
+}
+
+.project-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s var(--ease-smooth),
+              box-shadow 0.5s ease,
+              border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 24px 64px rgba(13, 148, 99, 0.08);
+  border-color: var(--accent-contributor);
+}
+
+/* Top accent line that grows on hover */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-contributor), var(--accent-contributor-soft));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Diagonal bg decoration */
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  right: -30%;
+  width: 80%;
+  height: 80%;
+  background: var(--accent-contributor);
+  opacity: 0.02;
+  transform: rotate(-15deg);
+  border-radius: 40%;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover::after {
+  opacity: 0.04;
+}
+
+.project-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.project-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--accent-contributor-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-contributor);
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease-out-back);
+}
+
+.project-card:hover .project-card__icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.project-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.project-card__title {
+  font-size: var(--step-1);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.project-card__desc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-light);
+  position: relative;
+  z-index: 1;
+}
+
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.project-card__stack .tag {
+  font-size: 0.68rem;
+  padding: 3px 10px;
+  background: var(--accent-contributor-soft);
+  color: var(--accent-contributor);
+  border-color: transparent;
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--accent-contributor);
+  white-space: nowrap;
+  transition: gap 0.3s var(--ease-out-expo);
+}
+
+.project-card__link:hover {
+  gap: 10px;
+}
+
+/* --- GitHub Profile Block --- */
+.github-block {
+  margin-top: var(--space-xl);
+  background: var(--bg-dark);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative diagonal stripe */
+.github-block::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(135deg, transparent 40%, rgba(13, 148, 99, 0.08) 100%);
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
+
+.github-block__info {
+  position: relative;
+  z-index: 1;
+}
+
+.github-block__label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-contributor);
+  margin-bottom: var(--space-xs);
+}
+
+.github-block__name {
+  font-family: var(--font-heading);
+  font-size: var(--step-2);
+  font-weight: 700;
+  color: var(--text-on-dark);
+  margin-bottom: 0.25rem;
+}
+
+.github-block__stats {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.github-block__cta {
+  position: relative;
+  z-index: 1;
+}
+
+.github-block .btn {
+  border-color: var(--accent-contributor);
+  color: var(--accent-contributor);
+}
+
+.github-block .btn::before {
+  background: var(--accent-contributor);
+}
+
+.github-block .btn:hover {
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .projects-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-card--featured {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card--featured {
+    grid-column: span 1;
+  }
+
+  .github-block {
+    flex-direction: column;
+    text-align: center;
+  }
+}

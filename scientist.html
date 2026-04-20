@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientist — Aleksander Borodin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/scientist.css">
+</head>
+<body class="grain">
+
+  <!-- Floating shapes -->
+  <div class="geo-shapes" aria-hidden="true">
+    <div class="geo-shape geo-shape--1"></div>
+    <div class="geo-shape geo-shape--2"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span data-i18n="logo_text">AB</span>
+    </a>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links">
+      <li><a href="scientist.html" class="nav__link active" data-i18n="nav_scientist">Scientist</a></li>
+      <li><a href="contributor.html" class="nav__link" data-i18n="nav_contributor">Contributor</a></li>
+      <li><a href="professional.html" class="nav__link" data-i18n="nav_professional">Professional</a></li>
+      <li>
+        <div class="lang-toggle">
+          <button class="lang-toggle__btn active" data-lang="en">EN</button>
+          <button class="lang-toggle__btn" data-lang="ru">RU</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="page-hero__bg"></div>
+    <div class="container">
+      <h1 class="page-hero__title reveal" data-i18n="sci_hero_title">Research & Science</h1>
+      <p class="page-hero__subtitle reveal" data-i18n="sci_hero_desc">Exploring the boundaries of language model safety, knowledge extraction, and applied NLP. Every experiment is a question — every result, a new direction.</p>
+    </div>
+  </section>
+
+  <!-- Research Projects -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-header__label" data-i18n="sci_label">Research Projects</span>
+      </div>
+
+      <div class="research-grid">
+        <!-- Project 1: Prefix Injection -->
+        <div class="research-card reveal">
+          <div class="research-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div>
+            <h3 class="research-card__title" data-i18n="sci_proj1_title">Prefix Injection Jailbreak</h3>
+            <p class="research-card__desc" data-i18n="sci_proj1_desc">Researched prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. By simulating the start of a model's response to a forbidden query, models like Gemini 2.5 Pro and DeepSeek R1 were tricked into completing harmful answers — achieving near-100% success on MaliciousInstruct vs. near-zero baseline.</p>
+            <p class="research-card__stack" data-i18n="sci_proj1_stack">Python · LLM APIs · Prompt Engineering</p>
+            <a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" target="_blank" rel="noopener" class="research-card__link">
+              <span data-i18n="view_on_github">View on GitHub</span> &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: Edu Parser -->
+        <div class="research-card reveal">
+          <div class="research-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9 2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9 2.83-2.83"/></svg>
+          </div>
+          <div>
+            <h3 class="research-card__title" data-i18n="sci_proj2_title">Edu Parser — Knowledge Graph Extraction</h3>
+            <p class="research-card__desc" data-i18n="sci_proj2_desc">Built a system that parses lecture notes into entities and infers prerequisite relationships using BM25, embeddings, and LLM-based verification. Applied to 2 years of MIPT math notes — became the foundation for a flashcard-based lifelong learning app.</p>
+            <p class="research-card__stack" data-i18n="sci_proj2_stack">Python · BM25 · Embeddings · LLM · NetworkX</p>
+            <a href="https://github.com/aleksanderborodin/edu_parser" target="_blank" rel="noopener" class="research-card__link">
+              <span data-i18n="view_on_github">View on GitHub</span> &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education & Achievements -->
+      <div class="info-grid">
+        <div class="info-block reveal">
+          <span class="info-block__label" data-i18n="sci_education_label">Education</span>
+          <h4 class="info-block__title" data-i18n="sci_education_degree">Bachelor's degree (in progress)</h4>
+          <p class="info-block__subtitle" data-i18n="sci_education_school">FPMI MIPT — Applied Mathematics and Computer Science</p>
+          <p class="info-block__detail" data-i18n="sci_education_gpa">GPA: 7.8 / 10</p>
+          <p class="info-block__text" data-i18n="sci_education_courses">Relevant: Math Analysis, Probability Theory, Linear Algebra, Computational Complexity, Algorithms, ML, Physics, Economics</p>
+        </div>
+
+        <div class="info-block reveal">
+          <span class="info-block__label" data-i18n="sci_achievements_label">Achievements</span>
+          <ul class="achievement-list">
+            <li data-i18n="sci_achievement_1">Winner — International Experimental Physics Olympiad (IEPhO), 2023</li>
+            <li data-i18n="sci_achievement_2">Prize-winner — All-Russian Physics Olympiad, Grade 10 (2022) & Grade 11 (2023)</li>
+            <li data-i18n="sci_achievement_3">Winner — Team Wiki-races, Sirius, 2023</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__copy">&copy; 2025 <span data-i18n="footer_copy">Aleksander Borodin</span></span>
+        <ul class="footer__links">
+          <li><a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a></li>
+          <li><a href="mailto:apdorodin765@gmail.com" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a></li>
+        </ul>
+        <span class="footer__copy" data-i18n="footer_built">Built with curiosity</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

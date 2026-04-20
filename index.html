@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aleksander Borodin — NLP / AI Developer</title>
+  <meta name="description" content="Personal portfolio of Aleksander Borodin — NLP/AI Developer, researcher, and open-source contributor.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body class="grain">
+
+  <!-- Floating geometric shapes -->
+  <div class="geo-shapes" aria-hidden="true">
+    <div class="geo-shape geo-shape--1"></div>
+    <div class="geo-shape geo-shape--2"></div>
+    <div class="geo-shape geo-shape--3"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span data-i18n="logo_text">AB</span>
+    </a>
+
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav__links">
+      <li><a href="#scientist" class="nav__link" data-i18n="nav_scientist">Scientist</a></li>
+      <li><a href="#contributor" class="nav__link" data-i18n="nav_contributor">Contributor</a></li>
+      <li><a href="#professional" class="nav__link" data-i18n="nav_professional">Professional</a></li>
+      <li>
+        <div class="lang-toggle">
+          <button class="lang-toggle__btn active" data-lang="en">EN</button>
+          <button class="lang-toggle__btn" data-lang="ru">RU</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__text">
+          <p class="hero__greeting" data-i18n="landing_greeting">Hello, I'm</p>
+          <h1 class="hero__name">Aleksander Borodin</h1>
+          <p class="hero__role" data-i18n="landing_role">NLP / AI Developer</p>
+          <p class="hero__intro" data-i18n="landing_intro">MIPT student blending mathematics, machine learning, and a relentless curiosity for how language models think — and how to break them.</p>
+
+          <div class="hero__socials">
+            <a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="hero__social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:apdorodin765@gmail.com" class="hero__social-link" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+            <a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="hero__social-link" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__photo-wrapper">
+          <div class="hero__photo-ring" aria-hidden="true"></div>
+          <img src="https://avatars.githubusercontent.com/u/41406948?v=4" alt="Aleksander Borodin" class="hero__photo" width="286" height="286">
+          <span class="hero__photo-label">FPMI MIPT '27</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diagonal divider -->
+  <div class="landing-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,0 L1440,60 L1440,100 L0,100 Z" fill="var(--bg-secondary)" opacity="0.5"/>
+      <path d="M0,30 Q360,80 720,50 T1440,70 L1440,100 L0,100 Z" fill="var(--bg-secondary)"/>
+    </svg>
+  </div>
+
+  <!-- Marquee strip -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__inner">
+      <span class="marquee__item">RESEARCH <span class="dot"></span></span>
+      <span class="marquee__item">OPEN SOURCE <span class="dot"></span></span>
+      <span class="marquee__item">MACHINE LEARNING <span class="dot"></span></span>
+      <span class="marquee__item">NLP <span class="dot"></span></span>
+      <span class="marquee__item">LLM SAFETY <span class="dot"></span></span>
+      <span class="marquee__item">OPTIMIZATION <span class="dot"></span></span>
+      <span class="marquee__item">RESEARCH <span class="dot"></span></span>
+      <span class="marquee__item">OPEN SOURCE <span class="dot"></span></span>
+      <span class="marquee__item">MACHINE LEARNING <span class="dot"></span></span>
+      <span class="marquee__item">NLP <span class="dot"></span></span>
+      <span class="marquee__item">LLM SAFETY <span class="dot"></span></span>
+      <span class="marquee__item">OPTIMIZATION <span class="dot"></span></span>
+    </div>
+  </div>
+
+  <!-- Portal Cards -->
+  <section class="portals">
+    <div class="container">
+      <p class="portals__label" data-i18n="landing_explore">Explore my world</p>
+      <div class="portals__grid reveal">
+        <a href="#scientist" class="portal portal--scientist stagger shine-effect">
+          <div class="portal__glow"></div>
+          <div class="portal__diagonal" aria-hidden="true"></div>
+          <span class="portal__number">01</span>
+          <div class="portal__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16.5h10"/></svg>
+          </div>
+          <div class="portal__content">
+            <h3 class="portal__title" data-i18n="portal_scientist_title">Scientist</h3>
+            <p class="portal__desc" data-i18n="portal_scientist_desc">Research in LLM safety, jailbreaking, and knowledge extraction. Where curiosity meets rigor.</p>
+            <span class="portal__cta"><span data-i18n="portal_scientist_cta">View Research</span> <span class="portal__cta-arrow">&rarr;</span></span>
+          </div>
+        </a>
+        <a href="#contributor" class="portal portal--contributor stagger shine-effect">
+          <div class="portal__glow"></div>
+          <div class="portal__diagonal" aria-hidden="true"></div>
+          <span class="portal__number">02</span>
+          <div class="portal__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="portal__content">
+            <h3 class="portal__title" data-i18n="portal_contributor_title">Contributor</h3>
+            <p class="portal__desc" data-i18n="portal_contributor_desc">Open-source tools — from evolutionary AI agents to browser extensions that decode legalese.</p>
+            <span class="portal__cta"><span data-i18n="portal_contributor_cta">View Projects</span> <span class="portal__cta-arrow">&rarr;</span></span>
+          </div>
+        </a>
+        <a href="#professional" class="portal portal--professional stagger shine-effect">
+          <div class="portal__glow"></div>
+          <div class="portal__diagonal" aria-hidden="true"></div>
+          <span class="portal__number">03</span>
+          <div class="portal__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="portal__content">
+            <h3 class="portal__title" data-i18n="portal_professional_title">Professional</h3>
+            <p class="portal__desc" data-i18n="portal_professional_desc">Real-world impact: optimization algorithms, RAG systems, and data pipelines for production.</p>
+            <span class="portal__cta"><span data-i18n="portal_professional_cta">View Experience</span> <span class="portal__cta-arrow">&rarr;</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SCIENTIST SECTION
+       ==================================================================== -->
+  <section class="section section--scientist-preview" id="scientist">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-header__label" data-i18n="sci_label">Research Projects</span>
+        <h2 class="section-header__title" data-i18n="sci_hero_title">Research & Science</h2>
+        <p class="section-header__desc" data-i18n="sci_hero_desc">Exploring the boundaries of language model safety, knowledge extraction, and applied NLP. Every experiment is a question — every result, a new direction.</p>
+      </div>
+
+      <div class="reveal">
+        <div class="card" style="max-width:900px">
+          <h4 class="card__title" data-i18n="sci_proj1_title">Prefix Injection Jailbreak</h4>
+          <p class="card__desc" data-i18n="sci_proj1_desc">Researched prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. By simulating the start of a model's response to a forbidden query, models like Gemini 2.5 Pro and DeepSeek R1 were tricked into completing harmful answers — achieving near-100% success on MaliciousInstruct vs. near-zero baseline.</p>
+          <div style="margin-top:0.75rem"><span class="card__tag">Python</span><span class="card__tag">LLM APIs</span><span class="card__tag">Prompt Engineering</span></div>
+          <a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" target="_blank" rel="noopener" class="card__link"><span data-i18n="view_on_github">View on GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Education & Achievements -->
+      <div class="grid-2 reveal" style="margin-top:var(--space-lg)">
+        <div class="card stagger">
+          <span class="section-header__label" data-i18n="sci_education_label">Education</span>
+          <h4 class="card__title" style="margin-top:0.5rem" data-i18n="sci_education_degree">Bachelor's degree (in progress)</h4>
+          <p class="card__desc" style="margin-bottom:0.25rem" data-i18n="sci_education_school">FPMI MIPT — Applied Mathematics and Computer Science</p>
+          <p style="font-family:var(--font-mono);font-size:0.82rem;color:var(--text-muted);margin-bottom:0.5rem" data-i18n="sci_education_gpa">GPA: 7.8 / 10</p>
+          <p class="card__desc" style="font-size:0.88rem" data-i18n="sci_education_courses">Relevant: Math Analysis, Probability Theory, Linear Algebra, Computational Complexity, Algorithms, ML, Physics, Economics</p>
+        </div>
+        <div class="card stagger">
+          <span class="section-header__label" data-i18n="sci_achievements_label">Achievements</span>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem">
+            <li style="font-size:0.92rem;color:var(--text-secondary);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent-scientist);opacity:0.6"></span> <span data-i18n="sci_achievement_1">Winner — International Experimental Physics Olympiad (IEPhO), 2023</span></li>
+            <li style="font-size:0.92rem;color:var(--text-secondary);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent-scientist);opacity:0.6"></span> <span data-i18n="sci_achievement_2">Prize-winner — All-Russian Physics Olympiad, Grade 10 (2022) & Grade 11 (2023)</span></li>
+            <li style="font-size:0.92rem;color:var(--text-secondary);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent-scientist);opacity:0.6"></span> <span data-i18n="sci_achievement_3">Winner — Team Wiki-races, Sirius, 2023</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="divider-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 Q360,80 720,40 T1440,50 L1440,80 L0,80 Z" fill="var(--bg-secondary)"/>
+    </svg>
+  </div>
+
+  <!-- ====================================================================
+       CONTRIBUTOR SECTION
+       ==================================================================== -->
+  <section class="section divider-diagonal" id="contributor" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-header__label" style="--accent:var(--accent-contributor);color:var(--accent-contributor)" data-i18n="contrib_label">Projects</span>
+        <h2 class="section-header__title" data-i18n="contrib_hero_title">Open Source</h2>
+        <p class="section-header__desc" data-i18n="contrib_hero_desc">Building tools that solve real problems — then sharing them with the world. From multi-agent AI systems to browser extensions that protect users.</p>
+      </div>
+
+      <div class="grid-3 reveal">
+        <div class="card stagger" style="grid-column:span 2">
+          <h4 class="card__title" data-i18n="contrib_proj1_title">Idea Evolve</h4>
+          <p class="card__desc" data-i18n="contrib_proj1_desc">Evolutionary code optimization through collaborative AI agent work sessions. Multiple specialized Claude agents (architects, explorers, researchers) work in parallel to evolve increasingly better solutions to hard optimization problems.</p>
+          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Claude API</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Evolutionary</span></div>
+          <a href="https://github.com/aleksanderborodin/idea_evolve" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)"><span data-i18n="view_on_github">View on GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        </div>
+        <div class="card stagger">
+          <h4 class="card__title" data-i18n="contrib_proj2_title">Yoola Explain</h4>
+          <p class="card__desc" data-i18n="contrib_proj2_desc">A browser extension that simplifies Terms of Service by providing AI-generated summaries. Extracts ToS text, sends it to an LLM via OpenRouter, and returns structured summaries with key points, data collection info, and warnings. Multi-language support with caching.</p>
+          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">JavaScript</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">FastAPI</span></div>
+          <a href="https://github.com/aleksanderborodin/yoola_explain" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)">GitHub <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        </div>
+        <div class="card stagger">
+          <h4 class="card__title" data-i18n="contrib_proj3_title">Edu Parser</h4>
+          <p class="card__desc" data-i18n="contrib_proj3_desc">Open-source system for automatic analysis of educational content — extracting knowledge entities and prerequisite relationships from lecture materials using NLP and vector embeddings.</p>
+          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">BM25</span></div>
+          <a href="https://github.com/aleksanderborodin/edu_parser" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)">GitHub <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- GitHub profile block -->
+      <div style="margin-top:var(--space-lg);background:var(--bg-dark);border-radius:var(--radius-xl);padding:var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;position:relative;overflow:hidden" class="reveal">
+        <div style="position:absolute;top:-50%;right:-10%;width:60%;height:200%;background:linear-gradient(135deg,transparent 40%,rgba(13,148,99,0.08) 100%);transform:rotate(-15deg);pointer-events:none"></div>
+        <div style="position:relative;z-index:1">
+          <span style="font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-contributor)" data-i18n="contrib_github_label">GitHub Profile</span>
+          <h3 style="font-family:var(--font-heading);font-size:var(--step-2);font-weight:700;color:var(--text-on-dark);margin-top:0.25rem">@aleksanderborodin</h3>
+          <p style="font-size:0.95rem;color:var(--text-muted)" data-i18n="contrib_github_stats">12 public repositories</p>
+        </div>
+        <div style="position:relative;z-index:1">
+          <a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="btn" style="border-color:var(--accent-contributor);color:var(--accent-contributor)">
+            <span data-i18n="contrib_github_cta">View on GitHub</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PROFESSIONAL SECTION
+       ==================================================================== -->
+  <section class="section" id="professional">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-header__label" style="--accent:var(--accent-professional);color:var(--accent-professional)" data-i18n="prof_label">Experience</span>
+        <h2 class="section-header__title" data-i18n="prof_hero_title">Professional Work</h2>
+        <p class="section-header__desc" data-i18n="prof_hero_desc">Delivering measurable business impact through AI, optimization, and data engineering. Building systems that generate real value.</p>
+      </div>
+
+      <!-- Job card -->
+      <div class="card reveal" style="max-width:900px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
+          <h4 class="card__title" style="margin-bottom:0" data-i18n="prof_job1_title">Model & Algorithm Developer</h4>
+          <span class="card__tag" style="background:var(--accent-professional-soft);color:var(--accent-professional)" data-i18n="prof_job1_period">2024 — 2025</span>
+        </div>
+        <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem" data-i18n="prof_job1_company">Royal Credit Bank (Client Project)</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem">
+          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> <span data-i18n="prof_job1_item1">Developed and simulated a cash collection optimization algorithm; analysis of historical data projected a 20M RUB annual profit increase.</span></li>
+          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> <span data-i18n="prof_job1_item2">Engineered a web scraping and analysis system to extract key data from the central bank's website that was unavailable via API.</span></li>
+          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> <span data-i18n="prof_job1_item3">Built an internal RAG system to support business operations with document-based Q&A.</span></li>
+        </ul>
+        <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);margin-top:1rem" data-i18n="prof_job1_stack">Python · NumPy · Pandas · RAG · Web Scraping</p>
+      </div>
+
+      <!-- Modelgate -->
+      <div class="card reveal" style="max-width:900px;margin-top:var(--space-md)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
+          <h4 class="card__title" style="margin-bottom:0" data-i18n="prof_job2_title">Project Manager / Vibe-Coder</h4>
+          <span class="card__tag" style="background:var(--accent-professional-soft);color:var(--accent-professional)" data-i18n="prof_job2_period">2025 — Present</span>
+        </div>
+        <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem">
+          <a href="https://modelgate.ru" target="_blank" rel="noopener" style="color:var(--accent-professional);font-weight:600" data-i18n="prof_job2_company">ModelGate.ru</a>
+        </p>
+        <p class="card__desc" data-i18n="prof_job2_desc">LLM API gateway and proxy service. Managing product development and building features with AI-assisted coding workflows.</p>
+        <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);margin-top:1rem" data-i18n="prof_job2_stack">Python · LLM APIs · Product Management</p>
+      </div>
+
+      <!-- Skills -->
+      <div class="section-header reveal" style="margin-top:var(--space-xl)">
+        <span class="section-header__label" style="--accent:var(--accent-professional);color:var(--accent-professional)" data-i18n="prof_skills_label">Technical Skills</span>
+      </div>
+      <div class="grid-2 reveal">
+        <div class="card stagger">
+          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_programming">Programming</div>
+          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_programming_val">Python (advanced) · C++ (intermediate) · C · Assembler</div>
+        </div>
+        <div class="card stagger">
+          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_data">Data / ML</div>
+          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_data_val">PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · Excel</div>
+        </div>
+        <div class="card stagger">
+          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_nlp">NLP / LLM</div>
+          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_nlp_val">BM25 · Embeddings · RAG · LLM APIs · Evaluation · Prompt Engineering</div>
+        </div>
+        <div class="card stagger">
+          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_backend">Backend</div>
+          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_backend_val">FastAPI · LangChain · LangGraph</div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div style="margin-top:var(--space-xl);background:var(--bg-dark);border-radius:var(--radius-xl);padding:var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;position:relative;overflow:hidden" class="reveal">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(217,119,6,0.03) 40px,rgba(217,119,6,0.03) 80px);pointer-events:none"></div>
+        <div style="position:relative;z-index:1">
+          <span style="font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-professional)" data-i18n="prof_contact_label">Get in Touch</span>
+          <h3 style="font-size:var(--step-2);color:var(--text-on-dark);margin-top:0.25rem" data-i18n="prof_contact_desc">Interested in collaboration or have a project in mind? Let's talk.</h3>
+        </div>
+        <div style="display:flex;gap:var(--space-sm);position:relative;z-index:1;flex-wrap:wrap">
+          <a href="assets/CV_Borodin.pdf" download class="btn" style="border-color:var(--accent-professional);color:var(--accent-professional)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="prof_download_cv">Download CV</span>
+          </a>
+          <a href="mailto:apdorodin765@gmail.com" class="btn" style="border-color:var(--text-muted);color:var(--text-on-dark)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span data-i18n="prof_email">Email me</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__copy">&copy; 2026 <span data-i18n="footer_copy">Aleksander Borodin</span></span>
+        <ul class="footer__links">
+          <li><a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a></li>
+          <li><a href="mailto:apdorodin765@gmail.com" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a></li>
+          <li><a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
+            Telegram
+          </a></li>
+        </ul>
+        <span class="footer__copy" data-i18n="footer_built">Built with curiosity</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

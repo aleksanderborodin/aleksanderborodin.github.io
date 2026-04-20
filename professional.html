@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional — Aleksander Borodin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/professional.css">
+</head>
+<body class="grain">
+
+  <div class="geo-shapes" aria-hidden="true">
+    <div class="geo-shape geo-shape--3"></div>
+    <div class="geo-shape geo-shape--1"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span data-i18n="logo_text">AB</span>
+    </a>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links">
+      <li><a href="scientist.html" class="nav__link" data-i18n="nav_scientist">Scientist</a></li>
+      <li><a href="contributor.html" class="nav__link" data-i18n="nav_contributor">Contributor</a></li>
+      <li><a href="professional.html" class="nav__link active" data-i18n="nav_professional">Professional</a></li>
+      <li>
+        <div class="lang-toggle">
+          <button class="lang-toggle__btn active" data-lang="en">EN</button>
+          <button class="lang-toggle__btn" data-lang="ru">RU</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="page-hero__bg"></div>
+    <div class="container">
+      <h1 class="page-hero__title reveal" data-i18n="prof_hero_title">Professional Work</h1>
+      <p class="page-hero__subtitle reveal" data-i18n="prof_hero_desc">Delivering measurable business impact through AI, optimization, and data engineering. Building systems that generate real value.</p>
+    </div>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-header__label" data-i18n="prof_label">Experience</span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline__item reveal">
+          <span class="timeline__period" data-i18n="prof_job1_period">2024 — 2025</span>
+          <div class="timeline__card">
+            <h3 class="timeline__title" data-i18n="prof_job1_title">Model & Algorithm Developer</h3>
+            <p class="timeline__company" data-i18n="prof_job1_company">Regional Bank (Client Project)</p>
+            <ul class="timeline__list">
+              <li data-i18n="prof_job1_item1">Developed and simulated a cash collection optimization algorithm; analysis of historical data projected a 20M RUB annual profit increase.</li>
+              <li data-i18n="prof_job1_item2">Engineered a web scraping and analysis system to extract key data from the central bank's website that was unavailable via API.</li>
+              <li data-i18n="prof_job1_item3">Built an internal RAG system to support business operations with document-based Q&A.</li>
+            </ul>
+            <p class="timeline__stack" data-i18n="prof_job1_stack">Python · NumPy · Pandas · RAG · Web Scraping</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="skills-section">
+        <div class="section-header reveal">
+          <span class="section-header__label" data-i18n="prof_skills_label">Technical Skills</span>
+        </div>
+
+        <div class="skills-grid reveal">
+          <div class="skill-block stagger">
+            <div class="skill-block__label" data-i18n="prof_skill_programming">Programming</div>
+            <div class="skill-block__value" data-i18n="prof_skill_programming_val">Python (advanced) · C++ (intermediate) · C · Assembler</div>
+          </div>
+          <div class="skill-block stagger">
+            <div class="skill-block__label" data-i18n="prof_skill_data">Data / ML</div>
+            <div class="skill-block__value" data-i18n="prof_skill_data_val">PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · Excel</div>
+          </div>
+          <div class="skill-block stagger">
+            <div class="skill-block__label" data-i18n="prof_skill_nlp">NLP / LLM</div>
+            <div class="skill-block__value" data-i18n="prof_skill_nlp_val">BM25 · Embeddings · RAG · LLM APIs · Evaluation · Prompt Engineering</div>
+          </div>
+          <div class="skill-block stagger">
+            <div class="skill-block__label" data-i18n="prof_skill_backend">Backend</div>
+            <div class="skill-block__value" data-i18n="prof_skill_backend_val">FastAPI · LangChain · LangGraph</div>
+          </div>
+          <div class="skill-block stagger">
+            <div class="skill-block__label" data-i18n="prof_skill_systems">Systems</div>
+            <div class="skill-block__value" data-i18n="prof_skill_systems_val">Linux (home server admin, workstation usage)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="contact-section reveal">
+        <div class="contact-section__info">
+          <span class="contact-section__label" data-i18n="prof_contact_label">Get in Touch</span>
+          <h3 class="contact-section__title" data-i18n="prof_contact_desc">Interested in collaboration or have a project in mind? Let's talk.</h3>
+        </div>
+        <div class="contact-section__actions">
+          <a href="assets/CV_Borodin.pdf" download class="btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="prof_download_cv">Download CV</span>
+          </a>
+          <a href="mailto:apdorodin765@gmail.com" class="btn btn--outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span data-i18n="prof_email">Email me</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__copy">&copy; 2025 <span data-i18n="footer_copy">Aleksander Borodin</span></span>
+        <ul class="footer__links">
+          <li><a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a></li>
+          <li><a href="mailto:apdorodin765@gmail.com" class="footer__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a></li>
+        </ul>
+        <span class="footer__copy" data-i18n="footer_built">Built with curiosity</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>
