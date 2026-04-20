@@ -4,7 +4,7 @@
 
 I build and break language models. My research focuses on LLM safety and jailbreaking; on the engineering side I ship optimization algorithms, RAG systems, and multi-agent frameworks for production.
 
-**Portfolio →** [aleksanderborodin.github.io/personal_website](https://aleksanderborodin.github.io/personal_website/)
+**Portfolio →** [aleksanderborodin.github.io](https://aleksanderborodin.github.io/)
 
 ---
 
@@ -18,8 +18,8 @@ I build and break language models. My research focuses on LLM safety and jailbre
 
 | Project | What it is |
 |---|---|
-| **[Prefix Injection Jailbreak](https://github.com/aleksanderborodin/prefix_injection_jailbreak)** | Choice-Blindness-inspired prefix attacks on Gemini 2.5 Pro and DeepSeek R1. Near-100% attack success on MaliciousInstruct vs. near-zero baseline. [Writeup](https://aleksanderborodin.github.io/personal_website/projects/prefix-injection.html) |
-| **[Idea Evolve](https://github.com/aleksanderborodin/idea_evolve)** | Evolutionary multi-agent framework — specialized Claude agents (architects, explorers, researchers) evolve solutions in parallel. [Writeup](https://aleksanderborodin.github.io/personal_website/projects/idea-evolve.html) |
+| **[Prefix Injection Jailbreak](https://github.com/aleksanderborodin/prefix_injection_jailbreak)** | Choice-Blindness-inspired prefix attacks on Gemini 2.5 Pro and DeepSeek R1. Near-100% attack success on MaliciousInstruct vs. near-zero baseline. [Writeup](https://aleksanderborodin.github.io/projects/prefix-injection.html) |
+| **[Idea Evolve](https://github.com/aleksanderborodin/idea_evolve)** | Evolutionary multi-agent framework — specialized Claude agents (architects, explorers, researchers) evolve solutions in parallel. [Writeup](https://aleksanderborodin.github.io/projects/idea-evolve.html) |
 | **[Yoola Explain](https://github.com/aleksanderborodin/yoola_explain)** | Browser extension that summarizes Terms of Service via LLM (OpenRouter). Multi-language, cached. |
 
 ## Experience
@@ -36,6 +36,6 @@ Comfortable across the full LLM lifecycle: fine-tuning, evaluation, retrieval, a
 
 - Email — [apdorodin765@gmail.com](mailto:apdorodin765@gmail.com)
 - Telegram — [@aleksanderbor](https://t.me/aleksanderbor)
-- CV — [download PDF](https://aleksanderborodin.github.io/personal_website/assets/CV_Borodin.pdf)
+- CV — [download PDF](https://aleksanderborodin.github.io/assets/CV_Borodin.pdf)
 
 Open to research collaborations, internships, and consulting on LLM safety and applied NLP.

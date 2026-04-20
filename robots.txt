@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aleksanderborodin.github.io/personal_website/sitemap.xml
+Sitemap: https://aleksanderborodin.github.io/sitemap.xml

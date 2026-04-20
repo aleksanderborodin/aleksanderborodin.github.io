@@ -2,30 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://aleksanderborodin.github.io/personal_website/</loc>
+    <loc>https://aleksanderborodin.github.io/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/personal_website/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/personal_website/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/personal_website/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/"/>
   </url>
   <url>
-    <loc>https://aleksanderborodin.github.io/personal_website/projects/prefix-injection.html</loc>
+    <loc>https://aleksanderborodin.github.io/projects/prefix-injection.html</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/personal_website/projects/prefix-injection.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/personal_website/projects/prefix-injection.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/personal_website/projects/prefix-injection.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/projects/prefix-injection.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/projects/prefix-injection.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/projects/prefix-injection.html"/>
   </url>
   <url>
-    <loc>https://aleksanderborodin.github.io/personal_website/projects/idea-evolve.html</loc>
+    <loc>https://aleksanderborodin.github.io/projects/idea-evolve.html</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/personal_website/projects/idea-evolve.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/personal_website/projects/idea-evolve.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/personal_website/projects/idea-evolve.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/projects/idea-evolve.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/projects/idea-evolve.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/projects/idea-evolve.html"/>
   </url>
 </urlset>
