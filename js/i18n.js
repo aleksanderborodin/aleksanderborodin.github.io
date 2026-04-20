@@ -39,10 +39,6 @@ const translations = {
     sci_proj1_desc: "Researched prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. By simulating the start of a model's response to a forbidden query, models like Gemini 2.5 Pro and DeepSeek R1 were tricked into completing harmful answers — achieving near-100% success on MaliciousInstruct vs. near-zero baseline.",
     sci_proj1_stack: "Python · LLM APIs · Prompt Engineering",
 
-    sci_proj2_title: "Edu Parser — Knowledge Graph Extraction",
-    sci_proj2_desc: "Built a system that parses lecture notes into entities and infers prerequisite relationships using BM25, embeddings, and LLM-based verification. Applied to 2 years of MIPT math notes — became the foundation for a flashcard-based lifelong learning app.",
-    sci_proj2_stack: "Python · BM25 · Embeddings · LLM · NetworkX",
-
     sci_education_label: "Education",
     sci_education_degree: "Bachelor's degree (in progress)",
     sci_education_school: "FPMI MIPT — Applied Mathematics and Computer Science",
@@ -66,18 +62,6 @@ const translations = {
     contrib_proj2_title: "Yoola Explain",
     contrib_proj2_desc: "A browser extension that simplifies Terms of Service by providing AI-generated summaries. Extracts ToS text, sends it to an LLM via OpenRouter, and returns structured summaries with key points, data collection info, and warnings. Multi-language support with caching.",
     contrib_proj2_stack: "JavaScript · FastAPI · SQLite · OpenRouter",
-
-    contrib_proj3_title: "Edu Parser",
-    contrib_proj3_desc: "Open-source system for automatic analysis of educational content — extracting knowledge entities and prerequisite relationships from lecture materials using NLP and vector embeddings.",
-    contrib_proj3_stack: "Python · BM25 · Embeddings · LLM",
-
-    contrib_proj4_title: "Medic",
-    contrib_proj4_desc: "Telegram bot that orchestrates a group of AI agents working together. Open-source framework for multi-agent collaboration via messaging.",
-    contrib_proj4_stack: "Python · Telegram API · AI Agents",
-
-    contrib_proj5_title: "Flash Cards",
-    contrib_proj5_desc: "A flashcard-based learning application designed for spaced repetition and knowledge retention.",
-    contrib_proj5_stack: "Python",
 
     contrib_github_label: "GitHub Profile",
     contrib_github_stats: "12 public repositories",
@@ -206,10 +190,6 @@ const translations = {
     sci_proj1_desc: "Исследование префиксных атак на LLM, вдохновлённое экспериментами BBC по Choice Blindness. Имитируя начало ответа модели на запрещённый запрос, модели Gemini 2.5 Pro и DeepSeek R1 давали вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.",
     sci_proj1_stack: "Python · LLM API · Prompt Engineering",
 
-    sci_proj2_title: "Edu Parser — Граф знаний",
-    sci_proj2_desc: "Система парсинга лекционных заметок в сущности и определения пререквизитных связей с помощью BM25, эмбеддингов и LLM-верификации. Применена к 2 годам математических заметок МФТИ — стала основой приложения для обучения на основе флэш-карт.",
-    sci_proj2_stack: "Python · BM25 · Эмбеддинги · LLM · NetworkX",
-
     sci_education_label: "Образование",
     sci_education_degree: "Бакалавриат (в процессе)",
     sci_education_school: "ФПМИ МФТИ — Прикладная математика и информатика",
@@ -233,18 +213,6 @@ const translations = {
     contrib_proj2_title: "Yoola Explain",
     contrib_proj2_desc: "Браузерное расширение, упрощающее пользовательские соглашения с помощью ИИ-генерируемых резюме. Извлекает текст ToS, отправляет в LLM через OpenRouter и возвращает структурированные сводки с ключевыми пунктами и предупреждениями. Мультиязычность и кэширование.",
     contrib_proj2_stack: "JavaScript · FastAPI · SQLite · OpenRouter",
-
-    contrib_proj3_title: "Edu Parser",
-    contrib_proj3_desc: "Открытая система автоматического анализа образовательного контента — извлечение сущностей знаний и пререквизитных связей из лекционных материалов с помощью NLP и векторных представлений.",
-    contrib_proj3_stack: "Python · BM25 · Эмбеддинги · LLM",
-
-    contrib_proj4_title: "Medic",
-    contrib_proj4_desc: "Телеграм-бот, оркестрирующий группу ИИ-агентов для совместной работы. Открытый фреймворк для мульти-агентного взаимодействия через мессенджер.",
-    contrib_proj4_stack: "Python · Telegram API · ИИ-агенты",
-
-    contrib_proj5_title: "Flash Cards",
-    contrib_proj5_desc: "Приложение для обучения на основе флэш-карт с интервальным повторением и удержанием знаний.",
-    contrib_proj5_stack: "Python",
 
     contrib_github_label: "Профиль GitHub",
     contrib_github_stats: "12 публичных репозиториев",
