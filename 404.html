@@ -30,56 +30,84 @@
       z-index: 2;
     }
 
+    /* Three-accent gradient — ties all three site identities together */
     .not-found__code {
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: clamp(7rem, 20vw, 14rem);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: transparent;
-      -webkit-text-stroke: 2px var(--border);
-      background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+      font-size: clamp(6rem, 22vw, 15rem);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      background: linear-gradient(
+        125deg,
+        var(--accent-scientist) 10%,
+        var(--accent-contributor) 52%,
+        var(--accent-professional) 92%
+      );
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       user-select: none;
-      margin-bottom: 0.25em;
+      margin-bottom: var(--space-sm);
     }
 
+    /* Neutral mono badge — no arbitrary accent color */
     .not-found__label {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(196, 85, 58, 0.1);
-      border: 1px solid rgba(196, 85, 58, 0.2);
+      color: var(--text-muted);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 0.3em 0.9em;
+      padding: 0.35em 1em;
       display: inline-block;
       margin-bottom: var(--space-sm);
     }
 
     .not-found__title {
-      font-size: var(--step-2);
       font-family: var(--font-heading);
-      margin-bottom: 0.6em;
+      font-size: var(--step-2);
+      font-weight: 700;
+      letter-spacing: -0.025em;
       color: var(--text-primary);
+      margin-bottom: 0.5em;
     }
 
     .not-found__desc {
       color: var(--text-secondary);
       font-size: var(--step-0);
-      max-width: 42ch;
+      max-width: 44ch;
       margin: 0 auto var(--space-md);
-      line-height: 1.7;
+      line-height: 1.75;
     }
+
+    /* Developer-flavored error log */
+    .not-found__log {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.85;
+      color: rgba(245, 241, 235, 0.8);
+      background: var(--bg-dark);
+      border-radius: var(--radius-md);
+      padding: 1.1em 1.6em;
+      text-align: left;
+      margin: 0 auto var(--space-md);
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .not-found__log-muted { opacity: 0.38; }
+    .not-found__log-blue  { color: #7ba7f7; }
+    .not-found__log-green { color: #5dc9a0; }
+    .not-found__log-amber { color: #fbbf4e; }
 
     .not-found__actions {
       display: flex;
       gap: var(--space-sm);
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: var(--space-lg);
     }
 
     .btn {
@@ -89,22 +117,23 @@
       font-family: var(--font-body);
       font-weight: 600;
       font-size: 0.95rem;
-      padding: 0.75em 1.6em;
+      padding: 0.75em 1.75em;
       border-radius: var(--radius-md);
-      transition: all 0.25s var(--ease-out-expo);
+      transition: all 0.3s var(--ease-out-expo);
       cursor: pointer;
       text-decoration: none;
     }
 
+    /* Dark primary — fits parchment palette, no arbitrary accent */
     .btn--primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(196, 85, 58, 0.25);
+      background: var(--bg-dark);
+      color: var(--text-on-dark);
+      box-shadow: 0 4px 24px rgba(26, 26, 46, 0.18);
     }
 
     .btn--primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(196, 85, 58, 0.35);
+      box-shadow: 0 10px 36px rgba(26, 26, 46, 0.26);
     }
 
     .btn--ghost {
@@ -116,49 +145,109 @@
     .btn--ghost:hover {
       border-color: var(--text-muted);
       transform: translateY(-2px);
+      background: var(--bg-secondary);
     }
 
+    /* Quick-nav card — each section gets its own cell with colored hover */
     .not-found__nav-hint {
-      margin-top: var(--space-lg);
       display: flex;
-      gap: var(--space-md);
       flex-wrap: wrap;
       justify-content: center;
       list-style: none;
       padding: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface-elevated);
+      max-width: 560px;
+      width: 100%;
     }
+
+    .not-found__nav-hint li {
+      flex: 1;
+      min-width: 130px;
+      border-right: 1px solid var(--border);
+    }
+
+    .not-found__nav-hint li:last-child { border-right: none; }
 
     .not-found__nav-hint a {
-      font-size: 0.9rem;
-      color: var(--text-muted);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.4em;
-      transition: color 0.2s ease;
+      gap: 0.45em;
+      padding: 1.2em 0.75em;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-top: 2px solid transparent;
+      transition: all 0.22s var(--ease-out-expo);
     }
 
-    .not-found__nav-hint a:hover {
-      color: var(--text-primary);
+    .not-found__nav-hint li:nth-child(1) a:hover {
+      color: var(--accent-scientist);
+      background: var(--accent-scientist-soft);
+      border-top-color: var(--accent-scientist);
+    }
+
+    .not-found__nav-hint li:nth-child(2) a:hover {
+      color: var(--accent-contributor);
+      background: var(--accent-contributor-soft);
+      border-top-color: var(--accent-contributor);
+    }
+
+    .not-found__nav-hint li:nth-child(3) a:hover {
+      color: var(--accent-professional);
+      background: var(--accent-professional-soft);
+      border-top-color: var(--accent-professional);
+    }
+
+    .not-found__nav-hint li:nth-child(4) a:hover {
+      color: var(--accent-contributor);
+      background: var(--accent-contributor-soft);
+      border-top-color: var(--accent-contributor);
     }
 
     .not-found__nav-hint .dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       flex-shrink: 0;
+      transition: transform 0.2s var(--ease-out-back);
     }
 
-    /* Floating shapes (same as main site) */
+    .not-found__nav-hint a:hover .dot { transform: scale(1.5); }
+
+    /* Background shapes — one per section accent */
     .geo-shapes { pointer-events: none; position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+
     .geo-shape {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.035;
-      background: var(--accent);
     }
-    .geo-shape--1 { width: 500px; height: 500px; top: -10%; right: -8%; }
-    .geo-shape--2 { width: 300px; height: 300px; bottom: 5%; left: -5%; background: var(--accent-scientist); }
-    .geo-shape--3 { width: 200px; height: 200px; top: 55%; right: 20%; background: var(--accent-contributor); opacity: 0.025; }
+
+    .geo-shape--1 {
+      width: 600px; height: 600px;
+      top: -15%; right: -10%;
+      background: var(--accent-scientist);
+      opacity: 0.04;
+    }
+
+    .geo-shape--2 {
+      width: 380px; height: 380px;
+      bottom: -5%; left: -7%;
+      background: var(--accent-professional);
+      opacity: 0.04;
+    }
+
+    .geo-shape--3 {
+      width: 240px; height: 240px;
+      top: 52%; right: 16%;
+      background: var(--accent-contributor);
+      opacity: 0.03;
+    }
   </style>
 </head>
 <body class="grain">
@@ -197,6 +286,17 @@
       The URL may be mistyped, the page may have moved,
       or it was never here to begin with.
     </p>
+
+    <div class="not-found__log" aria-hidden="true">
+      <div class="not-found__log-muted">$ GET /[requested-path]</div>
+      <div><span class="not-found__log-amber">→</span> 404 Not Found</div>
+      <div class="not-found__log-muted">try instead:</div>
+      <div>
+        <span class="not-found__log-blue">·</span> /#scientist&nbsp;&nbsp;
+        <span class="not-found__log-green">·</span> /#contributor&nbsp;&nbsp;
+        <span class="not-found__log-amber">·</span> /#professional
+      </div>
+    </div>
 
     <div class="not-found__actions">
       <a href="/" class="btn btn--primary">
