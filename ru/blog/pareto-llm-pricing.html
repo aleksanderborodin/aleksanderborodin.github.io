@@ -41,6 +41,7 @@
     "description": "График интеллект × цена для сотен LLM показывает: большинство моделей бессмысленны. Вот Парето-фронт и четыре модели, которые стоит выбрать.",
     "url": "https://aleksanderborodin.github.io/ru/blog/pareto-llm-pricing.html",
     "datePublished": "2026-01-26",
+    "dateModified": "2026-04-21",
     "author": { "@id": "https://aleksanderborodin.github.io/#person" },
     "publisher": { "@id": "https://aleksanderborodin.github.io/#person" },
     "inLanguage": "ru",
@@ -104,7 +105,15 @@
 
         <p>Я построил график на данных <a href="https://artificialanalysis.ai/">artificialanalysis.ai</a>, где по оси X — цена, по оси Y — интеллект (композитный индекс из бенчмарков + несколько других вариантов). А также линию максимального интеллекта для данной цены (Парето-границу). Соответственно модели, не лежащие на этой линии, — бессмысленные: всегда можно найти модель не хуже за меньшую цену.</p>
 
-        <p><em>(Здесь должен быть интерактивный график с пятью вкладками — общий интеллект, кодинг, математика, LiveCodeBench, GPQA — и фильтром по провайдерам. Готовлю версию под стиль сайта; пока — короткие выводы ниже.)</em></p>
+        <figure class="chart-figure" style="margin: 2rem 0;">
+          <iframe src="/assets/pareto-llm-pricing/chart.html"
+                  title="Интерактивный Парето-фронт цены и интеллекта LLM"
+                  loading="lazy"
+                  style="width: 100%; height: 760px; border: 1px solid rgba(26,24,25,0.1); border-radius: 8px; background: #f5f1eb; display: block;"></iframe>
+          <figcaption style="font-size: 0.85em; color: #6b6461; margin-top: 0.5rem; text-align: center;">
+            Интерактив: цена × интеллект по пяти бенчмаркам. Ступенчатая линия — Парето-фронт; всё, что ниже, — модели, которые всегда можно заменить. Кликните по точке, чтобы увидеть детали.
+          </figcaption>
+        </figure>
 
         <p>По графику можно сказать, какие модели стоит выбрать:</p>
 

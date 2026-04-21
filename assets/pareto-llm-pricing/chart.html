@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Models: Cost vs Performance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600&family=Epilogue:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; overflow: hidden; }
+        body {
+            font-family: 'Epilogue', 'Segoe UI', system-ui, sans-serif;
+            background: #f5f1eb;
+            color: #1a1819;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 15px 20px;
+        }
+        .header { flex-shrink: 0; text-align: center; margin-bottom: 10px; }
+        h1 {
+            font-family: 'Syne', 'Segoe UI', system-ui, sans-serif;
+            font-size: 1.45em;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #1a1819;
+        }
+        .tabs { display: flex; gap: 7px; justify-content: center; margin: 10px 0; flex-wrap: wrap; }
+        .tab {
+            padding: 6px 15px;
+            background: transparent;
+            border: 1px solid rgba(26,24,25,0.18);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            letter-spacing: 0.03em;
+            color: #6b6461;
+            transition: all 0.2s;
+        }
+        .tab:hover { background: rgba(26,24,25,0.05); color: #1a1819; }
+        .tab.active {
+            background: #f4e6e8;
+            color: #7b2d3f;
+            border-color: #b47986;
+        }
+        .main { flex: 1; display: flex; gap: 14px; min-height: 0; }
+        .chart-container {
+            flex: 1;
+            background: #fff;
+            border: 1px solid rgba(26,24,25,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        .controls {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .control-group { display: flex; align-items: center; gap: 7px; }
+        .control-group label { color: #6b6461; font-size: 0.8em; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+        select {
+            background: #fff;
+            border: 1px solid rgba(26,24,25,0.2);
+            color: #1a1819;
+            padding: 5px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-family: 'Epilogue', system-ui, sans-serif;
+        }
+        select:focus { outline: none; border-color: #7b2d3f; }
+        input[type="checkbox"] { cursor: pointer; accent-color: #7b2d3f; }
+        .chart-wrap { flex: 1; position: relative; min-height: 0; }
+        #chart { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; }
+        .sidebar {
+            width: 255px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .info-box {
+            background: #fff;
+            border: 1px solid rgba(26,24,25,0.1);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .info-box h3 {
+            font-size: 0.68em;
+            font-family: 'JetBrains Mono', monospace;
+            color: #6b6461;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 8px;
+        }
+        .stats-row { display: flex; justify-content: space-around; text-align: center; }
+        .stat .number {
+            font-size: 1.5em;
+            font-weight: 700;
+            font-family: 'Syne', system-ui, sans-serif;
+            color: #7b2d3f;
+        }
+        .stat .label { font-size: 0.68em; color: #6b6461; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+        .legend { display: flex; flex-wrap: wrap; gap: 5px; }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.72em;
+            color: #4a3f3c;
+            cursor: pointer;
+            padding: 3px 7px;
+            border-radius: 10px;
+        }
+        .legend-item:hover { background: rgba(26,24,25,0.06); }
+        .legend-color { width: 8px; height: 8px; border-radius: 50%; }
+        .pareto-list { flex: 1; overflow-y: auto; min-height: 0; }
+        .pareto-item {
+            padding: 7px 9px;
+            background: rgba(123,45,63,0.05);
+            border-radius: 5px;
+            margin-bottom: 4px;
+            font-size: 0.75em;
+            border-left: 2px solid #7b2d3f;
+            cursor: pointer;
+        }
+        .pareto-item:hover { background: rgba(123,45,63,0.11); }
+        .pareto-item .name { color: #1a1819; font-weight: 500; }
+        .pareto-item .details { color: #6b6461; font-size: 0.9em; font-family: 'JetBrains Mono', monospace; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(26,24,25,0.45);
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+        .modal.active { display: flex; justify-content: center; align-items: center; }
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 22px;
+            max-width: 420px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 12px 40px rgba(26,24,25,0.18);
+            border: 1px solid rgba(26,24,25,0.1);
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px; right: 14px;
+            font-size: 1.4em;
+            cursor: pointer;
+            color: #6b6461;
+        }
+        .modal-close:hover { color: #1a1819; }
+        .modal h2 { color: #7b2d3f; font-size: 1.15em; font-family: 'Syne', system-ui, sans-serif; font-weight: 600; margin-bottom: 3px; }
+        .modal .provider { color: #6b6461; margin-bottom: 14px; font-size: 0.88em; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .stat-card { background: #f5f1eb; padding: 10px; border-radius: 6px; }
+        .stat-card.highlight {
+            background: rgba(123,45,63,0.08);
+            border: 1px solid rgba(123,45,63,0.22);
+        }
+        .stat-label {
+            font-size: 0.64em;
+            font-family: 'JetBrains Mono', monospace;
+            color: #6b6461;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 3px;
+        }
+        .stat-value { font-size: 1.05em; font-weight: 600; color: #1a1819; }
+        .pareto-badge {
+            display: inline-block;
+            background: #7b2d3f;
+            color: #fff;
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-size: 0.58em;
+            margin-left: 8px;
+            vertical-align: middle;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AI Models: Cost vs Performance</h1>
+        <div class="tabs" id="tabs"></div>
+    </div>
+
+    <div class="main">
+        <div class="chart-container">
+            <div class="controls">
+                <div class="control-group">
+                    <label>Scale:</label>
+                    <select id="scaleSelect">
+                        <option value="log">Log</option>
+                        <option value="linear">Linear</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <input type="checkbox" id="showPareto" checked>
+                    <label for="showPareto">Pareto Frontier</label>
+                </div>
+                <div class="control-group">
+                    <label>Labels:</label>
+                    <select id="labelMode">
+                        <option value="frontier">Frontier Only</option>
+                        <option value="all">All Models</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Provider:</label>
+                    <select id="providerFilter">
+                        <option value="all">All</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart-wrap">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="info-box">
+                <h3>Overview</h3>
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="number" id="modelCount">0</div>
+                        <div class="label">Models</div>
+                    </div>
+                    <div class="stat">
+                        <div class="number" id="paretoCount">0</div>
+                        <div class="label">Pareto Optimal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-box">
+                <h3>Providers</h3>
+                <div class="legend" id="legend"></div>
+            </div>
+            <div class="info-box pareto-list">
+                <h3>Pareto Optimal Models</h3>
+                <div id="paretoList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const rawData = [{"name": "GPT-5.2 (xhigh)", "provider": "OpenAI", "cost": 4.813, "input_price": "1.75", "output_price": "14", "tokens_per_sec": "113.333", "ttft": "30.425", "intelligence": 51.2, "coding_index": 48.7, "math_index": 99.0, "livecodebench": 0.889, "gpqa": 0.903}, {"name": "Claude Opus 4.5 (Reasoning)", "provider": "Anthropic", "cost": 10.0, "input_price": "5", "output_price": "25", "tokens_per_sec": "83.513", "ttft": "1.527", "intelligence": 49.7, "coding_index": 47.8, "math_index": 91.3, "livecodebench": 0.871, "gpqa": 0.866}, {"name": "GPT-5.2 Codex (xhigh)", "provider": "OpenAI", "cost": 4.813, "input_price": "1.75", "output_price": "14", "tokens_per_sec": "136.921", "ttft": "24.501", "intelligence": 49.0, "coding_index": 43.0, "math_index": null, "livecodebench": null, "gpqa": 0.899}, {"name": "Gemini 3 Pro Preview (high)", "provider": "Google", "cost": 4.5, "input_price": "2", "output_price": "12", "tokens_per_sec": "123.823", "ttft": "31.386", "intelligence": 48.4, "coding_index": 46.5, "math_index": 95.7, "livecodebench": 0.917, "gpqa": 0.908}, {"name": "GPT-5.1 (high)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "110.472", "ttft": "33.98", "intelligence": 47.6, "coding_index": 44.7, "math_index": 94.0, "livecodebench": 0.868, "gpqa": 0.873}, {"name": "GPT-5.2 (medium)", "provider": "OpenAI", "cost": 4.813, "input_price": "1.75", "output_price": "14", "tokens_per_sec": "0", "ttft": "0", "intelligence": 46.6, "coding_index": 44.2, "math_index": 96.7, "livecodebench": 0.894, "gpqa": 0.864}, {"name": "Gemini 3 Flash Preview (Reasoning)", "provider": "Google", "cost": 1.125, "input_price": "0.5", "output_price": "3", "tokens_per_sec": "200.219", "ttft": "14.067", "intelligence": 46.4, "coding_index": 42.6, "math_index": 97.0, "livecodebench": 0.908, "gpqa": 0.898}, {"name": "GPT-5 (high)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "127.095", "ttft": "91.549", "intelligence": 44.6, "coding_index": 36.0, "math_index": 94.3, "livecodebench": 0.846, "gpqa": 0.854}, {"name": "GPT-5 Codex (high)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "269.353", "ttft": "16.72", "intelligence": 44.5, "coding_index": 38.9, "math_index": 98.7, "livecodebench": 0.84, "gpqa": 0.837}, {"name": "Claude Opus 4.5 (Non-reasoning)", "provider": "Anthropic", "cost": 10.0, "input_price": "5", "output_price": "25", "tokens_per_sec": "79.682", "ttft": "1.698", "intelligence": 43.0, "coding_index": 42.9, "math_index": 62.7, "livecodebench": 0.738, "gpqa": 0.81}, {"name": "Claude 4.5 Sonnet (Reasoning)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "73.741", "ttft": "1.142", "intelligence": 42.9, "coding_index": 38.6, "math_index": 88.0, "livecodebench": 0.714, "gpqa": 0.834}, {"name": "GPT-5.1 Codex (high)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "261.087", "ttft": "11.351", "intelligence": 42.2, "coding_index": 36.6, "math_index": 95.7, "livecodebench": 0.849, "gpqa": 0.86}, {"name": "GLM-4.7 (Reasoning)", "provider": "Z AI", "cost": 0.875, "input_price": "0.5", "output_price": "2.1", "tokens_per_sec": "108.886", "ttft": "0.686", "intelligence": 42.0, "coding_index": 36.3, "math_index": 95.0, "livecodebench": 0.894, "gpqa": 0.859}, {"name": "GPT-5 (medium)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "131.336", "ttft": "40.643", "intelligence": 41.8, "coding_index": 39.0, "math_index": 91.7, "livecodebench": 0.703, "gpqa": 0.842}, {"name": "DeepSeek V3.2 (Reasoning)", "provider": "DeepSeek", "cost": 0.315, "input_price": "0.28", "output_price": "0.42", "tokens_per_sec": "30.927", "ttft": "1.214", "intelligence": 41.6, "coding_index": 36.7, "math_index": 92.0, "livecodebench": 0.862, "gpqa": 0.84}, {"name": "Grok 4", "provider": "xAI", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "45.719", "ttft": "14.514", "intelligence": 41.4, "coding_index": 40.5, "math_index": 92.7, "livecodebench": 0.819, "gpqa": 0.877}, {"name": "Gemini 3 Pro Preview (low)", "provider": "Google", "cost": 4.5, "input_price": "2", "output_price": "12", "tokens_per_sec": "132.491", "ttft": "3.981", "intelligence": 41.1, "coding_index": 39.4, "math_index": 86.7, "livecodebench": 0.857, "gpqa": 0.887}, {"name": "GPT-5 mini (high)", "provider": "OpenAI", "cost": 0.688, "input_price": "0.25", "output_price": "2", "tokens_per_sec": "74.907", "ttft": "104.599", "intelligence": 41.0, "coding_index": 35.3, "math_index": 90.7, "livecodebench": 0.838, "gpqa": 0.828}, {"name": "o3", "provider": "OpenAI", "cost": 3.5, "input_price": "2", "output_price": "8", "tokens_per_sec": "306.743", "ttft": "9.268", "intelligence": 40.9, "coding_index": 38.4, "math_index": 88.3, "livecodebench": 0.808, "gpqa": 0.827}, {"name": "Kimi K2 Thinking", "provider": "Kimi", "cost": 1.075, "input_price": "0.6", "output_price": "2.5", "tokens_per_sec": "84.836", "ttft": "0.633", "intelligence": 40.7, "coding_index": 34.8, "math_index": 94.7, "livecodebench": 0.853, "gpqa": 0.838}, {"name": "o3-pro", "provider": "OpenAI", "cost": 35.0, "input_price": "20", "output_price": "80", "tokens_per_sec": "41.736", "ttft": "73.818", "intelligence": 40.7, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": 0.845}, {"name": "MiniMax-M2.1", "provider": "MiniMax", "cost": 0.525, "input_price": "0.3", "output_price": "1.2", "tokens_per_sec": "69.977", "ttft": "1.376", "intelligence": 39.5, "coding_index": 32.8, "math_index": 82.7, "livecodebench": 0.81, "gpqa": 0.83}, {"name": "MiMo-V2-Flash (Reasoning)", "provider": "Xiaomi", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "94.544", "ttft": "2.431", "intelligence": 39.2, "coding_index": 31.8, "math_index": 96.3, "livecodebench": 0.868, "gpqa": 0.846}, {"name": "GPT-5 (low)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "126.503", "ttft": "22.049", "intelligence": 39.0, "coding_index": 30.7, "math_index": 83.0, "livecodebench": 0.763, "gpqa": 0.808}, {"name": "GPT-5 mini (medium)", "provider": "OpenAI", "cost": 0.688, "input_price": "0.25", "output_price": "2", "tokens_per_sec": "75.907", "ttft": "31.93", "intelligence": 38.8, "coding_index": 32.9, "math_index": 85.0, "livecodebench": 0.692, "gpqa": 0.803}, {"name": "Claude 4 Sonnet (Reasoning)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "77.118", "ttft": "1.712", "intelligence": 38.6, "coding_index": 34.1, "math_index": 74.3, "livecodebench": 0.655, "gpqa": 0.777}, {"name": "GPT-5.1 Codex mini (high)", "provider": "OpenAI", "cost": 0.688, "input_price": "0.25", "output_price": "2", "tokens_per_sec": "125.571", "ttft": "11.582", "intelligence": 38.5, "coding_index": 36.4, "math_index": 91.7, "livecodebench": 0.836, "gpqa": 0.813}, {"name": "Grok 4.1 Fast (Reasoning)", "provider": "xAI", "cost": 0.275, "input_price": "0.2", "output_price": "0.5", "tokens_per_sec": "174.644", "ttft": "12.042", "intelligence": 38.5, "coding_index": 30.9, "math_index": 89.3, "livecodebench": 0.822, "gpqa": 0.853}, {"name": "Claude 4.5 Sonnet (Non-reasoning)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "67.896", "ttft": "1.129", "intelligence": 37.1, "coding_index": 33.5, "math_index": 37.0, "livecodebench": 0.59, "gpqa": 0.727}, {"name": "Claude 4.5 Haiku (Reasoning)", "provider": "Anthropic", "cost": 2.0, "input_price": "1", "output_price": "5", "tokens_per_sec": "118.038", "ttft": "0.454", "intelligence": 37.0, "coding_index": 32.6, "math_index": 83.7, "livecodebench": 0.615, "gpqa": 0.672}, {"name": "KAT-Coder-Pro V1", "provider": "KwaiKAT", "cost": 0.525, "input_price": "0.3", "output_price": "1.2", "tokens_per_sec": "59.335", "ttft": "2.091", "intelligence": 36.1, "coding_index": 18.3, "math_index": 94.7, "livecodebench": 0.747, "gpqa": 0.764}, {"name": "MiniMax-M2", "provider": "MiniMax", "cost": 0.525, "input_price": "0.3", "output_price": "1.2", "tokens_per_sec": "70.108", "ttft": "1.272", "intelligence": 36.0, "coding_index": 29.2, "math_index": 78.3, "livecodebench": 0.826, "gpqa": 0.777}, {"name": "Nova 2.0 Pro Preview (medium)", "provider": "Amazon", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "138.419", "ttft": "17.531", "intelligence": 35.6, "coding_index": 30.4, "math_index": 89.0, "livecodebench": 0.73, "gpqa": 0.785}, {"name": "Gemini 3 Flash Preview (Non-reasoning)", "provider": "Google", "cost": 1.125, "input_price": "0.5", "output_price": "3", "tokens_per_sec": "166.237", "ttft": "0.777", "intelligence": 35.1, "coding_index": 37.8, "math_index": 55.7, "livecodebench": 0.797, "gpqa": 0.812}, {"name": "Grok 4 Fast (Reasoning)", "provider": "xAI", "cost": 0.275, "input_price": "0.2", "output_price": "0.5", "tokens_per_sec": "163.677", "ttft": "4.6", "intelligence": 34.9, "coding_index": 27.4, "math_index": 89.7, "livecodebench": 0.832, "gpqa": 0.847}, {"name": "Claude 3.7 Sonnet (Reasoning)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 34.6, "coding_index": 27.6, "math_index": 56.3, "livecodebench": 0.473, "gpqa": 0.772}, {"name": "Gemini 2.5 Pro", "provider": "Google", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "157.566", "ttft": "35.196", "intelligence": 34.5, "coding_index": 31.9, "math_index": 87.7, "livecodebench": 0.801, "gpqa": 0.844}, {"name": "DeepSeek V3.2 Speciale", "provider": "DeepSeek", "cost": 0.425, "input_price": "0.4", "output_price": "0.5", "tokens_per_sec": "0", "ttft": "0", "intelligence": 34.1, "coding_index": 37.9, "math_index": 96.7, "livecodebench": 0.896, "gpqa": 0.871}, {"name": "GLM-4.7 (Non-reasoning)", "provider": "Z AI", "cost": 0.938, "input_price": "0.55", "output_price": "2.15", "tokens_per_sec": "125.399", "ttft": "0.577", "intelligence": 34.1, "coding_index": 32.0, "math_index": 48.0, "livecodebench": 0.562, "gpqa": 0.664}, {"name": "DeepSeek V3.1 Terminus (Reasoning)", "provider": "DeepSeek", "cost": 0.8, "input_price": "0.4", "output_price": "2", "tokens_per_sec": "0", "ttft": "0", "intelligence": 33.8, "coding_index": 33.7, "math_index": 89.7, "livecodebench": 0.798, "gpqa": 0.792}, {"name": "GPT-5.2 (Non-reasoning)", "provider": "OpenAI", "cost": 4.813, "input_price": "1.75", "output_price": "14", "tokens_per_sec": "75.852", "ttft": "0.542", "intelligence": 33.5, "coding_index": 34.7, "math_index": 51.0, "livecodebench": 0.669, "gpqa": 0.712}, {"name": "Doubao Seed Code", "provider": "ByteDance Seed", "cost": 0.407, "input_price": "0.17", "output_price": "1.12", "tokens_per_sec": "36.881", "ttft": "2.029", "intelligence": 33.5, "coding_index": 31.3, "math_index": 79.3, "livecodebench": 0.766, "gpqa": 0.764}, {"name": "gpt-oss-120B (high)", "provider": "OpenAI", "cost": 0.263, "input_price": "0.15", "output_price": "0.6", "tokens_per_sec": "315.145", "ttft": "0.419", "intelligence": 33.3, "coding_index": 28.6, "math_index": 93.4, "livecodebench": 0.878, "gpqa": 0.782}, {"name": "o4-mini (high)", "provider": "OpenAI", "cost": 1.925, "input_price": "1.1", "output_price": "4.4", "tokens_per_sec": "150.366", "ttft": "51.677", "intelligence": 33.0, "coding_index": 25.6, "math_index": 90.7, "livecodebench": 0.859, "gpqa": 0.784}, {"name": "Claude 4 Sonnet (Non-reasoning)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "73.942", "ttft": "1.958", "intelligence": 33.0, "coding_index": 30.6, "math_index": 38.0, "livecodebench": 0.449, "gpqa": 0.683}, {"name": "DeepSeek V3.2 Exp (Reasoning)", "provider": "DeepSeek", "cost": 0.315, "input_price": "0.28", "output_price": "0.42", "tokens_per_sec": "31.098", "ttft": "1.228", "intelligence": 32.9, "coding_index": 33.3, "math_index": 87.7, "livecodebench": 0.789, "gpqa": 0.797}, {"name": "Qwen3 Max Thinking", "provider": "Alibaba", "cost": 2.4, "input_price": "1.2", "output_price": "6", "tokens_per_sec": "42.298", "ttft": "1.776", "intelligence": 32.5, "coding_index": 24.5, "math_index": 82.3, "livecodebench": 0.535, "gpqa": 0.776}, {"name": "GLM-4.6 (Reasoning)", "provider": "Z AI", "cost": 0.981, "input_price": "0.575", "output_price": "2.2", "tokens_per_sec": "88.708", "ttft": "0.504", "intelligence": 32.5, "coding_index": 29.5, "math_index": 86.0, "livecodebench": 0.695, "gpqa": 0.78}, {"name": "DeepSeek V3.2 (Non-reasoning)", "provider": "DeepSeek", "cost": 0.315, "input_price": "0.28", "output_price": "0.42", "tokens_per_sec": "30.165", "ttft": "1.137", "intelligence": 32.1, "coding_index": 34.6, "math_index": 59.0, "livecodebench": 0.593, "gpqa": 0.751}, {"name": "Grok 3 mini Reasoning (high)", "provider": "xAI", "cost": 0.35, "input_price": "0.3", "output_price": "0.5", "tokens_per_sec": "195.359", "ttft": "0.67", "intelligence": 32.0, "coding_index": 25.2, "math_index": 84.7, "livecodebench": 0.696, "gpqa": 0.791}, {"name": "Nova 2.0 Pro Preview (low)", "provider": "Amazon", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "134.847", "ttft": "12.915", "intelligence": 31.9, "coding_index": 24.5, "math_index": 63.3, "livecodebench": 0.638, "gpqa": 0.751}, {"name": "Claude 4.1 Opus (Reasoning)", "provider": "Anthropic", "cost": 30.0, "input_price": "15", "output_price": "75", "tokens_per_sec": "49.216", "ttft": "1.199", "intelligence": 31.9, "coding_index": 36.5, "math_index": 80.3, "livecodebench": 0.654, "gpqa": 0.809}, {"name": "Qwen3 Max", "provider": "Alibaba", "cost": 2.4, "input_price": "1.2", "output_price": "6", "tokens_per_sec": "32.925", "ttft": "2.001", "intelligence": 31.3, "coding_index": 26.4, "math_index": 80.7, "livecodebench": 0.767, "gpqa": 0.764}, {"name": "Gemini 2.5 Flash Preview (Sep '25) (Reasoning)", "provider": "Google", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "302.911", "ttft": "10.263", "intelligence": 31.1, "coding_index": 24.6, "math_index": 78.3, "livecodebench": 0.713, "gpqa": 0.793}, {"name": "Claude 4.5 Haiku (Non-reasoning)", "provider": "Anthropic", "cost": 2.0, "input_price": "1", "output_price": "5", "tokens_per_sec": "108.718", "ttft": "0.472", "intelligence": 31.0, "coding_index": 29.6, "math_index": 39.0, "livecodebench": 0.511, "gpqa": 0.646}, {"name": "Kimi K2 0905", "provider": "Kimi", "cost": 1.2, "input_price": "0.99", "output_price": "2.5", "tokens_per_sec": "54.857", "ttft": "0.617", "intelligence": 30.8, "coding_index": 25.9, "math_index": 57.3, "livecodebench": 0.61, "gpqa": 0.767}, {"name": "Claude 3.7 Sonnet (Non-reasoning)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 30.8, "coding_index": 26.7, "math_index": 21.0, "livecodebench": 0.394, "gpqa": 0.656}, {"name": "o1", "provider": "OpenAI", "cost": 26.25, "input_price": "15", "output_price": "60", "tokens_per_sec": "176.896", "ttft": "17.974", "intelligence": 30.7, "coding_index": 20.5, "math_index": null, "livecodebench": 0.679, "gpqa": 0.747}, {"name": "MiMo-V2-Flash (Non-reasoning)", "provider": "Xiaomi", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "86.928", "ttft": "5.662", "intelligence": 30.6, "coding_index": 25.8, "math_index": 67.7, "livecodebench": 0.402, "gpqa": 0.656}, {"name": "Gemini 2.5 Pro Preview (Mar' 25)", "provider": "Google", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "0", "ttft": "0", "intelligence": 30.3, "coding_index": 46.7, "math_index": null, "livecodebench": 0.778, "gpqa": 0.836}, {"name": "GLM-4.7-Flash (Reasoning)", "provider": "Z AI", "cost": 0.152, "input_price": "0.07", "output_price": "0.4", "tokens_per_sec": "56.674", "ttft": "10.582", "intelligence": 30.1, "coding_index": 25.9, "math_index": null, "livecodebench": null, "gpqa": 0.581}, {"name": "GLM-4.6 (Non-reasoning)", "provider": "Z AI", "cost": 1.0, "input_price": "0.6", "output_price": "2.2", "tokens_per_sec": "56.891", "ttft": "10.739", "intelligence": 30.1, "coding_index": 30.2, "math_index": 44.3, "livecodebench": 0.561, "gpqa": 0.632}, {"name": "Nova 2.0 Lite (medium)", "provider": "Amazon", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "245.539", "ttft": "14.765", "intelligence": 29.6, "coding_index": 23.9, "math_index": 88.7, "livecodebench": 0.663, "gpqa": 0.768}, {"name": "Qwen3 235B A22B 2507 (Reasoning)", "provider": "Alibaba", "cost": 2.625, "input_price": "0.7", "output_price": "8.4", "tokens_per_sec": "69.935", "ttft": "1.228", "intelligence": 29.5, "coding_index": 23.2, "math_index": 91.0, "livecodebench": 0.788, "gpqa": 0.79}, {"name": "Gemini 2.5 Pro Preview (May' 25)", "provider": "Google", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "0", "ttft": "0", "intelligence": 29.5, "coding_index": null, "math_index": null, "livecodebench": 0.77, "gpqa": 0.822}, {"name": "ERNIE 5.0 Thinking Preview", "provider": "Baidu", "cost": 1.472, "input_price": "0.84", "output_price": "3.37", "tokens_per_sec": "26.345", "ttft": "4.23", "intelligence": 29.1, "coding_index": 29.2, "math_index": 85.0, "livecodebench": 0.812, "gpqa": 0.777}, {"name": "Grok Code Fast 1", "provider": "xAI", "cost": 0.525, "input_price": "0.2", "output_price": "1.5", "tokens_per_sec": "235.946", "ttft": "7.388", "intelligence": 28.7, "coding_index": 23.7, "math_index": 43.3, "livecodebench": 0.657, "gpqa": 0.727}, {"name": "DeepSeek V3.1 Terminus (Non-reasoning)", "provider": "DeepSeek", "cost": 0.8, "input_price": "0.4", "output_price": "1.68", "tokens_per_sec": "0", "ttft": "0", "intelligence": 28.4, "coding_index": 31.9, "math_index": 53.7, "livecodebench": 0.529, "gpqa": 0.751}, {"name": "DeepSeek V3.2 Exp (Non-reasoning)", "provider": "DeepSeek", "cost": 0.315, "input_price": "0.28", "output_price": "0.42", "tokens_per_sec": "31.228", "ttft": "1.278", "intelligence": 28.3, "coding_index": 30.0, "math_index": 57.7, "livecodebench": 0.554, "gpqa": 0.738}, {"name": "DeepSeek V3.1 (Non-reasoning)", "provider": "DeepSeek", "cost": 0.84, "input_price": "0.56", "output_price": "1.68", "tokens_per_sec": "0", "ttft": "0", "intelligence": 28.0, "coding_index": 28.4, "math_index": 49.7, "livecodebench": 0.577, "gpqa": 0.735}, {"name": "Nova 2.0 Omni (medium)", "provider": "Amazon", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "0", "ttft": "0", "intelligence": 27.9, "coding_index": 15.1, "math_index": 89.7, "livecodebench": 0.66, "gpqa": 0.76}, {"name": "DeepSeek V3.1 (Reasoning)", "provider": "DeepSeek", "cost": 0.865, "input_price": "0.59", "output_price": "1.69", "tokens_per_sec": "0", "ttft": "0", "intelligence": 27.6, "coding_index": 29.7, "math_index": 89.7, "livecodebench": 0.784, "gpqa": 0.779}, {"name": "Qwen3 VL 235B A22B (Reasoning)", "provider": "Alibaba", "cost": 2.625, "input_price": "0.7", "output_price": "8.4", "tokens_per_sec": "43.882", "ttft": "1.085", "intelligence": 27.5, "coding_index": 20.9, "math_index": 88.3, "livecodebench": 0.646, "gpqa": 0.772}, {"name": "GPT-5.1 (Non-reasoning)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "80.258", "ttft": "0.753", "intelligence": 27.4, "coding_index": 27.3, "math_index": 38.0, "livecodebench": 0.494, "gpqa": 0.643}, {"name": "Claude 4 Opus (Reasoning)", "provider": "Anthropic", "cost": 30.0, "input_price": "15", "output_price": "75", "tokens_per_sec": "46.607", "ttft": "1.11", "intelligence": 27.4, "coding_index": 34.0, "math_index": 73.3, "livecodebench": 0.636, "gpqa": 0.796}, {"name": "Magistral Medium 1.2", "provider": "Mistral", "cost": 2.75, "input_price": "2", "output_price": "5", "tokens_per_sec": "49.339", "ttft": "0.478", "intelligence": 27.0, "coding_index": 21.7, "math_index": 82.0, "livecodebench": 0.75, "gpqa": 0.739}, {"name": "DeepSeek R1 0528 (May '25)", "provider": "DeepSeek", "cost": 2.362, "input_price": "1.35", "output_price": "4.2", "tokens_per_sec": "0", "ttft": "0", "intelligence": 27.0, "coding_index": 24.0, "math_index": 76.0, "livecodebench": 0.77, "gpqa": 0.813}, {"name": "Gemini 2.5 Flash (Reasoning)", "provider": "Google", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "279.711", "ttft": "17.028", "intelligence": 26.8, "coding_index": 22.2, "math_index": 73.3, "livecodebench": 0.695, "gpqa": 0.79}, {"name": "GPT-5 nano (high)", "provider": "OpenAI", "cost": 0.138, "input_price": "0.05", "output_price": "0.4", "tokens_per_sec": "137.632", "ttft": "109.188", "intelligence": 26.7, "coding_index": 20.3, "math_index": 83.7, "livecodebench": 0.789, "gpqa": 0.676}, {"name": "Qwen3 Next 80B A3B (Reasoning)", "provider": "Alibaba", "cost": 1.875, "input_price": "0.5", "output_price": "6", "tokens_per_sec": "174.384", "ttft": "1.033", "intelligence": 26.5, "coding_index": 19.5, "math_index": 84.3, "livecodebench": 0.784, "gpqa": 0.759}, {"name": "GLM-4.5 (Reasoning)", "provider": "Z AI", "cost": 1.0, "input_price": "0.6", "output_price": "2.2", "tokens_per_sec": "45.981", "ttft": "0.723", "intelligence": 26.2, "coding_index": 26.3, "math_index": 73.7, "livecodebench": 0.738, "gpqa": 0.782}, {"name": "Qwen3 Max (Preview)", "provider": "Alibaba", "cost": 2.4, "input_price": "1.2", "output_price": "6", "tokens_per_sec": "39.243", "ttft": "1.75", "intelligence": 26.1, "coding_index": 25.5, "math_index": 75.0, "livecodebench": 0.651, "gpqa": 0.764}, {"name": "o3-mini", "provider": "OpenAI", "cost": 1.925, "input_price": "1.1", "output_price": "4.4", "tokens_per_sec": "164.903", "ttft": "15.15", "intelligence": 25.9, "coding_index": 17.9, "math_index": null, "livecodebench": 0.717, "gpqa": 0.748}, {"name": "Kimi K2", "provider": "Kimi", "cost": 1.075, "input_price": "0.6", "output_price": "2.5", "tokens_per_sec": "40.079", "ttft": "0.752", "intelligence": 25.9, "coding_index": 22.1, "math_index": 57.0, "livecodebench": 0.556, "gpqa": 0.766}, {"name": "o1-pro", "provider": "OpenAI", "cost": 262.5, "input_price": "150", "output_price": "600", "tokens_per_sec": "0", "ttft": "0", "intelligence": 25.8, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "GPT-5 nano (medium)", "provider": "OpenAI", "cost": 0.138, "input_price": "0.05", "output_price": "0.4", "tokens_per_sec": "128.275", "ttft": "51.584", "intelligence": 25.7, "coding_index": 22.9, "math_index": 78.3, "livecodebench": 0.763, "gpqa": 0.67}, {"name": "GPT-4.1", "provider": "OpenAI", "cost": 3.5, "input_price": "2", "output_price": "8", "tokens_per_sec": "93.563", "ttft": "0.46", "intelligence": 25.6, "coding_index": 21.8, "math_index": 34.7, "livecodebench": 0.457, "gpqa": 0.666}, {"name": "Gemini 2.5 Flash Preview (Sep '25) (Non-reasoning)", "provider": "Google", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "258.169", "ttft": "0.365", "intelligence": 25.5, "coding_index": 22.1, "math_index": 56.7, "livecodebench": 0.625, "gpqa": 0.766}, {"name": "o3-mini (high)", "provider": "OpenAI", "cost": 1.925, "input_price": "1.1", "output_price": "4.4", "tokens_per_sec": "152.157", "ttft": "48.981", "intelligence": 25.1, "coding_index": 17.3, "math_index": null, "livecodebench": 0.734, "gpqa": 0.773}, {"name": "Grok 3", "provider": "xAI", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "58.977", "ttft": "0.747", "intelligence": 25.0, "coding_index": 19.8, "math_index": 58.0, "livecodebench": 0.425, "gpqa": 0.693}, {"name": "Seed-OSS-36B-Instruct", "provider": "ByteDance Seed", "cost": 0.3, "input_price": "0.21", "output_price": "0.57", "tokens_per_sec": "28.017", "ttft": "1.647", "intelligence": 25.0, "coding_index": 16.7, "math_index": 84.7, "livecodebench": 0.765, "gpqa": 0.726}, {"name": "Qwen3 235B A22B 2507 Instruct", "provider": "Alibaba", "cost": 1.225, "input_price": "0.7", "output_price": "2.8", "tokens_per_sec": "45.766", "ttft": "1.211", "intelligence": 24.7, "coding_index": 22.1, "math_index": 71.7, "livecodebench": 0.524, "gpqa": 0.753}, {"name": "Qwen3 Coder 480B A35B Instruct", "provider": "Alibaba", "cost": 3.0, "input_price": "1.5", "output_price": "7.5", "tokens_per_sec": "50.709", "ttft": "1.654", "intelligence": 24.6, "coding_index": 24.6, "math_index": 39.3, "livecodebench": 0.585, "gpqa": 0.618}, {"name": "gpt-oss-20B (high)", "provider": "OpenAI", "cost": 0.1, "input_price": "0.07", "output_price": "0.2", "tokens_per_sec": "308.191", "ttft": "0.405", "intelligence": 24.5, "coding_index": 18.5, "math_index": 89.3, "livecodebench": 0.777, "gpqa": 0.688}, {"name": "Qwen3 VL 32B (Reasoning)", "provider": "Alibaba", "cost": 2.625, "input_price": "0.7", "output_price": "8.4", "tokens_per_sec": "50.239", "ttft": "0.972", "intelligence": 24.5, "coding_index": 14.5, "math_index": 84.7, "livecodebench": 0.738, "gpqa": 0.733}, {"name": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)", "provider": "NVIDIA", "cost": 0.105, "input_price": "0.06", "output_price": "0.24", "tokens_per_sec": "152.45", "ttft": "0.496", "intelligence": 24.3, "coding_index": 19.0, "math_index": 91.0, "livecodebench": 0.741, "gpqa": 0.757}, {"name": "MiniMax M1 80k", "provider": "MiniMax", "cost": 0.963, "input_price": "0.55", "output_price": "2.2", "tokens_per_sec": "0", "ttft": "0", "intelligence": 24.3, "coding_index": 14.5, "math_index": 61.0, "livecodebench": 0.711, "gpqa": 0.697}, {"name": "Nova 2.0 Lite (low)", "provider": "Amazon", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "237.268", "ttft": "7.127", "intelligence": 24.2, "coding_index": 13.6, "math_index": 46.7, "livecodebench": 0.469, "gpqa": 0.698}, {"name": "gpt-oss-120B (low)", "provider": "OpenAI", "cost": 0.263, "input_price": "0.15", "output_price": "0.595", "tokens_per_sec": "280.123", "ttft": "0.414", "intelligence": 23.9, "coding_index": 15.5, "math_index": 66.7, "livecodebench": 0.707, "gpqa": 0.672}, {"name": "o1-preview", "provider": "OpenAI", "cost": 28.875, "input_price": "16.5", "output_price": "66", "tokens_per_sec": "0", "ttft": "0", "intelligence": 23.7, "coding_index": 34.0, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "GPT-5 (minimal)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "94.911", "ttft": "0.982", "intelligence": 23.7, "coding_index": 25.1, "math_index": 31.7, "livecodebench": 0.558, "gpqa": 0.673}, {"name": "Claude 4.1 Opus (Non-reasoning)", "provider": "Anthropic", "cost": 30.0, "input_price": "15", "output_price": "75", "tokens_per_sec": "38.879", "ttft": "1.262", "intelligence": 23.6, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "Grok 4.1 Fast (Non-reasoning)", "provider": "xAI", "cost": 0.275, "input_price": "0.2", "output_price": "0.5", "tokens_per_sec": "121.235", "ttft": "0.778", "intelligence": 23.5, "coding_index": 19.5, "math_index": 34.3, "livecodebench": 0.399, "gpqa": 0.637}, {"name": "GLM-4.6V (Reasoning)", "provider": "Z AI", "cost": 0.45, "input_price": "0.3", "output_price": "0.9", "tokens_per_sec": "78.179", "ttft": "0.683", "intelligence": 23.5, "coding_index": 19.7, "math_index": 85.3, "livecodebench": 0.16, "gpqa": 0.719}, {"name": "Nova 2.0 Omni (low)", "provider": "Amazon", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "0", "ttft": "0", "intelligence": 23.2, "coding_index": 13.9, "math_index": 56.0, "livecodebench": 0.592, "gpqa": 0.699}, {"name": "GLM-4.5-Air", "provider": "Z AI", "cost": 0.425, "input_price": "0.2", "output_price": "1.1", "tokens_per_sec": "102.031", "ttft": "0.586", "intelligence": 23.2, "coding_index": 23.8, "math_index": 80.7, "livecodebench": 0.684, "gpqa": 0.733}, {"name": "Nova 2.0 Pro Preview (Non-reasoning)", "provider": "Amazon", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "158.105", "ttft": "0.465", "intelligence": 22.9, "coding_index": 20.5, "math_index": 30.7, "livecodebench": 0.473, "gpqa": 0.636}, {"name": "Mistral Large 3", "provider": "Mistral", "cost": 0.75, "input_price": "0.5", "output_price": "1.5", "tokens_per_sec": "50.018", "ttft": "0.507", "intelligence": 22.7, "coding_index": 22.7, "math_index": 38.0, "livecodebench": 0.465, "gpqa": 0.68}, {"name": "Grok 4 Fast (Non-reasoning)", "provider": "xAI", "cost": 0.275, "input_price": "0.2", "output_price": "0.5", "tokens_per_sec": "150.291", "ttft": "0.587", "intelligence": 22.6, "coding_index": 19.0, "math_index": 41.3, "livecodebench": 0.401, "gpqa": 0.606}, {"name": "Magistral Small 1.2", "provider": "Mistral", "cost": 0.75, "input_price": "0.5", "output_price": "1.5", "tokens_per_sec": "202.291", "ttft": "0.319", "intelligence": 22.5, "coding_index": 14.8, "math_index": 80.3, "livecodebench": 0.723, "gpqa": 0.663}, {"name": "Ring-1T", "provider": "InclusionAI", "cost": 0.98, "input_price": "0.56", "output_price": "2.24", "tokens_per_sec": "58.169", "ttft": "1.676", "intelligence": 22.5, "coding_index": 16.8, "math_index": 89.3, "livecodebench": 0.643, "gpqa": 0.774}, {"name": "Qwen3 30B A3B 2507 (Reasoning)", "provider": "Alibaba", "cost": 0.75, "input_price": "0.2", "output_price": "2.4", "tokens_per_sec": "165.393", "ttft": "1.187", "intelligence": 22.4, "coding_index": 14.7, "math_index": 56.3, "livecodebench": 0.707, "gpqa": 0.707}, {"name": "GPT-4.1 mini", "provider": "OpenAI", "cost": 0.7, "input_price": "0.4", "output_price": "1.6", "tokens_per_sec": "72.505", "ttft": "0.46", "intelligence": 22.4, "coding_index": 18.5, "math_index": 46.3, "livecodebench": 0.483, "gpqa": 0.664}, {"name": "Claude 4 Opus (Non-reasoning)", "provider": "Anthropic", "cost": 30.0, "input_price": "15", "output_price": "75", "tokens_per_sec": "40.333", "ttft": "1.197", "intelligence": 22.2, "coding_index": null, "math_index": 36.3, "livecodebench": 0.542, "gpqa": 0.701}, {"name": "INTELLECT-3", "provider": "Prime Intellect", "cost": 0.425, "input_price": "0.2", "output_price": "1.1", "tokens_per_sec": "85.702", "ttft": "0.595", "intelligence": 22.1, "coding_index": 19.1, "math_index": 88.0, "livecodebench": 0.777, "gpqa": 0.761}, {"name": "GPT-5 (ChatGPT)", "provider": "OpenAI", "cost": 3.438, "input_price": "1.25", "output_price": "10", "tokens_per_sec": "207.531", "ttft": "0.572", "intelligence": 21.8, "coding_index": 21.2, "math_index": 48.3, "livecodebench": 0.543, "gpqa": 0.686}, {"name": "DeepSeek V3 0324", "provider": "DeepSeek", "cost": 1.25, "input_price": "1.195", "output_price": "1.35", "tokens_per_sec": "0", "ttft": "0", "intelligence": 21.8, "coding_index": 22.0, "math_index": 41.0, "livecodebench": 0.405, "gpqa": 0.655}, {"name": "Hermes 4 - Llama-3.1 405B (Reasoning)", "provider": "Nous Research", "cost": 1.5, "input_price": "1", "output_price": "3", "tokens_per_sec": "35.155", "ttft": "0.704", "intelligence": 21.7, "coding_index": 16.0, "math_index": 69.7, "livecodebench": 0.686, "gpqa": 0.727}, {"name": "Gemini 2.5 Flash-Lite Preview (Sep '25) (Reasoning)", "provider": "Google", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "659.131", "ttft": "6.434", "intelligence": 21.6, "coding_index": 18.1, "math_index": 68.7, "livecodebench": 0.688, "gpqa": 0.709}, {"name": "Mistral Medium 3.1", "provider": "Mistral", "cost": 0.8, "input_price": "0.4", "output_price": "2", "tokens_per_sec": "104.847", "ttft": "0.358", "intelligence": 21.1, "coding_index": 18.3, "math_index": 38.3, "livecodebench": 0.406, "gpqa": 0.588}, {"name": "gpt-oss-20B (low)", "provider": "OpenAI", "cost": 0.1, "input_price": "0.07", "output_price": "0.2", "tokens_per_sec": "247.986", "ttft": "0.471", "intelligence": 20.8, "coding_index": 14.4, "math_index": 62.3, "livecodebench": 0.652, "gpqa": 0.611}, {"name": "GPT-5 mini (minimal)", "provider": "OpenAI", "cost": 0.688, "input_price": "0.25", "output_price": "2", "tokens_per_sec": "78.64", "ttft": "0.728", "intelligence": 20.7, "coding_index": 21.9, "math_index": 46.7, "livecodebench": 0.545, "gpqa": 0.687}, {"name": "Qwen3 VL 235B A22B Instruct", "provider": "Alibaba", "cost": 1.225, "input_price": "0.7", "output_price": "2.8", "tokens_per_sec": "36.186", "ttft": "1.083", "intelligence": 20.6, "coding_index": 16.5, "math_index": 70.7, "livecodebench": 0.594, "gpqa": 0.712}, {"name": "Ring-flash-2.0", "provider": "InclusionAI", "cost": 0.247, "input_price": "0.14", "output_price": "0.57", "tokens_per_sec": "90.057", "ttft": "1.394", "intelligence": 20.6, "coding_index": 10.6, "math_index": 83.7, "livecodebench": 0.628, "gpqa": 0.725}, {"name": "Gemini 2.5 Flash (Non-reasoning)", "provider": "Google", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "242.135", "ttft": "0.365", "intelligence": 20.5, "coding_index": 17.8, "math_index": 60.3, "livecodebench": 0.495, "gpqa": 0.683}, {"name": "Hermes 4 - Llama-3.1 70B (Reasoning)", "provider": "Nous Research", "cost": 0.198, "input_price": "0.13", "output_price": "0.4", "tokens_per_sec": "81.42", "ttft": "0.563", "intelligence": 20.4, "coding_index": 14.4, "math_index": 68.7, "livecodebench": 0.653, "gpqa": 0.699}, {"name": "Qwen3 Next 80B A3B Instruct", "provider": "Alibaba", "cost": 0.875, "input_price": "0.5", "output_price": "2", "tokens_per_sec": "162.149", "ttft": "1.104", "intelligence": 20.1, "coding_index": 15.3, "math_index": 66.3, "livecodebench": 0.684, "gpqa": 0.738}, {"name": "Llama 3.1 Nemotron Ultra 253B v1 (Reasoning)", "provider": "NVIDIA", "cost": 0.9, "input_price": "0.6", "output_price": "1.8", "tokens_per_sec": "37.356", "ttft": "0.671", "intelligence": 20.0, "coding_index": 13.1, "math_index": 63.7, "livecodebench": 0.641, "gpqa": 0.728}, {"name": "Qwen3 Coder 30B A3B Instruct", "provider": "Alibaba", "cost": 0.9, "input_price": "0.45", "output_price": "2.25", "tokens_per_sec": "104.321", "ttft": "1.589", "intelligence": 20.0, "coding_index": 19.4, "math_index": 29.0, "livecodebench": 0.403, "gpqa": 0.516}, {"name": "Qwen3 235B A22B (Reasoning)", "provider": "Alibaba", "cost": 2.625, "input_price": "0.7", "output_price": "8.4", "tokens_per_sec": "56.071", "ttft": "1.125", "intelligence": 19.8, "coding_index": 17.4, "math_index": 82.0, "livecodebench": 0.622, "gpqa": 0.7}, {"name": "QwQ 32B", "provider": "Alibaba", "cost": 0.473, "input_price": "0.43", "output_price": "0.6", "tokens_per_sec": "30.694", "ttft": "1.559", "intelligence": 19.7, "coding_index": null, "math_index": 29.0, "livecodebench": 0.631, "gpqa": 0.593}, {"name": "Qwen3 VL 30B A3B (Reasoning)", "provider": "Alibaba", "cost": 0.75, "input_price": "0.2", "output_price": "2.4", "tokens_per_sec": "119.624", "ttft": "1.162", "intelligence": 19.6, "coding_index": 13.1, "math_index": 82.3, "livecodebench": 0.697, "gpqa": 0.72}, {"name": "Gemini 2.5 Flash-Lite Preview (Sep '25) (Non-reasoning)", "provider": "Google", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "475.567", "ttft": "0.241", "intelligence": 19.4, "coding_index": 14.5, "math_index": 46.7, "livecodebench": 0.641, "gpqa": 0.651}, {"name": "GLM-4.5V (Reasoning)", "provider": "Z AI", "cost": 0.9, "input_price": "0.6", "output_price": "1.8", "tokens_per_sec": "31.703", "ttft": "0.662", "intelligence": 19.3, "coding_index": 10.9, "math_index": 73.0, "livecodebench": 0.604, "gpqa": 0.684}, {"name": "Nova Premier", "provider": "Amazon", "cost": 5.0, "input_price": "2.5", "output_price": "12.5", "tokens_per_sec": "69.778", "ttft": "0.865", "intelligence": 18.9, "coding_index": 13.8, "math_index": 17.3, "livecodebench": 0.317, "gpqa": 0.569}, {"name": "GPT-4o (Aug '24)", "provider": "OpenAI", "cost": 4.375, "input_price": "2.5", "output_price": "10", "tokens_per_sec": "90.354", "ttft": "0.461", "intelligence": 18.8, "coding_index": 16.6, "math_index": null, "livecodebench": 0.317, "gpqa": 0.521}, {"name": "DeepSeek R1 (Jan '25)", "provider": "DeepSeek", "cost": 2.362, "input_price": "1.35", "output_price": "4", "tokens_per_sec": "0", "ttft": "0", "intelligence": 18.8, "coding_index": 15.9, "math_index": 68.0, "livecodebench": 0.617, "gpqa": 0.708}, {"name": "Claude 3.5 Haiku", "provider": "Anthropic", "cost": 1.6, "input_price": "0.8", "output_price": "4", "tokens_per_sec": "47.762", "ttft": "0.675", "intelligence": 18.7, "coding_index": 10.7, "math_index": null, "livecodebench": 0.314, "gpqa": 0.408}, {"name": "Magistral Medium 1", "provider": "Mistral", "cost": 2.75, "input_price": "2", "output_price": "5", "tokens_per_sec": "39.769", "ttft": "0.521", "intelligence": 18.7, "coding_index": 16.0, "math_index": 40.3, "livecodebench": 0.527, "gpqa": 0.679}, {"name": "Llama Nemotron Super 49B v1.5 (Reasoning)", "provider": "NVIDIA", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "73.139", "ttft": "0.446", "intelligence": 18.6, "coding_index": 15.2, "math_index": 76.7, "livecodebench": 0.737, "gpqa": 0.748}, {"name": "GPT-4o (March 2025, chatgpt-4o-latest)", "provider": "OpenAI", "cost": 7.5, "input_price": "5", "output_price": "15", "tokens_per_sec": "279.156", "ttft": "0.51", "intelligence": 18.6, "coding_index": null, "math_index": 25.7, "livecodebench": 0.425, "gpqa": 0.655}, {"name": "Devstral Medium", "provider": "Mistral", "cost": 0.8, "input_price": "0.4", "output_price": "2", "tokens_per_sec": "105.822", "ttft": "0.419", "intelligence": 18.6, "coding_index": 15.9, "math_index": 4.7, "livecodebench": 0.337, "gpqa": 0.492}, {"name": "Gemini 2.0 Flash (Feb '25)", "provider": "Google", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "0", "ttft": "0", "intelligence": 18.5, "coding_index": 13.6, "math_index": 21.7, "livecodebench": 0.334, "gpqa": 0.623}, {"name": "Llama 4 Maverick", "provider": "Meta", "cost": 0.461, "input_price": "0.31", "output_price": "0.85", "tokens_per_sec": "130.376", "ttft": "0.482", "intelligence": 18.3, "coding_index": 15.6, "math_index": 19.3, "livecodebench": 0.397, "gpqa": 0.671}, {"name": "Devstral Small (May '25)", "provider": "Mistral", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "197.192", "ttft": "0.334", "intelligence": 18.0, "coding_index": 12.2, "math_index": null, "livecodebench": 0.258, "gpqa": 0.434}, {"name": "Nova 2.0 Lite (Non-reasoning)", "provider": "Amazon", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "228.712", "ttft": "0.523", "intelligence": 17.9, "coding_index": 12.5, "math_index": 33.7, "livecodebench": 0.346, "gpqa": 0.603}, {"name": "Sonar Reasoning", "provider": "Perplexity", "cost": 2.0, "input_price": "1", "output_price": "5", "tokens_per_sec": "0", "ttft": "0", "intelligence": 17.9, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": 0.623}, {"name": "Mistral Medium 3", "provider": "Mistral", "cost": 0.8, "input_price": "0.4", "output_price": "2", "tokens_per_sec": "94.548", "ttft": "0.357", "intelligence": 17.6, "coding_index": 13.6, "math_index": 30.3, "livecodebench": 0.4, "gpqa": 0.578}, {"name": "Gemini 2.5 Flash-Lite (Reasoning)", "provider": "Google", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "353.135", "ttft": "12.467", "intelligence": 17.4, "coding_index": 9.5, "math_index": 53.3, "livecodebench": 0.593, "gpqa": 0.625}, {"name": "ERNIE 4.5 300B A47B", "provider": "Baidu", "cost": 0.485, "input_price": "0.28", "output_price": "1.1", "tokens_per_sec": "30.137", "ttft": "1.962", "intelligence": 17.3, "coding_index": 14.5, "math_index": 41.3, "livecodebench": 0.467, "gpqa": 0.811}, {"name": "Qwen3 VL 32B Instruct", "provider": "Alibaba", "cost": 1.225, "input_price": "0.7", "output_price": "2.8", "tokens_per_sec": "45.563", "ttft": "0.976", "intelligence": 17.2, "coding_index": 15.6, "math_index": 68.3, "livecodebench": 0.514, "gpqa": 0.671}, {"name": "DeepSeek R1 Distill Qwen 32B", "provider": "DeepSeek", "cost": 0.285, "input_price": "0.285", "output_price": "0.285", "tokens_per_sec": "41.587", "ttft": "0.416", "intelligence": 17.2, "coding_index": null, "math_index": 63.0, "livecodebench": 0.27, "gpqa": 0.615}, {"name": "Hermes 4 - Llama-3.1 405B (Non-reasoning)", "provider": "Nous Research", "cost": 1.5, "input_price": "1", "output_price": "3", "tokens_per_sec": "31.745", "ttft": "0.7", "intelligence": 17.1, "coding_index": 18.1, "math_index": 15.3, "livecodebench": 0.546, "gpqa": 0.536}, {"name": "GLM-4.6V (Non-reasoning)", "provider": "Z AI", "cost": 0.45, "input_price": "0.3", "output_price": "0.9", "tokens_per_sec": "54.308", "ttft": "0.884", "intelligence": 17.1, "coding_index": 11.1, "math_index": 26.3, "livecodebench": 0.411, "gpqa": 0.566}, {"name": "Qwen3 235B A22B (Non-reasoning)", "provider": "Alibaba", "cost": 1.225, "input_price": "0.7", "output_price": "2.8", "tokens_per_sec": "54.004", "ttft": "1.102", "intelligence": 16.9, "coding_index": 14.0, "math_index": 23.7, "livecodebench": 0.343, "gpqa": 0.613}, {"name": "Olmo 3 7B Think", "provider": "Allen Institute for AI", "cost": 0.14, "input_price": "0.12", "output_price": "0.2", "tokens_per_sec": "170.768", "ttft": "0.353", "intelligence": 16.8, "coding_index": 7.6, "math_index": 70.7, "livecodebench": 0.617, "gpqa": 0.516}, {"name": "Magistral Small 1", "provider": "Mistral", "cost": 0.75, "input_price": "0.5", "output_price": "1.5", "tokens_per_sec": "202.109", "ttft": "0.32", "intelligence": 16.8, "coding_index": 11.1, "math_index": 41.3, "livecodebench": 0.514, "gpqa": 0.641}, {"name": "Nova 2.0 Omni (Non-reasoning)", "provider": "Amazon", "cost": 0.85, "input_price": "0.3", "output_price": "2.5", "tokens_per_sec": "215.424", "ttft": "0.721", "intelligence": 16.6, "coding_index": 13.8, "math_index": 37.0, "livecodebench": 0.305, "gpqa": 0.555}, {"name": "EXAONE 4.0 32B (Reasoning)", "provider": "LG AI Research", "cost": 0.7, "input_price": "0.6", "output_price": "1", "tokens_per_sec": "93.907", "ttft": "0.286", "intelligence": 16.6, "coding_index": 14.0, "math_index": 80.0, "livecodebench": 0.747, "gpqa": 0.739}, {"name": "Qwen3 VL 8B (Reasoning)", "provider": "Alibaba", "cost": 0.66, "input_price": "0.18", "output_price": "2.1", "tokens_per_sec": "64.115", "ttft": "0.945", "intelligence": 16.6, "coding_index": 9.8, "math_index": 30.7, "livecodebench": 0.353, "gpqa": 0.579}, {"name": "Qwen3 32B (Reasoning)", "provider": "Alibaba", "cost": 2.625, "input_price": "0.7", "output_price": "8.4", "tokens_per_sec": "98.036", "ttft": "0.986", "intelligence": 16.5, "coding_index": 13.8, "math_index": 73.0, "livecodebench": 0.546, "gpqa": 0.668}, {"name": "DeepSeek R1 0528 Qwen3 8B", "provider": "DeepSeek", "cost": 0.068, "input_price": "0.06", "output_price": "0.09", "tokens_per_sec": "0", "ttft": "0", "intelligence": 16.4, "coding_index": 7.8, "math_index": 63.7, "livecodebench": 0.513, "gpqa": 0.612}, {"name": "DeepSeek V3 (Dec '24)", "provider": "DeepSeek", "cost": 0.625, "input_price": "0.4", "output_price": "0.89", "tokens_per_sec": "0", "ttft": "0", "intelligence": 16.4, "coding_index": 16.4, "math_index": 26.0, "livecodebench": 0.359, "gpqa": 0.557}, {"name": "Qwen2.5 Max", "provider": "Alibaba", "cost": 2.8, "input_price": "1.6", "output_price": "6.4", "tokens_per_sec": "41.21", "ttft": "1.086", "intelligence": 16.3, "coding_index": null, "math_index": null, "livecodebench": 0.359, "gpqa": 0.587}, {"name": "Qwen3 14B (Reasoning)", "provider": "Alibaba", "cost": 1.313, "input_price": "0.35", "output_price": "4.2", "tokens_per_sec": "57.148", "ttft": "1.045", "intelligence": 16.2, "coding_index": 13.1, "math_index": 55.7, "livecodebench": 0.523, "gpqa": 0.604}, {"name": "Ministral 3 14B", "provider": "Mistral", "cost": 0.2, "input_price": "0.2", "output_price": "0.2", "tokens_per_sec": "140.334", "ttft": "0.286", "intelligence": 16.0, "coding_index": 10.9, "math_index": 30.0, "livecodebench": 0.351, "gpqa": 0.572}, {"name": "DeepSeek R1 Distill Llama 70B", "provider": "DeepSeek", "cost": 0.963, "input_price": "0.875", "output_price": "1.3", "tokens_per_sec": "42.123", "ttft": "0.813", "intelligence": 16.0, "coding_index": 11.4, "math_index": 53.7, "livecodebench": 0.266, "gpqa": 0.402}, {"name": "Qwen3 VL 30B A3B Instruct", "provider": "Alibaba", "cost": 0.35, "input_price": "0.2", "output_price": "0.8", "tokens_per_sec": "107.29", "ttft": "0.994", "intelligence": 16.0, "coding_index": 14.3, "math_index": 72.3, "livecodebench": 0.476, "gpqa": 0.695}, {"name": "Claude 3.5 Sonnet (Oct '24)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 15.9, "coding_index": 30.2, "math_index": null, "livecodebench": 0.381, "gpqa": 0.599}, {"name": "DeepSeek R1 Distill Qwen 14B", "provider": "DeepSeek", "cost": 0.15, "input_price": "0.15", "output_price": "0.15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 15.8, "coding_index": null, "math_index": 55.7, "livecodebench": 0.376, "gpqa": 0.484}, {"name": "Qwen3 Omni 30B A3B (Reasoning)", "provider": "Alibaba", "cost": 0.43, "input_price": "0.25", "output_price": "0.97", "tokens_per_sec": "97.804", "ttft": "0.935", "intelligence": 15.6, "coding_index": 12.7, "math_index": 74.0, "livecodebench": 0.679, "gpqa": 0.726}, {"name": "Ling-flash-2.0", "provider": "InclusionAI", "cost": 0.247, "input_price": "0.14", "output_price": "0.57", "tokens_per_sec": "57.715", "ttft": "1.466", "intelligence": 15.5, "coding_index": 16.7, "math_index": 65.3, "livecodebench": 0.589, "gpqa": 0.657}, {"name": "Sonar", "provider": "Perplexity", "cost": 1.0, "input_price": "1", "output_price": "1", "tokens_per_sec": "102.709", "ttft": "1.283", "intelligence": 15.5, "coding_index": null, "math_index": null, "livecodebench": 0.295, "gpqa": 0.471}, {"name": "Qwen3 30B A3B (Reasoning)", "provider": "Alibaba", "cost": 0.75, "input_price": "0.2", "output_price": "2.4", "tokens_per_sec": "69.566", "ttft": "1.089", "intelligence": 15.3, "coding_index": 11.0, "math_index": 72.3, "livecodebench": 0.506, "gpqa": 0.616}, {"name": "Devstral Small (Jul '25)", "provider": "Mistral", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "225.993", "ttft": "0.344", "intelligence": 15.2, "coding_index": 12.1, "math_index": 29.3, "livecodebench": 0.254, "gpqa": 0.414}, {"name": "Sonar Pro", "provider": "Perplexity", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "106.084", "ttft": "1.391", "intelligence": 15.2, "coding_index": null, "math_index": null, "livecodebench": 0.275, "gpqa": 0.578}, {"name": "QwQ 32B-Preview", "provider": "Alibaba", "cost": 0.135, "input_price": "0.12", "output_price": "0.18", "tokens_per_sec": "41.786", "ttft": "0.402", "intelligence": 15.2, "coding_index": null, "math_index": null, "livecodebench": 0.337, "gpqa": 0.557}, {"name": "Ling-mini-2.0", "provider": "InclusionAI", "cost": 0.122, "input_price": "0.07", "output_price": "0.28", "tokens_per_sec": "147.958", "ttft": "1.46", "intelligence": 15.1, "coding_index": 5.0, "math_index": 49.3, "livecodebench": 0.429, "gpqa": 0.562}, {"name": "Mistral Large 2 (Nov '24)", "provider": "Mistral", "cost": 3.0, "input_price": "2", "output_price": "6", "tokens_per_sec": "46.049", "ttft": "0.44", "intelligence": 15.1, "coding_index": 13.8, "math_index": 14.0, "livecodebench": 0.293, "gpqa": 0.486}, {"name": "Mistral Small 3.2", "provider": "Mistral", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "113.541", "ttft": "0.268", "intelligence": 15.0, "coding_index": 13.3, "math_index": 27.0, "livecodebench": 0.275, "gpqa": 0.505}, {"name": "Qwen3 30B A3B 2507 Instruct", "provider": "Alibaba", "cost": 0.35, "input_price": "0.2", "output_price": "0.8", "tokens_per_sec": "60.37", "ttft": "1.134", "intelligence": 15.0, "coding_index": 14.2, "math_index": 66.3, "livecodebench": 0.515, "gpqa": 0.659}, {"name": "NVIDIA Nemotron Nano 12B v2 VL (Reasoning)", "provider": "NVIDIA", "cost": 0.3, "input_price": "0.2", "output_price": "0.6", "tokens_per_sec": "131.314", "ttft": "0.222", "intelligence": 14.8, "coding_index": 11.8, "math_index": 75.0, "livecodebench": 0.694, "gpqa": 0.572}, {"name": "NVIDIA Nemotron Nano 9B V2 (Reasoning)", "provider": "NVIDIA", "cost": 0.07, "input_price": "0.04", "output_price": "0.16", "tokens_per_sec": "109.389", "ttft": "0.227", "intelligence": 14.8, "coding_index": 8.3, "math_index": 69.7, "livecodebench": 0.724, "gpqa": 0.57}, {"name": "GPT-4o (Nov '24)", "provider": "OpenAI", "cost": 4.375, "input_price": "2.5", "output_price": "10", "tokens_per_sec": "177.346", "ttft": "0.43", "intelligence": 14.8, "coding_index": 16.7, "math_index": 6.0, "livecodebench": 0.309, "gpqa": 0.543}, {"name": "Gemini 2.0 Flash-Lite (Feb '25)", "provider": "Google", "cost": 0.131, "input_price": "0.075", "output_price": "0.3", "tokens_per_sec": "0", "ttft": "0", "intelligence": 14.7, "coding_index": null, "math_index": null, "livecodebench": 0.185, "gpqa": 0.535}, {"name": "Ministral 3 8B", "provider": "Mistral", "cost": 0.15, "input_price": "0.15", "output_price": "0.15", "tokens_per_sec": "186.591", "ttft": "0.272", "intelligence": 14.6, "coding_index": 10.0, "math_index": 31.7, "livecodebench": 0.303, "gpqa": 0.471}, {"name": "Llama Nemotron Super 49B v1.5 (Non-reasoning)", "provider": "NVIDIA", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "66.535", "ttft": "0.471", "intelligence": 14.5, "coding_index": 10.5, "math_index": 8.0, "livecodebench": 0.29, "gpqa": 0.481}, {"name": "GPT-4o (May '24)", "provider": "OpenAI", "cost": 7.5, "input_price": "5", "output_price": "15", "tokens_per_sec": "77.132", "ttft": "0.512", "intelligence": 14.5, "coding_index": 24.2, "math_index": null, "livecodebench": 0.334, "gpqa": 0.526}, {"name": "Gemini 2.0 Flash-Lite (Preview)", "provider": "Google", "cost": 0.131, "input_price": "0.075", "output_price": "0.3", "tokens_per_sec": "0", "ttft": "0", "intelligence": 14.5, "coding_index": null, "math_index": null, "livecodebench": 0.179, "gpqa": 0.542}, {"name": "Qwen3 32B (Non-reasoning)", "provider": "Alibaba", "cost": 1.225, "input_price": "0.7", "output_price": "2.8", "tokens_per_sec": "92.415", "ttft": "1", "intelligence": 14.5, "coding_index": null, "math_index": 19.7, "livecodebench": 0.288, "gpqa": 0.535}, {"name": "Reka Flash 3", "provider": "Reka AI", "cost": 0.35, "input_price": "0.2", "output_price": "0.8", "tokens_per_sec": "49.261", "ttft": "1.347", "intelligence": 14.3, "coding_index": 8.9, "math_index": 33.7, "livecodebench": 0.435, "gpqa": 0.529}, {"name": "Qwen3 VL 8B Instruct", "provider": "Alibaba", "cost": 0.31, "input_price": "0.18", "output_price": "0.7", "tokens_per_sec": "101.377", "ttft": "0.926", "intelligence": 14.3, "coding_index": 7.3, "math_index": 27.3, "livecodebench": 0.332, "gpqa": 0.427}, {"name": "Llama 3.3 Instruct 70B", "provider": "Meta", "cost": 0.675, "input_price": "0.585", "output_price": "0.715", "tokens_per_sec": "111.561", "ttft": "0.49", "intelligence": 14.2, "coding_index": 10.7, "math_index": 7.7, "livecodebench": 0.288, "gpqa": 0.498}, {"name": "Llama 3.1 Instruct 405B", "provider": "Meta", "cost": 4.188, "input_price": "3.75", "output_price": "6.75", "tokens_per_sec": "25.104", "ttft": "0.736", "intelligence": 14.2, "coding_index": 14.5, "math_index": 3.0, "livecodebench": 0.305, "gpqa": 0.515}, {"name": "Claude 3.5 Sonnet (June '24)", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 14.2, "coding_index": 26.0, "math_index": null, "livecodebench": null, "gpqa": 0.56}, {"name": "Qwen3 4B (Reasoning)", "provider": "Alibaba", "cost": 0.398, "input_price": "0.11", "output_price": "1.26", "tokens_per_sec": "90.419", "ttft": "0.971", "intelligence": 14.2, "coding_index": null, "math_index": 22.3, "livecodebench": 0.465, "gpqa": 0.522}, {"name": "GPT-4o (ChatGPT)", "provider": "OpenAI", "cost": 7.5, "input_price": "5", "output_price": "15", "tokens_per_sec": "199.278", "ttft": "0.396", "intelligence": 14.1, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": 0.511}, {"name": "Pixtral Large", "provider": "Mistral", "cost": 3.0, "input_price": "2", "output_price": "6", "tokens_per_sec": "33.213", "ttft": "0.443", "intelligence": 14.0, "coding_index": null, "math_index": 2.3, "livecodebench": 0.261, "gpqa": 0.505}, {"name": "Mistral Small 3.1", "provider": "Mistral", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "113.254", "ttft": "0.275", "intelligence": 14.0, "coding_index": 13.9, "math_index": 3.7, "livecodebench": 0.212, "gpqa": 0.454}, {"name": "GPT-4 Turbo", "provider": "OpenAI", "cost": 15.0, "input_price": "10", "output_price": "30", "tokens_per_sec": "38.821", "ttft": "1.171", "intelligence": 13.7, "coding_index": 21.5, "math_index": null, "livecodebench": 0.291, "gpqa": null}, {"name": "GPT-5 nano (minimal)", "provider": "OpenAI", "cost": 0.138, "input_price": "0.05", "output_price": "0.4", "tokens_per_sec": "128.206", "ttft": "0.574", "intelligence": 13.7, "coding_index": 14.2, "math_index": 27.3, "livecodebench": 0.47, "gpqa": 0.428}, {"name": "Hermes 4 - Llama-3.1 70B (Non-reasoning)", "provider": "Nous Research", "cost": 0.198, "input_price": "0.13", "output_price": "0.4", "tokens_per_sec": "75.264", "ttft": "0.577", "intelligence": 13.6, "coding_index": 9.2, "math_index": 11.3, "livecodebench": 0.269, "gpqa": 0.491}, {"name": "Llama 4 Scout", "provider": "Meta", "cost": 0.287, "input_price": "0.18", "output_price": "0.625", "tokens_per_sec": "122.381", "ttft": "0.412", "intelligence": 13.5, "coding_index": 6.7, "math_index": 14.0, "livecodebench": 0.299, "gpqa": 0.587}, {"name": "Nova Pro", "provider": "Amazon", "cost": 1.4, "input_price": "0.8", "output_price": "3.2", "tokens_per_sec": "0", "ttft": "0", "intelligence": 13.5, "coding_index": 11.0, "math_index": 7.0, "livecodebench": 0.233, "gpqa": 0.499}, {"name": "Llama 3.1 Nemotron Instruct 70B", "provider": "NVIDIA", "cost": 1.2, "input_price": "1.2", "output_price": "1.2", "tokens_per_sec": "39.948", "ttft": "0.302", "intelligence": 13.4, "coding_index": 10.8, "math_index": 11.0, "livecodebench": 0.169, "gpqa": 0.465}, {"name": "Command A", "provider": "Cohere", "cost": 4.375, "input_price": "2.5", "output_price": "10", "tokens_per_sec": "61.053", "ttft": "0.283", "intelligence": 13.4, "coding_index": 9.9, "math_index": 13.0, "livecodebench": 0.287, "gpqa": 0.527}, {"name": "NVIDIA Nemotron 3 Nano 30B A3B (Non-reasoning)", "provider": "NVIDIA", "cost": 0.105, "input_price": "0.06", "output_price": "0.24", "tokens_per_sec": "118.022", "ttft": "0.261", "intelligence": 13.3, "coding_index": 15.8, "math_index": 13.3, "livecodebench": 0.36, "gpqa": 0.399}, {"name": "Phi-4", "provider": "Microsoft Azure", "cost": 0.219, "input_price": "0.125", "output_price": "0.5", "tokens_per_sec": "8.883", "ttft": "0.637", "intelligence": 13.2, "coding_index": 11.2, "math_index": 18.0, "livecodebench": 0.231, "gpqa": 0.575}, {"name": "NVIDIA Nemotron Nano 9B V2 (Non-reasoning)", "provider": "NVIDIA", "cost": 0.102, "input_price": "0.06", "output_price": "0.23", "tokens_per_sec": "107.917", "ttft": "0.803", "intelligence": 13.1, "coding_index": 7.5, "math_index": 62.3, "livecodebench": 0.701, "gpqa": 0.557}, {"name": "Llama 3.1 Instruct 70B", "provider": "Meta", "cost": 0.56, "input_price": "0.56", "output_price": "0.56", "tokens_per_sec": "60.941", "ttft": "0.359", "intelligence": 13.1, "coding_index": 10.9, "math_index": 4.0, "livecodebench": 0.232, "gpqa": 0.409}, {"name": "Qwen3 8B (Reasoning)", "provider": "Alibaba", "cost": 0.66, "input_price": "0.18", "output_price": "2.1", "tokens_per_sec": "86.937", "ttft": "0.964", "intelligence": 13.1, "coding_index": 9.0, "math_index": 19.0, "livecodebench": 0.406, "gpqa": 0.589}, {"name": "Mistral Large 2 (Jul '24)", "provider": "Mistral", "cost": 3.0, "input_price": "2", "output_price": "6", "tokens_per_sec": "0", "ttft": "0", "intelligence": 13.0, "coding_index": null, "math_index": 0.0, "livecodebench": 0.267, "gpqa": 0.472}, {"name": "GPT-4.1 nano", "provider": "OpenAI", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "164.553", "ttft": "0.371", "intelligence": 12.9, "coding_index": 11.2, "math_index": 24.0, "livecodebench": 0.326, "gpqa": 0.512}, {"name": "Qwen2.5 Coder Instruct 32B", "provider": "Alibaba", "cost": 0.141, "input_price": "0.13", "output_price": "0.175", "tokens_per_sec": "40.336", "ttft": "0.463", "intelligence": 12.9, "coding_index": null, "math_index": null, "livecodebench": 0.295, "gpqa": 0.417}, {"name": "GPT-4", "provider": "OpenAI", "cost": 37.5, "input_price": "30", "output_price": "60", "tokens_per_sec": "34.26", "ttft": "0.795", "intelligence": 12.8, "coding_index": 13.1, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "Mistral Small 3", "provider": "Mistral", "cost": 0.15, "input_price": "0.1", "output_price": "0.3", "tokens_per_sec": "231.952", "ttft": "0.346", "intelligence": 12.7, "coding_index": null, "math_index": 4.3, "livecodebench": 0.252, "gpqa": 0.462}, {"name": "Qwen3 14B (Non-reasoning)", "provider": "Alibaba", "cost": 0.613, "input_price": "0.35", "output_price": "1.4", "tokens_per_sec": "53.445", "ttft": "1.053", "intelligence": 12.7, "coding_index": 12.4, "math_index": 58.0, "livecodebench": 0.28, "gpqa": 0.47}, {"name": "GPT-4o mini", "provider": "OpenAI", "cost": 0.263, "input_price": "0.15", "output_price": "0.6", "tokens_per_sec": "55.609", "ttft": "0.563", "intelligence": 12.6, "coding_index": null, "math_index": 14.7, "livecodebench": 0.234, "gpqa": 0.426}, {"name": "Gemini 2.5 Flash-Lite (Non-reasoning)", "provider": "Google", "cost": 0.175, "input_price": "0.1", "output_price": "0.4", "tokens_per_sec": "277.621", "ttft": "0.334", "intelligence": 12.5, "coding_index": 7.4, "math_index": 35.3, "livecodebench": 0.4, "gpqa": 0.474}, {"name": "Claude 3 Opus", "provider": "Anthropic", "cost": 30.0, "input_price": "15", "output_price": "75", "tokens_per_sec": "0", "ttft": "0", "intelligence": 12.5, "coding_index": 19.5, "math_index": null, "livecodebench": 0.279, "gpqa": 0.489}, {"name": "GLM-4.5V (Non-reasoning)", "provider": "Z AI", "cost": 0.9, "input_price": "0.6", "output_price": "1.8", "tokens_per_sec": "39.831", "ttft": "0.733", "intelligence": 12.5, "coding_index": 10.8, "math_index": 15.3, "livecodebench": 0.352, "gpqa": 0.573}, {"name": "Qwen3 4B (Non-reasoning)", "provider": "Alibaba", "cost": 0.188, "input_price": "0.11", "output_price": "0.42", "tokens_per_sec": "86.51", "ttft": "0.95", "intelligence": 12.5, "coding_index": null, "math_index": null, "livecodebench": 0.233, "gpqa": 0.398}, {"name": "Nova Lite", "provider": "Amazon", "cost": 0.105, "input_price": "0.06", "output_price": "0.24", "tokens_per_sec": "244.026", "ttft": "0.365", "intelligence": 12.4, "coding_index": 5.1, "math_index": 7.0, "livecodebench": 0.167, "gpqa": 0.433}, {"name": "Qwen3 30B A3B (Non-reasoning)", "provider": "Alibaba", "cost": 0.35, "input_price": "0.2", "output_price": "0.8", "tokens_per_sec": "59.747", "ttft": "1.058", "intelligence": 12.4, "coding_index": 13.3, "math_index": 21.7, "livecodebench": 0.322, "gpqa": 0.515}, {"name": "Olmo 3.1 32B Instruct", "provider": "Allen Institute for AI", "cost": 0.3, "input_price": "0.2", "output_price": "0.6", "tokens_per_sec": "49.556", "ttft": "0.23", "intelligence": 12.0, "coding_index": 5.6, "math_index": null, "livecodebench": null, "gpqa": 0.539}, {"name": "Reka Flash (Sep '24)", "provider": "Reka AI", "cost": 0.35, "input_price": "0.2", "output_price": "0.8", "tokens_per_sec": "69.208", "ttft": "1.264", "intelligence": 12.0, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "Qwen2.5 Turbo", "provider": "Alibaba", "cost": 0.087, "input_price": "0.05", "output_price": "0.2", "tokens_per_sec": "65.16", "ttft": "1.13", "intelligence": 12.0, "coding_index": null, "math_index": null, "livecodebench": 0.163, "gpqa": 0.41}, {"name": "Llama 3.2 Instruct 90B (Vision)", "provider": "Meta", "cost": 0.72, "input_price": "0.72", "output_price": "0.72", "tokens_per_sec": "34.076", "ttft": "0.415", "intelligence": 11.9, "coding_index": null, "math_index": null, "livecodebench": 0.214, "gpqa": 0.432}, {"name": "Solar Mini", "provider": "Upstage", "cost": 0.15, "input_price": "0.15", "output_price": "0.15", "tokens_per_sec": "80.732", "ttft": "1.031", "intelligence": 11.9, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "Llama 3.1 Instruct 8B", "provider": "Meta", "cost": 0.1, "input_price": "0.1", "output_price": "0.1", "tokens_per_sec": "168.878", "ttft": "0.365", "intelligence": 11.7, "coding_index": 4.9, "math_index": 4.3, "livecodebench": 0.116, "gpqa": 0.259}, {"name": "EXAONE 4.0 32B (Non-reasoning)", "provider": "LG AI Research", "cost": 0.7, "input_price": "0.6", "output_price": "1", "tokens_per_sec": "88.708", "ttft": "0.302", "intelligence": 11.5, "coding_index": 9.4, "math_index": 39.3, "livecodebench": 0.472, "gpqa": 0.628}, {"name": "Ministral 3 3B", "provider": "Mistral", "cost": 0.1, "input_price": "0.1", "output_price": "0.1", "tokens_per_sec": "301.615", "ttft": "0.264", "intelligence": 11.2, "coding_index": 4.8, "math_index": 22.0, "livecodebench": 0.247, "gpqa": 0.358}, {"name": "Llama 3.2 Instruct 11B (Vision)", "provider": "Meta", "cost": 0.16, "input_price": "0.16", "output_price": "0.16", "tokens_per_sec": "70.528", "ttft": "0.396", "intelligence": 10.9, "coding_index": 4.3, "math_index": 1.7, "livecodebench": 0.11, "gpqa": 0.221}, {"name": "Granite 4.0 H Small", "provider": "IBM", "cost": 0.107, "input_price": "0.06", "output_price": "0.25", "tokens_per_sec": "462.378", "ttft": "8.914", "intelligence": 10.8, "coding_index": 8.5, "math_index": 13.7, "livecodebench": 0.251, "gpqa": 0.416}, {"name": "Granite 3.3 8B (Non-reasoning)", "provider": "IBM", "cost": 0.085, "input_price": "0.03", "output_price": "0.25", "tokens_per_sec": "469.254", "ttft": "7.39", "intelligence": 10.8, "coding_index": 3.4, "math_index": 6.7, "livecodebench": 0.127, "gpqa": 0.338}, {"name": "Qwen3 Omni 30B A3B Instruct", "provider": "Alibaba", "cost": 0.43, "input_price": "0.25", "output_price": "0.97", "tokens_per_sec": "87.97", "ttft": "0.969", "intelligence": 10.7, "coding_index": 7.2, "math_index": 52.3, "livecodebench": 0.422, "gpqa": 0.62}, {"name": "Jamba 1.5 Large", "provider": "AI21 Labs", "cost": 3.5, "input_price": "2", "output_price": "8", "tokens_per_sec": "0", "ttft": "0", "intelligence": 10.7, "coding_index": null, "math_index": null, "livecodebench": 0.143, "gpqa": 0.427}, {"name": "Hermes 3 - Llama-3.1 70B", "provider": "Nous Research", "cost": 0.3, "input_price": "0.3", "output_price": "0.3", "tokens_per_sec": "37.71", "ttft": "0.305", "intelligence": 10.6, "coding_index": null, "math_index": null, "livecodebench": 0.188, "gpqa": 0.401}, {"name": "Jamba 1.6 Large", "provider": "AI21 Labs", "cost": 3.5, "input_price": "2", "output_price": "8", "tokens_per_sec": "48.966", "ttft": "0.859", "intelligence": 10.6, "coding_index": null, "math_index": null, "livecodebench": 0.172, "gpqa": 0.387}, {"name": "Qwen3 8B (Non-reasoning)", "provider": "Alibaba", "cost": 0.31, "input_price": "0.18", "output_price": "0.7", "tokens_per_sec": "78.716", "ttft": "1.063", "intelligence": 10.6, "coding_index": 7.1, "math_index": 24.3, "livecodebench": 0.202, "gpqa": 0.452}, {"name": "Nova Micro", "provider": "Amazon", "cost": 0.061, "input_price": "0.035", "output_price": "0.14", "tokens_per_sec": "434.029", "ttft": "0.349", "intelligence": 10.3, "coding_index": 4.1, "math_index": 6.0, "livecodebench": 0.14, "gpqa": 0.358}, {"name": "Claude 3 Sonnet", "provider": "Anthropic", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 10.3, "coding_index": null, "math_index": null, "livecodebench": 0.175, "gpqa": 0.4}, {"name": "Llama 3 Instruct 70B", "provider": "Meta", "cost": 0.568, "input_price": "0.51", "output_price": "0.74", "tokens_per_sec": "36.885", "ttft": "0.414", "intelligence": 10.2, "coding_index": 6.8, "math_index": null, "livecodebench": 0.198, "gpqa": 0.379}, {"name": "Mistral Small (Sep '24)", "provider": "Mistral", "cost": 0.3, "input_price": "0.2", "output_price": "0.6", "tokens_per_sec": "115.16", "ttft": "0.281", "intelligence": 10.2, "coding_index": null, "math_index": null, "livecodebench": 0.141, "gpqa": 0.381}, {"name": "NVIDIA Nemotron Nano 12B v2 VL (Non-reasoning)", "provider": "NVIDIA", "cost": 0.3, "input_price": "0.2", "output_price": "0.6", "tokens_per_sec": "130.181", "ttft": "0.531", "intelligence": 10.1, "coding_index": 5.9, "math_index": 26.7, "livecodebench": 0.345, "gpqa": 0.439}, {"name": "Phi-3 Mini Instruct 3.8B", "provider": "Microsoft Azure", "cost": 0.228, "input_price": "0.13", "output_price": "0.52", "tokens_per_sec": "0", "ttft": "0", "intelligence": 10.1, "coding_index": 3.0, "math_index": 0.3, "livecodebench": 0.116, "gpqa": 0.319}, {"name": "Mistral Large (Feb '24)", "provider": "Mistral", "cost": 6.0, "input_price": "4", "output_price": "12", "tokens_per_sec": "0", "ttft": "0", "intelligence": 9.9, "coding_index": null, "math_index": null, "livecodebench": 0.178, "gpqa": 0.351}, {"name": "Llama 3.2 Instruct 3B", "provider": "Meta", "cost": 0.06, "input_price": "0.06", "output_price": "0.06", "tokens_per_sec": "47.709", "ttft": "0.465", "intelligence": 9.7, "coding_index": null, "math_index": 3.3, "livecodebench": 0.083, "gpqa": 0.255}, {"name": "Llama 2 Chat 7B", "provider": "Meta", "cost": 0.1, "input_price": "0.05", "output_price": "0.25", "tokens_per_sec": "109.807", "ttft": "0.441", "intelligence": 9.7, "coding_index": null, "math_index": null, "livecodebench": 0.002, "gpqa": 0.227}, {"name": "Jamba 1.7 Large", "provider": "AI21 Labs", "cost": 3.5, "input_price": "2", "output_price": "8", "tokens_per_sec": "44.864", "ttft": "0.776", "intelligence": 9.3, "coding_index": 7.8, "math_index": 2.3, "livecodebench": 0.181, "gpqa": 0.39}, {"name": "Claude 3 Haiku", "provider": "Anthropic", "cost": 0.5, "input_price": "0.25", "output_price": "1.25", "tokens_per_sec": "115.401", "ttft": "0.346", "intelligence": 9.3, "coding_index": null, "math_index": null, "livecodebench": 0.154, "gpqa": null}, {"name": "Llama 3.2 Instruct 1B", "provider": "Meta", "cost": 0.053, "input_price": "0.053", "output_price": "0.055", "tokens_per_sec": "74.791", "ttft": "0.549", "intelligence": 9.1, "coding_index": 0.6, "math_index": 0.0, "livecodebench": 0.019, "gpqa": 0.196}, {"name": "GPT-3.5 Turbo", "provider": "OpenAI", "cost": 0.75, "input_price": "0.5", "output_price": "1.5", "tokens_per_sec": "109.311", "ttft": "0.444", "intelligence": 9.0, "coding_index": 10.7, "math_index": null, "livecodebench": null, "gpqa": 0.297}, {"name": "Mistral Small (Feb '24)", "provider": "Mistral", "cost": 1.5, "input_price": "1", "output_price": "3", "tokens_per_sec": "110.615", "ttft": "0.284", "intelligence": 9.0, "coding_index": null, "math_index": null, "livecodebench": 0.111, "gpqa": 0.302}, {"name": "Mistral Medium", "provider": "Mistral", "cost": 4.088, "input_price": "2.75", "output_price": "8.1", "tokens_per_sec": "90.691", "ttft": "0.359", "intelligence": 9.0, "coding_index": null, "math_index": null, "livecodebench": 0.099, "gpqa": 0.349}, {"name": "Llama 3 Instruct 8B", "provider": "Meta", "cost": 0.07, "input_price": "0.045", "output_price": "0.155", "tokens_per_sec": "65.241", "ttft": "0.387", "intelligence": 8.7, "coding_index": 4.0, "math_index": null, "livecodebench": 0.096, "gpqa": 0.296}, {"name": "Command-R+ (Apr '24)", "provider": "Cohere", "cost": 6.0, "input_price": "3", "output_price": "15", "tokens_per_sec": "0", "ttft": "0", "intelligence": 8.3, "coding_index": null, "math_index": null, "livecodebench": 0.122, "gpqa": 0.323}, {"name": "Olmo 3 7B Instruct", "provider": "Allen Institute for AI", "cost": 0.125, "input_price": "0.1", "output_price": "0.2", "tokens_per_sec": "36.692", "ttft": "0.408", "intelligence": 8.1, "coding_index": 3.4, "math_index": 41.3, "livecodebench": 0.266, "gpqa": 0.4}, {"name": "Jamba 1.5 Mini", "provider": "AI21 Labs", "cost": 0.25, "input_price": "0.2", "output_price": "0.4", "tokens_per_sec": "0", "ttft": "0", "intelligence": 8.0, "coding_index": null, "math_index": null, "livecodebench": 0.062, "gpqa": 0.302}, {"name": "Qwen3 1.7B (Reasoning)", "provider": "Alibaba", "cost": 0.398, "input_price": "0.11", "output_price": "1.26", "tokens_per_sec": "124.267", "ttft": "0.915", "intelligence": 7.9, "coding_index": 1.4, "math_index": 38.7, "livecodebench": 0.308, "gpqa": 0.356}, {"name": "Jamba 1.6 Mini", "provider": "AI21 Labs", "cost": 0.25, "input_price": "0.2", "output_price": "0.4", "tokens_per_sec": "125.986", "ttft": "0.642", "intelligence": 7.9, "coding_index": null, "math_index": null, "livecodebench": 0.071, "gpqa": 0.3}, {"name": "Mixtral 8x7B Instruct", "provider": "Mistral", "cost": 0.54, "input_price": "0.54", "output_price": "0.6", "tokens_per_sec": "0", "ttft": "0", "intelligence": 7.7, "coding_index": null, "math_index": null, "livecodebench": 0.066, "gpqa": 0.292}, {"name": "Mistral 7B Instruct", "provider": "Mistral", "cost": 0.25, "input_price": "0.25", "output_price": "0.25", "tokens_per_sec": "124.355", "ttft": "0.334", "intelligence": 7.4, "coding_index": null, "math_index": null, "livecodebench": 0.046, "gpqa": 0.177}, {"name": "Command-R (Mar '24)", "provider": "Cohere", "cost": 0.75, "input_price": "0.5", "output_price": "1.5", "tokens_per_sec": "0", "ttft": "0", "intelligence": 7.4, "coding_index": null, "math_index": null, "livecodebench": 0.048, "gpqa": 0.284}, {"name": "Jamba 1.7 Mini", "provider": "AI21 Labs", "cost": 0.25, "input_price": "0.2", "output_price": "0.4", "tokens_per_sec": "158.526", "ttft": "0.654", "intelligence": 7.3, "coding_index": 3.1, "math_index": 0.3, "livecodebench": 0.061, "gpqa": 0.322}, {"name": "Qwen3 1.7B (Non-reasoning)", "provider": "Alibaba", "cost": 0.188, "input_price": "0.11", "output_price": "0.42", "tokens_per_sec": "114.108", "ttft": "0.911", "intelligence": 6.8, "coding_index": 2.3, "math_index": 7.3, "livecodebench": 0.126, "gpqa": 0.283}, {"name": "Qwen3 0.6B (Reasoning)", "provider": "Alibaba", "cost": 0.398, "input_price": "0.11", "output_price": "1.26", "tokens_per_sec": "199.91", "ttft": "0.962", "intelligence": 6.4, "coding_index": 0.9, "math_index": 18.0, "livecodebench": 0.121, "gpqa": 0.239}, {"name": "Gemma 3n E4B Instruct", "provider": "Google", "cost": 0.025, "input_price": "0.02", "output_price": "0.04", "tokens_per_sec": "51.383", "ttft": "0.381", "intelligence": 6.3, "coding_index": 4.2, "math_index": 14.3, "livecodebench": 0.146, "gpqa": 0.296}, {"name": "Qwen3 0.6B (Non-reasoning)", "provider": "Alibaba", "cost": 0.188, "input_price": "0.11", "output_price": "0.42", "tokens_per_sec": "186.25", "ttft": "0.932", "intelligence": 5.6, "coding_index": 1.4, "math_index": 10.3, "livecodebench": 0.073, "gpqa": 0.231}, {"name": "DeepSeek-OCR", "provider": "DeepSeek", "cost": 0.048, "input_price": "0.03", "output_price": "0.1", "tokens_per_sec": "307.453", "ttft": "0.191", "intelligence": null, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": null}, {"name": "Cogito v2.1 (Reasoning)", "provider": "Deep Cogito", "cost": 1.25, "input_price": "1.25", "output_price": "1.25", "tokens_per_sec": "73.707", "ttft": "0.385", "intelligence": null, "coding_index": 24.8, "math_index": 72.7, "livecodebench": 0.688, "gpqa": 0.768}, {"name": "Doubao-Seed-1.8", "provider": "ByteDance Seed", "cost": 0.152, "input_price": "0.11", "output_price": "0.28", "tokens_per_sec": "43.9", "ttft": "2.277", "intelligence": null, "coding_index": null, "math_index": null, "livecodebench": null, "gpqa": null}];
+        const metricsConfig = [{"key": "intelligence_index", "label": "Intelligence Index", "field": "intelligence"}, {"key": "coding_index", "label": "Coding Index", "field": "coding_index"}, {"key": "math_index", "label": "Math Index", "field": "math_index"}, {"key": "livecodebench", "label": "LiveCodeBench", "field": "livecodebench"}, {"key": "gpqa", "label": "GPQA (Science)", "field": "gpqa"}];
+        const metricsData = {"intelligence_index": {"stairs": [{"cost": 0.022500000000000003, "value": 6.3}, {"cost": 0.025, "value": 6.3, "name": "Gemma 3n E4B Instruct"}, {"cost": 0.053, "value": 6.3}, {"cost": 0.053, "value": 9.1, "name": "Llama 3.2 Instruct 1B"}, {"cost": 0.06, "value": 9.1}, {"cost": 0.06, "value": 9.7, "name": "Llama 3.2 Instruct 3B"}, {"cost": 0.061, "value": 9.7}, {"cost": 0.061, "value": 10.3, "name": "Nova Micro"}, {"cost": 0.068, "value": 10.3}, {"cost": 0.068, "value": 16.4, "name": "DeepSeek R1 0528 Qwen3 8B"}, {"cost": 0.1, "value": 16.4}, {"cost": 0.1, "value": 24.5, "name": "gpt-oss-20B (high)"}, {"cost": 0.138, "value": 24.5}, {"cost": 0.138, "value": 26.7, "name": "GPT-5 nano (high)"}, {"cost": 0.15, "value": 26.7}, {"cost": 0.15, "value": 39.2, "name": "MiMo-V2-Flash (Reasoning)"}, {"cost": 0.315, "value": 39.2}, {"cost": 0.315, "value": 41.6, "name": "DeepSeek V3.2 (Reasoning)"}, {"cost": 0.875, "value": 41.6}, {"cost": 0.875, "value": 42.0, "name": "GLM-4.7 (Reasoning)"}, {"cost": 1.125, "value": 42.0}, {"cost": 1.125, "value": 46.4, "name": "Gemini 3 Flash Preview (Reasoning)"}, {"cost": 3.438, "value": 46.4}, {"cost": 3.438, "value": 47.6, "name": "GPT-5.1 (high)"}, {"cost": 4.5, "value": 47.6}, {"cost": 4.5, "value": 48.4, "name": "Gemini 3 Pro Preview (high)"}, {"cost": 4.813, "value": 48.4}, {"cost": 4.813, "value": 51.2, "name": "GPT-5.2 (xhigh)"}, {"cost": 288.75, "value": 51.2}], "pareto_names": ["Gemma 3n E4B Instruct", "Llama 3.2 Instruct 1B", "Llama 3.2 Instruct 3B", "Nova Micro", "DeepSeek R1 0528 Qwen3 8B", "gpt-oss-20B (high)", "GPT-5 nano (high)", "MiMo-V2-Flash (Reasoning)", "DeepSeek V3.2 (Reasoning)", "GLM-4.7 (Reasoning)", "Gemini 3 Flash Preview (Reasoning)", "GPT-5.1 (high)", "Gemini 3 Pro Preview (high)", "GPT-5.2 (xhigh)"]}, "coding_index": {"stairs": [{"cost": 0.022500000000000003, "value": 4.2}, {"cost": 0.025, "value": 4.2, "name": "Gemma 3n E4B Instruct"}, {"cost": 0.068, "value": 4.2}, {"cost": 0.068, "value": 7.8, "name": "DeepSeek R1 0528 Qwen3 8B"}, {"cost": 0.07, "value": 7.8}, {"cost": 0.07, "value": 8.3, "name": "NVIDIA Nemotron Nano 9B V2 (Reasoning)"}, {"cost": 0.1, "value": 8.3}, {"cost": 0.1, "value": 18.5, "name": "gpt-oss-20B (high)"}, {"cost": 0.105, "value": 18.5}, {"cost": 0.105, "value": 19.0, "name": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)"}, {"cost": 0.138, "value": 19.0}, {"cost": 0.138, "value": 20.3, "name": "GPT-5 nano (high)"}, {"cost": 0.138, "value": 20.3}, {"cost": 0.138, "value": 22.9, "name": "GPT-5 nano (medium)"}, {"cost": 0.15, "value": 22.9}, {"cost": 0.15, "value": 31.8, "name": "MiMo-V2-Flash (Reasoning)"}, {"cost": 0.315, "value": 31.8}, {"cost": 0.315, "value": 36.7, "name": "DeepSeek V3.2 (Reasoning)"}, {"cost": 0.425, "value": 36.7}, {"cost": 0.425, "value": 37.9, "name": "DeepSeek V3.2 Speciale"}, {"cost": 1.125, "value": 37.9}, {"cost": 1.125, "value": 42.6, "name": "Gemini 3 Flash Preview (Reasoning)"}, {"cost": 3.438, "value": 42.6}, {"cost": 3.438, "value": 44.7, "name": "GPT-5.1 (high)"}, {"cost": 3.438, "value": 44.7}, {"cost": 3.438, "value": 46.7, "name": "Gemini 2.5 Pro Preview (Mar' 25)"}, {"cost": 4.813, "value": 46.7}, {"cost": 4.813, "value": 48.7, "name": "GPT-5.2 (xhigh)"}, {"cost": 41.25, "value": 48.7}], "pareto_names": ["Gemma 3n E4B Instruct", "DeepSeek R1 0528 Qwen3 8B", "NVIDIA Nemotron Nano 9B V2 (Reasoning)", "gpt-oss-20B (high)", "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)", "GPT-5 nano (high)", "GPT-5 nano (medium)", "MiMo-V2-Flash (Reasoning)", "DeepSeek V3.2 (Reasoning)", "DeepSeek V3.2 Speciale", "Gemini 3 Flash Preview (Reasoning)", "GPT-5.1 (high)", "Gemini 2.5 Pro Preview (Mar' 25)", "GPT-5.2 (xhigh)"]}, "math_index": {"stairs": [{"cost": 0.022500000000000003, "value": 14.3}, {"cost": 0.025, "value": 14.3, "name": "Gemma 3n E4B Instruct"}, {"cost": 0.068, "value": 14.3}, {"cost": 0.068, "value": 63.7, "name": "DeepSeek R1 0528 Qwen3 8B"}, {"cost": 0.07, "value": 63.7}, {"cost": 0.07, "value": 69.7, "name": "NVIDIA Nemotron Nano 9B V2 (Reasoning)"}, {"cost": 0.1, "value": 69.7}, {"cost": 0.1, "value": 89.3, "name": "gpt-oss-20B (high)"}, {"cost": 0.105, "value": 89.3}, {"cost": 0.105, "value": 91.0, "name": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)"}, {"cost": 0.15, "value": 91.0}, {"cost": 0.15, "value": 96.3, "name": "MiMo-V2-Flash (Reasoning)"}, {"cost": 0.425, "value": 96.3}, {"cost": 0.425, "value": 96.7, "name": "DeepSeek V3.2 Speciale"}, {"cost": 1.125, "value": 96.7}, {"cost": 1.125, "value": 97.0, "name": "Gemini 3 Flash Preview (Reasoning)"}, {"cost": 3.438, "value": 97.0}, {"cost": 3.438, "value": 98.7, "name": "GPT-5 Codex (high)"}, {"cost": 4.813, "value": 98.7}, {"cost": 4.813, "value": 99.0, "name": "GPT-5.2 (xhigh)"}, {"cost": 33.0, "value": 99.0}], "pareto_names": ["Gemma 3n E4B Instruct", "DeepSeek R1 0528 Qwen3 8B", "NVIDIA Nemotron Nano 9B V2 (Reasoning)", "gpt-oss-20B (high)", "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)", "MiMo-V2-Flash (Reasoning)", "DeepSeek V3.2 Speciale", "Gemini 3 Flash Preview (Reasoning)", "GPT-5 Codex (high)", "GPT-5.2 (xhigh)"]}, "livecodebench": {"stairs": [{"cost": 0.022500000000000003, "value": 0.146}, {"cost": 0.025, "value": 0.146, "name": "Gemma 3n E4B Instruct"}, {"cost": 0.068, "value": 0.146}, {"cost": 0.068, "value": 0.513, "name": "DeepSeek R1 0528 Qwen3 8B"}, {"cost": 0.07, "value": 0.513}, {"cost": 0.07, "value": 0.724, "name": "NVIDIA Nemotron Nano 9B V2 (Reasoning)"}, {"cost": 0.1, "value": 0.724}, {"cost": 0.1, "value": 0.777, "name": "gpt-oss-20B (high)"}, {"cost": 0.138, "value": 0.777}, {"cost": 0.138, "value": 0.789, "name": "GPT-5 nano (high)"}, {"cost": 0.15, "value": 0.789}, {"cost": 0.15, "value": 0.868, "name": "MiMo-V2-Flash (Reasoning)"}, {"cost": 0.263, "value": 0.868}, {"cost": 0.263, "value": 0.878, "name": "gpt-oss-120B (high)"}, {"cost": 0.425, "value": 0.878}, {"cost": 0.425, "value": 0.896, "name": "DeepSeek V3.2 Speciale"}, {"cost": 1.125, "value": 0.896}, {"cost": 1.125, "value": 0.908, "name": "Gemini 3 Flash Preview (Reasoning)"}, {"cost": 4.5, "value": 0.908}, {"cost": 4.5, "value": 0.917, "name": "Gemini 3 Pro Preview (high)"}, {"cost": 33.0, "value": 0.917}], "pareto_names": ["Gemma 3n E4B Instruct", "DeepSeek R1 0528 Qwen3 8B", "NVIDIA Nemotron Nano 9B V2 (Reasoning)", "gpt-oss-20B (high)", "GPT-5 nano (high)", "MiMo-V2-Flash (Reasoning)", "gpt-oss-120B (high)", "DeepSeek V3.2 Speciale", "Gemini 3 Flash Preview (Reasoning)", "Gemini 3 Pro Preview (high)"]}, "gpqa": {"stairs": [{"cost": 0.022500000000000003, "value": 0.296}, {"cost": 0.025, "value": 0.296, "name": "Gemma 3n E4B Instruct"}, {"cost": 0.061, "value": 0.296}, {"cost": 0.061, "value": 0.358, "name": "Nova Micro"}, {"cost": 0.068, "value": 0.358}, {"cost": 0.068, "value": 0.612, "name": "DeepSeek R1 0528 Qwen3 8B"}, {"cost": 0.1, "value": 0.612}, {"cost": 0.1, "value": 0.688, "name": "gpt-oss-20B (high)"}, {"cost": 0.105, "value": 0.688}, {"cost": 0.105, "value": 0.757, "name": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)"}, {"cost": 0.15, "value": 0.757}, {"cost": 0.15, "value": 0.846, "name": "MiMo-V2-Flash (Reasoning)"}, {"cost": 0.275, "value": 0.846}, {"cost": 0.275, "value": 0.853, "name": "Grok 4.1 Fast (Reasoning)"}, {"cost": 0.425, "value": 0.853}, {"cost": 0.425, "value": 0.871, "name": "DeepSeek V3.2 Speciale"}, {"cost": 1.125, "value": 0.871}, {"cost": 1.125, "value": 0.898, "name": "Gemini 3 Flash Preview (Reasoning)"}, {"cost": 4.5, "value": 0.898}, {"cost": 4.5, "value": 0.908, "name": "Gemini 3 Pro Preview (high)"}, {"cost": 38.5, "value": 0.908}], "pareto_names": ["Gemma 3n E4B Instruct", "Nova Micro", "DeepSeek R1 0528 Qwen3 8B", "gpt-oss-20B (high)", "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)", "MiMo-V2-Flash (Reasoning)", "Grok 4.1 Fast (Reasoning)", "DeepSeek V3.2 Speciale", "Gemini 3 Flash Preview (Reasoning)", "Gemini 3 Pro Preview (high)"]}};
+
+        // Site-coherent palette: site section accents (burgundy/amber/blue/green)
+        // extended with muted warm-earth tones that read well on parchment + white.
+        const providerColors = {
+            'OpenAI':     '#7b2d3f',  // burgundy (writer accent)
+            'Anthropic':  '#d97706',  // amber (professional accent)
+            'Google':     '#2d5ae5',  // blue (scientist accent)
+            'Meta':       '#0d9463',  // green (contributor accent)
+            'DeepSeek':   '#6b5b95',  // dusty violet
+            'Mistral AI': '#c06d3f',  // terracotta
+            'xAI':        '#2a2630',  // near-black
+            'Alibaba':    '#b0873a',  // gold
+            'Cohere':     '#8a4f7a',  // muted purple
+            'Amazon':     '#4a6c8a',  // slate blue
+            'AI21 Labs':  '#5e7c91',  // dusty blue-grey
+            'Z AI':       '#4a8a7a',  // teal-green
+            '01.AI':      '#a84a5c',  // rose
+            'Nvidia':     '#5a8a3a',  // olive
+            'Xiaomi':     '#b5553a',  // brick
+        };
+
+        function getColor(provider) { return providerColors[provider] || '#888888'; }
+
+        let currentMetric = metricsConfig[0].key;
+        let chart;
+        let currentParetoNames = new Set();
+
+        // Setup tabs
+        const tabsContainer = document.getElementById('tabs');
+        metricsConfig.forEach(m => {
+            const tab = document.createElement('div');
+            tab.className = 'tab' + (m.key === currentMetric ? ' active' : '');
+            tab.textContent = m.label;
+            tab.onclick = () => switchMetric(m.key);
+            tabsContainer.appendChild(tab);
+        });
+
+        // Setup provider filter
+        const providers = [...new Set(rawData.map(d => d.provider))].sort();
+        const providerFilter = document.getElementById('providerFilter');
+        providers.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p;
+            opt.textContent = p;
+            providerFilter.appendChild(opt);
+        });
+
+        // Setup legend
+        const legend = document.getElementById('legend');
+        providers.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'legend-item';
+            item.innerHTML = `<span class="legend-color" style="background: ${getColor(p)}"></span>${p}`;
+            item.onclick = () => { providerFilter.value = p; updateChart(); };
+            legend.appendChild(item);
+        });
+
+        function switchMetric(key) {
+            currentMetric = key;
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', metricsConfig[i].key === key);
+            });
+            updateChart();
+        }
+
+        function getMetricConfig() { return metricsConfig.find(m => m.key === currentMetric); }
+
+        function computeParetoFrontier(data, field) {
+            // Filter valid data
+            const validData = data
+                .filter(d => d[field] != null)
+                .map(d => ({ ...d, xCost: d.cost }));
+
+            if (validData.length === 0) return { stairs: [], paretoNames: [] };
+
+            // Sort by cost (x-axis value)
+            validData.sort((a, b) => a.xCost - b.xCost);
+
+            // Find Pareto optimal: best performance at each cost level
+            const frontierModels = [];
+            let maxVal = 0;
+
+            for (const model of validData) {
+                if (model[field] > maxVal) {
+                    maxVal = model[field];
+                    frontierModels.push(model);
+                }
+            }
+
+            if (frontierModels.length === 0) return { stairs: [], paretoNames: [] };
+
+            // Build stair-step line
+            const stairs = [];
+            const minCost = Math.min(...validData.map(d => d.xCost));
+            const maxCost = Math.max(...validData.map(d => d.xCost));
+
+            for (let i = 0; i < frontierModels.length; i++) {
+                const model = frontierModels[i];
+                if (i === 0) {
+                    stairs.push({ x: minCost * 0.9, y: model[field] });
+                } else {
+                    stairs.push({ x: model.xCost, y: frontierModels[i - 1][field] });
+                }
+                stairs.push({ x: model.xCost, y: model[field], name: model.name });
+            }
+            stairs.push({ x: maxCost * 1.1, y: frontierModels[frontierModels.length - 1][field] });
+
+            return {
+                stairs,
+                paretoNames: frontierModels.map(m => m.name)
+            };
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('chart').getContext('2d');
+            const config = getMetricConfig();
+            const field = config.field;
+            const scaleType = document.getElementById('scaleSelect').value;
+            const showPareto = document.getElementById('showPareto').checked;
+            const labelMode = document.getElementById('labelMode').value;
+            const selectedProvider = document.getElementById('providerFilter').value;
+
+            // Compute Pareto frontier
+            const paretoResult = computeParetoFrontier(rawData, field);
+            const paretoNames = new Set(paretoResult.paretoNames);
+            currentParetoNames = paretoNames;
+
+            let filteredData = rawData.filter(d => d[field] != null);
+            if (selectedProvider !== 'all') {
+                filteredData = filteredData.filter(d => d.provider === selectedProvider);
+            }
+
+            document.getElementById('modelCount').textContent = filteredData.length;
+            document.getElementById('paretoCount').textContent = paretoResult.paretoNames.length;
+
+            // Update pareto list
+            const paretoList = document.getElementById('paretoList');
+            paretoList.innerHTML = '';
+            rawData
+                .filter(d => d[field] != null && paretoNames.has(d.name))
+                .sort((a, b) => a.cost - b.cost)
+                .forEach(d => {
+                    const item = document.createElement('div');
+                    item.className = 'pareto-item';
+                    item.innerHTML = `<div class="name">${d.name}</div><div class="details">${d.provider} · ${config.label}: ${d[field]?.toFixed?.(2) || d[field]} · $${d.cost.toFixed(2)}</div>`;
+                    item.onclick = () => showModal(d);
+                    paretoList.appendChild(item);
+                });
+
+            const datasets = [{
+                label: 'Models',
+                data: filteredData.map(d => ({ x: d.cost, y: d[field], model: d })),
+                backgroundColor: filteredData.map(d => getColor(d.provider) + (paretoNames.has(d.name) ? 'ff' : '88')),
+                borderColor: filteredData.map(d => paretoNames.has(d.name) ? '#fff' : 'transparent'),
+                borderWidth: filteredData.map(d => paretoNames.has(d.name) ? 2 : 0),
+                pointRadius: filteredData.map(d => paretoNames.has(d.name) ? 8 : 5),
+                pointHoverRadius: 10,
+            }];
+
+            if (showPareto && paretoResult.stairs.length > 0) {
+                datasets.unshift({
+                    label: 'Pareto',
+                    data: paretoResult.stairs,
+                    type: 'line',
+                    borderColor: 'rgba(0, 212, 255, 0.8)',
+                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    stepped: 'before',
+                    pointRadius: 0,
+                });
+            }
+
+            chart = new Chart(ctx, {
+                type: 'scatter',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { intersect: true, mode: 'nearest' },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => {
+                                    if (ctx.dataset.label === 'Pareto') return null;
+                                    const m = ctx.raw.model;
+                                    return `${m.name} - ${config.label}: ${m[field]?.toFixed?.(2) || m[field]}, Cost: $${m.cost.toFixed(3)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: scaleType === 'log' ? 'logarithmic' : 'linear',
+                            title: { display: true, text: 'Cost per 1M tokens (USD)', color: '#6b6461' },
+                            grid: { color: 'rgba(0,0,0,0.06)' },
+                            ticks: { color: '#6b6461', callback: v => '$' + v }
+                        },
+                        y: {
+                            title: { display: true, text: config.label, color: '#6b6461' },
+                            grid: { color: 'rgba(0,0,0,0.06)' },
+                            ticks: { color: '#6b6461' },
+                            min: 0
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length && chart.data.datasets[elements[0].datasetIndex].label !== 'Pareto') {
+                            showModal(chart.data.datasets[elements[0].datasetIndex].data[elements[0].index].model);
+                        }
+                    }
+                },
+                plugins: [{
+                    afterDatasetsDraw: chart => {
+                        if (labelMode === 'none') return;
+                        const ctx = chart.ctx;
+                        chart.data.datasets.forEach((ds, i) => {
+                            if (ds.label === 'Pareto') return;
+                            chart.getDatasetMeta(i).data.forEach((el, idx) => {
+                                const m = ds.data[idx].model;
+                                const isPareto = paretoNames.has(m.name);
+                                if (labelMode === 'frontier' && !isPareto) return;
+
+                                ctx.save();
+                                ctx.fillStyle = isPareto ? '#1a1819' : '#9b8b88';
+                                ctx.font = isPareto ? 'bold 10px sans-serif' : '9px sans-serif';
+                                ctx.textAlign = 'center';
+                                ctx.shadowColor = 'rgba(255,255,255,0.9)';
+                                ctx.shadowBlur = 4;
+                                ctx.fillText(m.name, el.x, el.y - 12);
+                                ctx.restore();
+                            });
+                        });
+                    }
+                }]
+            });
+        }
+
+        function updateChart() {
+            if (chart) chart.destroy();
+            createChart();
+        }
+
+        function showModal(model) {
+            const config = getMetricConfig();
+            const isPareto = currentParetoNames.has(model.name);
+
+            document.getElementById('modalBody').innerHTML = `
+                <h2>${model.name}${isPareto ? '<span class="pareto-badge">Pareto Optimal</span>' : ''}</h2>
+                <p class="provider">${model.provider}</p>
+                <div class="stats-grid">
+                    <div class="stat-card highlight">
+                        <div class="stat-label">${config.label}</div>
+                        <div class="stat-value">${model[config.field]?.toFixed?.(2) || model[config.field] || 'N/A'}</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-label">Cost (Blended)</div>
+                        <div class="stat-value">$${model.cost.toFixed(3)}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Intelligence</div>
+                        <div class="stat-value">${model.intelligence?.toFixed?.(1) || 'N/A'}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Coding</div>
+                        <div class="stat-value">${model.coding_index?.toFixed?.(1) || 'N/A'}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Math</div>
+                        <div class="stat-value">${model.math_index?.toFixed?.(1) || 'N/A'}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">LiveCodeBench</div>
+                        <div class="stat-value">${model.livecodebench?.toFixed?.(3) || 'N/A'}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">GPQA</div>
+                        <div class="stat-value">${model.gpqa?.toFixed?.(3) || 'N/A'}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Input Price</div>
+                        <div class="stat-value">$${model.input_price}/M</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Output Price</div>
+                        <div class="stat-value">$${model.output_price}/M</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Speed</div>
+                        <div class="stat-value">${parseFloat(model.tokens_per_sec).toFixed(0) || 'N/A'} tok/s</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() { document.getElementById('modal').classList.remove('active'); }
+
+        document.getElementById('modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        document.getElementById('scaleSelect').onchange = updateChart;
+        document.getElementById('showPareto').onchange = updateChart;
+        document.getElementById('labelMode').onchange = updateChart;
+        document.getElementById('providerFilter').onchange = updateChart;
+
+        createChart();
+    </script>
+</body>
+</html>

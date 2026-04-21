@@ -41,6 +41,7 @@
     "description": "Plotting intelligence vs price for hundreds of LLMs shows most are strictly dominated. Here is the Pareto frontier and the four models that matter.",
     "url": "https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html",
     "datePublished": "2026-01-26",
+    "dateModified": "2026-04-21",
     "author": { "@id": "https://aleksanderborodin.github.io/#person" },
     "publisher": { "@id": "https://aleksanderborodin.github.io/#person" },
     "inLanguage": "en",
@@ -106,7 +107,15 @@
 
         <p>Anything below the frontier is strictly dominated: for the same price a better model exists, or for the same intelligence a cheaper one does.</p>
 
-        <p><em>(An interactive chart with five tabs — general intelligence, coding, math, LiveCodeBench, GPQA — and a filter by provider, belongs here. A site-styled version is being built; in the meantime the verdict is below.)</em></p>
+        <figure class="chart-figure" style="margin: 2rem 0;">
+          <iframe src="/assets/pareto-llm-pricing/chart.html"
+                  title="Interactive Pareto frontier of LLM price vs intelligence"
+                  loading="lazy"
+                  style="width: 100%; height: 760px; border: 1px solid rgba(26,24,25,0.1); border-radius: 8px; background: #f5f1eb; display: block;"></iframe>
+          <figcaption style="font-size: 0.85em; color: #6b6461; margin-top: 0.5rem; text-align: center;">
+            Interactive: price × intelligence across five benchmarks. The step-line is the Pareto frontier — anything below it is strictly dominated. Click a point for details.
+          </figcaption>
+        </figure>
 
         <p>Verdict, by use case:</p>
 
