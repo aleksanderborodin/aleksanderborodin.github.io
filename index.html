@@ -12,8 +12,8 @@
       var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
       if (lang === 'ru' || lang.startsWith('ru-')) {
         // Only redirect if not already redirected (avoid loops via sessionStorage)
-        if (!sessionStorage.getItem('lang-redirected')) {
-          sessionStorage.setItem('lang-redirected', '1');
+        if (!localStorage.getItem('lang-redirected')) {
+          localStorage.setItem('lang-redirected', '1');
           window.location.replace('/ru/');
         }
       }
@@ -75,7 +75,7 @@
     "description": "NLP/AI developer and LLM safety researcher at MIPT, building open-source AI tools and commercial ML systems.",
     "email": "apdorodin765@gmail.com",
     "nationality": "Russian",
-    "alumniOf": {
+    "memberOf": {
       "@type": "CollegeOrUniversity",
       "name": "Moscow Institute of Physics and Technology",
       "alternateName": "MIPT",
