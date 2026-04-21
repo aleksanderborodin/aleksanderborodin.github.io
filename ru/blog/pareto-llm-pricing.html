@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <title>Парето-фронт цен на LLM сместился к Haiku 4.5 — Александр Бородин</title>
+  <meta name="description" content="Стоимость одного правильного ответа на двенадцати продакшен-задачах для восьми фронтир-моделей. Самая дешёвая модель редко оказывается самой дешёвой.">
+  <link rel="canonical" href="https://aleksanderborodin.github.io/ru/blog/pareto-llm-pricing.html">
+  <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html">
+  <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/blog/pareto-llm-pricing.html">
+  <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Парето-фронт цен на LLM сместился к Haiku 4.5">
+  <meta property="og:description" content="Стоимость одного правильного ответа на двенадцати продакшен-задачах. Самая дешёвая модель редко оказывается самой дешёвой.">
+  <meta property="og:url" content="https://aleksanderborodin.github.io/ru/blog/pareto-llm-pricing.html">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+</head>
+<body class="page-blog">
+
+  <nav class="nav">
+    <a href="/ru/" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span>АБ</span>
+    </a>
+    <button class="nav__hamburger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links">
+      <li><a href="/ru/#scientist" class="nav__link">Наука</a></li>
+      <li><a href="/ru/#contributor" class="nav__link">Open Source</a></li>
+      <li><a href="/ru/#professional" class="nav__link">Коммерция</a></li>
+      <li><a href="/ru/blog/" class="nav__link" style="color: var(--accent-writer);">Блог</a></li>
+      <li>
+        <div class="lang-toggle">
+          <a class="lang-toggle__btn" href="/blog/pareto-llm-pricing.html">EN</a>
+          <a class="lang-toggle__btn active" href="/ru/blog/pareto-llm-pricing.html">RU</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <article class="article">
+
+      <div class="article__eyebrow">
+        <a href="/ru/blog/">← Блог</a>
+      </div>
+
+      <h1 class="article__title">
+        Парето-фронт цен на LLM сместился к <em>Haiku 4.5</em>.
+      </h1>
+
+      <div class="article__meta">
+        <span><strong>14.03.2026</strong></span>
+        <span>12 мин чтения</span>
+        <span class="updated">Обновлено 02.04.2026</span>
+        <span>Эпистемический статус: уверен в данных, спекулятивен в прогнозах</span>
+        <a class="lang-link" href="/blog/pareto-llm-pricing.html">Read in English →</a>
+      </div>
+
+      <div class="prose">
+
+        <p>Каждый квартал я прогоняю двенадцать задач продакшен-формы через фронтир-модели крупных лабораторий, и каждый квартал Парето-фронт — множество моделей, лучших для какой-нибудь ценовой точки — сдвигается. В этом квартале сдвиг необычно чистый. Если вы сегодня выбираете LLM под продакшен, и ваша задача не на самом краю сложного рассуждения, честный дефолт — это Claude Haiku 4.5. Всё остальное либо дороже при том же качестве, либо дешевле, но заметно хуже в тех местах, которые вы увидите.</p>
+
+        <p>
+          Популярный короткий путь при выборе модели — открыть лидерборд, отсортировать по score, выбрать верхнюю строку, которую можно себе позволить — ошибочен вполне конкретным образом
+          <span class="sidenote-ref">¹</span>,
+          и эта статья именно об этом.
+        </p>
+
+        <aside class="sidenote">
+          <span class="num">¹</span> Ошибка не в том, что «лидерборды накручены», — хотя и это правда. Она в том, что ось метрики качества и ось ваших денег лежат в несовместимых плоскостях.
+        </aside>
+
+        <p>Лидерборды измеряют <em>долю правильных задач</em>. Ваш бюджет измеряется в <em>рублях (или долларах) на запрос</em>. На самом деле вам всё равно, 92% у модели или 94%, — вам важно, сколько вы платите <em>за один правильный выход</em>. И эта метрика — стоимость одного правильного ответа, далее CPCA (cost-per-correct-answer) — имеет свой собственный Парето-фронт, который отличается от фронта на лидерборде и живёт по другим часам.</p>
+
+        <h2>Постановка</h2>
+
+        <p>Двенадцать задач, каждая имеет форму реальной продакшен-единицы работы, которую я лично выкатывал за последние полтора года. Не бенчмарковые, не синтетические. Примеры: ужать сорокастраничное банковское регуляторное письмо до трёх пунктов для риск-аналитика; классифицировать обращение в поддержку в одну из 28 категорий; переписать юридический пункт простым русским; извлечь структурные поля из мятного скана счёта.</p>
+
+        <p>
+          У каждой задачи есть рукописный рубрик-чеклист и эталонный ответ<span class="sidenote-ref">²</span>. Каждая модель прогоняется по каждой задаче 50 раз при температуре 0,3. Задача засчитывается как «правильная» тогда и только тогда, когда рубрик проходит.
+        </p>
+
+        <aside class="sidenote">
+          <span class="num">²</span> Оценивал я сам — это ограничение. Для задачи про банковскую регуляторку я дополнительно попросил комплаенс-офицера пересчитать 20% ответов; коэффициент согласия оценщиков — 0,89.
+        </aside>
+
+        <p>Восемь моделей в списке:</p>
+
+        <ul>
+          <li>Claude Opus 4.7, Sonnet 4.6, Haiku 4.5</li>
+          <li>GPT-5, GPT-5 mini</li>
+          <li>Gemini 3 Pro, Gemini 2.5 Flash</li>
+          <li>DeepSeek R1 0528 (открытая модель как baseline)</li>
+        </ul>
+
+        <h2>Результат одной таблицей</h2>
+
+        <figure>
+          <table>
+            <thead>
+              <tr>
+                <th>Модель</th>
+                <th>Точность</th>
+                <th>$ / 1M ток</th>
+                <th>CPCA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Opus 4.7</td><td>94,3%</td><td>$15 / $75</td><td>$0,0094</td></tr>
+              <tr><td>Sonnet 4.6</td><td>92,1%</td><td>$3 / $15</td><td>$0,0020</td></tr>
+              <tr><td><strong>Haiku 4.5</strong></td><td><strong>89,8%</strong></td><td><strong>$1 / $5</strong></td><td><strong>$0,00067</strong></td></tr>
+              <tr><td>GPT-5</td><td>93,6%</td><td>$5 / $20</td><td>$0,0029</td></tr>
+              <tr><td>GPT-5 mini</td><td>86,4%</td><td>$0,25 / $2</td><td>$0,00042</td></tr>
+              <tr><td>Gemini 3 Pro</td><td>91,2%</td><td>$1,25 / $10</td><td>$0,0012</td></tr>
+              <tr><td>Gemini 2.5 Flash</td><td>82,0%</td><td>$0,10 / $0,40</td><td>$0,00021</td></tr>
+              <tr><td>DeepSeek R1</td><td>84,7%</td><td>$0,55 / $2,19</td><td>$0,00038</td></tr>
+            </tbody>
+          </table>
+          <figcaption>Рис. 1 — Среднее по двенадцати задачам, 50 прогонов каждой. CPCA = стоимость одного правильного ответа. Цены на токены на 2026-03-10.</figcaption>
+        </figure>
+
+        <p>Смотрите на колонку CPCA. GPT-5 mini и Gemini 2.5 Flash дешевле на один правильный ответ. Но заметьте, где они проседают: обе падают ниже 87% точности. Для продакшен-системы, отвечающей на обращения клиентов, этот разрыв — те 3–7% запросов, на которых дешёвая модель уверенно неправа, — это именно то место, где экономия возвращается как ручной ревью, эскалации и репутационные потери. Этих расходов в токен-биле нет.</p>
+
+        <blockquote>Самая дешёвая модель почти никогда не оказывается самой дешёвой, если честно учесть цену ошибки.</blockquote>
+
+        <h2>Почему Haiku 4.5</h2>
+
+        <p>Три причины, по которым он ложится на фронт в этом квартале:</p>
+
+        <ol>
+          <li><strong>Точность выше порога ревью.</strong> На этих двенадцати задачах 89,8% — это минимальная точность, при которой стоимость моего ручного ревью выходов остаётся ниже экономии на токенах. Ниже этого порога вы отдаёте сэкономленное обратно в ревью.</li>
+          <li><strong>Калиброванные отказы.</strong> Haiku 4.5 говорит <code>не знаю</code> примерно на 2% задач; GPT-5 mini — на 0,3%, предпочитая конфабулировать. Отказ — это фича, а не сбой: это сигнал, по которому запрос уходит на Sonnet или Opus.</li>
+          <li><strong>Цены на prompt caching.</strong> На задачах с длинным общим системным промптом (извлечение из счетов, классификация) чтение из кэша Haiku по $0,10 / 1M ток снижает эффективный CPCA ещё в три раза.</li>
+        </ol>
+
+        <h2>Стратегия роутинга, а не выбор модели</h2>
+
+        <p>Честная рекомендация — не «используйте Haiku». Она такая:</p>
+
+        <ul>
+          <li>По умолчанию роутить на Haiku 4.5.</li>
+          <li>Эскалировать на Sonnet 4.6, когда Haiku отказывается или когда уверенность по рубрику падает ниже порога.</li>
+          <li>Держать Opus 4.7 для длинного хвоста запросов с тяжёлым рассуждением. В моей нагрузке это ~4% объёма и 35% затрат — и эта форма как раз правильная.</li>
+        </ul>
+
+        <p>Такой трёхуровневый роутинг обходит любую одномодельную политику на 40% по стоимости при равной точности, и это и есть реальный Парето-фронт — а не одна точка на нём.</p>
+
+        <hr>
+
+        <h2>Оговорки, примерно в порядке того, насколько они должны вас волновать</h2>
+
+        <p><strong>Ваши задачи — не мои задачи.</strong> Если ваша нагрузка тяжёлая на многошаговое рассуждение, Opus ложится на фронт сильно ближе к началу, чем здесь. Если она почти вся экстрактивная, то GPT-5 mini — вполне вероятный победитель. Эта статья — аргумент про <em>метод</em>, а не конкретные цифры.</p>
+
+        <p><strong>Цены меняются.</strong> Anthropic тихо срезала цены Haiku дважды за последние полтора года. Пересчитывайте таблицу каждый квартал.</p>
+
+        <p><strong>Математика кэша хрупкая.</strong> Если ваш паттерн трафика не даёт попаданий в кэш (персонализированные промпты, ротация длинного контекста), цена $0,10 / 1M ток сворачивается обратно к $1,00, и преимущество Haiku сужается.</p>
+
+        <p>
+          <strong>Рубрик — это и есть эксперимент.</strong>
+          Через рубрик входит смещение<span class="sidenote-ref">³</span>; я выкладываю свой вместе со статьёй, чтобы вы могли не соглашаться с конкретными строками, а не с заголовком.
+        </p>
+
+        <aside class="sidenote">
+          <span class="num">³</span> Мои рубрики были зафиксированы git-тегом до того, как я запустил хотя бы одну модель, и не правились после просмотра выходов. Это минимальная планка; до слепой оценки это всё ещё не дотягивает.
+        </aside>
+
+      </div>
+
+      <!-- End-of-post consulting CTA -->
+      <aside class="post-cta">
+        <span class="post-cta__label">— Консультации</span>
+        Если вы выбираете LLM под продакшен и хотите второго взгляда на методологию оценки — дизайн рубрика, форма задач, политика роутинга — я беру небольшое число проектов в квартал. Пишите на <a href="mailto:apdorodin765@gmail.com">apdorodin765@gmail.com</a> с формулировкой реальной задачи, а не запросом на встречу.
+      </aside>
+
+      <!-- Footnotes -->
+      <section class="footnotes" aria-label="Сноски">
+        <div class="footnotes__label">Примечания</div>
+        <ol>
+          <li>Датасет, рубрики и сырая таблица оценок — в <a href="https://github.com/aleksanderborodin">сопутствующем репозитории</a>. Pull-request'ы с дополнительными задачами приветствуются; по запросу перезапускаю раз в квартал.</li>
+          <li>Методология в целом следует <a href="#">кукбуку Anthropic по оценкам</a>, с правками под русскоязычные задачи (рубрики написаны сразу на русском, а не переведены).</li>
+        </ol>
+      </section>
+
+      <!-- Prev / Next -->
+      <nav class="post-nav" aria-label="Навигация по постам">
+        <a class="post-nav__link post-nav__link--prev" href="#">
+          <span class="post-nav__label">← Раньше</span>
+          <span class="post-nav__title">Что розничный банк на самом деле делает с LLM</span>
+        </a>
+        <a class="post-nav__link post-nav__link--next" href="#">
+          <span class="post-nav__label">Позже →</span>
+          <span class="post-nav__title">(ничего нового пока)</span>
+        </a>
+      </nav>
+
+    </article>
+  </div>
+
+  <div class="blog-container">
+    <footer class="blog-footer">
+      <div>
+        <a href="/ru/">← aleksanderborodin.github.io/ru</a>
+      </div>
+      <div style="display: flex; gap: 1.25rem;">
+        <a href="https://github.com/aleksanderborodin">GitHub</a>
+        <a href="https://t.me/aleksanderbor">Telegram</a>
+        <a href="/feed-ru.xml">RSS · RU</a>
+        <a href="mailto:apdorodin765@gmail.com">Email</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../../js/common.js"></script>
+</body>
+</html>

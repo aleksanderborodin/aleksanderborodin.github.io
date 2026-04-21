@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <title>Writing — Aleksander Borodin</title>
+  <meta name="description" content="Long-form notes on LLM evaluation, embedded AI, and the economics of picking models for production. By Aleksander Borodin.">
+  <link rel="canonical" href="https://aleksanderborodin.github.io/blog/">
+  <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/blog/">
+  <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/blog/">
+  <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/blog/">
+
+  <link rel="alternate" type="application/rss+xml" title="Aleksander Borodin — EN feed" href="/feed-en.xml">
+  <link rel="alternate" type="application/rss+xml" title="Aleksander Borodin — RU feed" href="/feed-ru.xml">
+
+  <!-- Fonts: reuse site fonts + add Fraunces for long-form reading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body class="page-blog">
+
+  <!-- Navigation (shared site nav + Writing link) -->
+  <nav class="nav">
+    <a href="/" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span>AB</span>
+    </a>
+
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav__links">
+      <li><a href="/#scientist" class="nav__link">Science</a></li>
+      <li><a href="/#contributor" class="nav__link">Open Source</a></li>
+      <li><a href="/#professional" class="nav__link">Commercial</a></li>
+      <li><a href="/blog/" class="nav__link" aria-current="page" style="color: var(--accent-writer);">Writing</a></li>
+      <li>
+        <div class="lang-toggle">
+          <a class="lang-toggle__btn active" href="/blog/">EN</a>
+          <a class="lang-toggle__btn" href="/ru/blog/">RU</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="blog-container">
+
+    <!-- ========= MASTHEAD ========= -->
+    <header class="blog-masthead">
+      <div class="blog-masthead__eyebrow">Writing · Notes &amp; essays</div>
+      <h1>Notes on LLMs, evaluation, and what to <em>actually</em> ship.</h1>
+      <p class="blog-masthead__lede">
+        Long-form analysis on picking models for production, embedded AI feasibility, and the quiet parts of LLM behavior no benchmark captures. Written slowly; updated when I'm wrong.
+      </p>
+      <div class="blog-masthead__meta">
+        <span>24 posts · EN + RU</span>
+        <a href="/feed-en.xml">RSS (EN)</a>
+        <a href="/feed-ru.xml">RSS (RU)</a>
+        <span style="color: var(--accent-writer);">Available for AI consulting — apdorodin765@gmail.com</span>
+      </div>
+    </header>
+
+    <!-- ========= START HERE ========= -->
+    <section class="start-here">
+      <div class="start-here__label">— Start here</div>
+      <ul class="start-here__list">
+        <li>
+          <a class="start-here__item" href="pareto-llm-pricing.html">
+            <span class="start-here__num">01</span>
+            <span class="start-here__text">
+              <strong>The Pareto front of LLM pricing has moved to Haiku 4.5.</strong>
+              <span> — cost-per-correct-answer across 12 tasks; why "cheapest" is usually wrong.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="start-here__item" href="#">
+            <span class="start-here__num">02</span>
+            <span class="start-here__text">
+              <strong>Choice-blindness as a jailbreak primitive.</strong>
+              <span> — the prefix-injection result on Gemini 2.5 Pro, written for people who don't read security papers.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="start-here__item" href="#">
+            <span class="start-here__num">03</span>
+            <span class="start-here__text">
+              <strong>RAG is mostly an evaluation problem, not a retrieval problem.</strong>
+              <span> — what six months on a commercial RAG system taught me about where it actually breaks.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="start-here__item" href="#">
+            <span class="start-here__num">04</span>
+            <span class="start-here__text">
+              <strong>If you can't replicate the benchmark, you can't use the benchmark.</strong>
+              <span> — a checklist for reading LLM eval papers without being fooled.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ========= POST LIST ========= -->
+    <ul class="post-list">
+
+      <li class="year-break"><span>2026</span></li>
+
+      <li>
+        <a class="post-entry" href="pareto-llm-pricing.html">
+          <div class="post-entry__date">Mar 14 &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">The Pareto front of LLM pricing has moved to <em>Haiku 4.5</em>.</div>
+            <div class="post-entry__desc">Running twelve production-shaped tasks against eight frontier models, measured not by benchmark score but by cost-per-correct-answer. The winner isn't what you think.</div>
+          </div>
+          <div class="post-entry__meta">12 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">Feb 22 &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">What a retail bank actually does with an LLM (and what it wisely doesn't).</div>
+            <div class="post-entry__desc">Six months of internal RAG work at a large retail bank — what moved metrics, what stalled in compliance, and why "give every analyst a chatbot" was quietly abandoned.</div>
+          </div>
+          <div class="post-entry__meta">18 min <span class="post-entry__lang-pill">EN</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">Jan 30 &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Prefix injection, one year later.</div>
+            <div class="post-entry__desc">Revisiting the choice-blindness jailbreak against Gemini 2.5 Pro and DeepSeek R1 now that both have had patches. What still works, what was fixed, and what the fix taught me about their safety stack.</div>
+          </div>
+          <div class="post-entry__meta">9 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">Jan 08 &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">AIRI seminar notes: multi-agent evolutionary search.</div>
+            <div class="post-entry__desc">My talk notes from the AIRI seminar on <em>Idea Evolve</em> — what I'd change if I rebuilt it, and why the "parallel architects" idea was the wrong primitive.</div>
+          </div>
+          <div class="post-entry__meta">6 min <span class="post-entry__lang-pill">RU</span></div>
+        </a>
+      </li>
+
+      <li class="year-break"><span>2025</span></li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">Dec 05 &nbsp;· &nbsp;2025</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">ModelGate: why I'm building another LLM gateway.</div>
+            <div class="post-entry__desc">The market is crowded. Here's the single wedge I'm betting on, the price point I can hold, and the two customer types I'm willing to ignore.</div>
+          </div>
+          <div class="post-entry__meta">11 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">Oct 12 &nbsp;· &nbsp;2025</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Cash collection, solved by a small MILP.</div>
+            <div class="post-entry__desc">Why the retail-bank cash optimization problem yields to a thirty-variable mixed-integer program — and what the LLM people tried first, wasted a quarter on, and eventually scrapped.</div>
+          </div>
+          <div class="post-entry__meta">14 min <span class="post-entry__lang-pill">EN</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">Aug 18 &nbsp;· &nbsp;2025</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">A reading list for LLM safety, for people who already code.</div>
+            <div class="post-entry__desc">Twenty papers, in the order I'd give them to a strong engineer entering the field. Annotated with what each one actually contributes.</div>
+          </div>
+          <div class="post-entry__meta">22 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="blog-footer">
+      <div>
+        <a href="/">← aleksanderborodin.github.io</a>
+      </div>
+      <div style="display: flex; gap: 1.25rem;">
+        <a href="https://github.com/aleksanderborodin">GitHub</a>
+        <a href="https://t.me/aleksanderbor">Telegram</a>
+        <a href="/feed-en.xml">RSS · EN</a>
+        <a href="/feed-ru.xml">RSS · RU</a>
+        <a href="mailto:apdorodin765@gmail.com">Email</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="../js/common.js"></script>
+</body>
+</html>

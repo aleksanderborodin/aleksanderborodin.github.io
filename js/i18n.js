@@ -9,6 +9,7 @@ const translations = {
     nav_scientist: "Science",
     nav_contributor: "Open Source",
     nav_professional: "Commercial",
+    nav_writing: "Writing",
 
     // Landing
     landing_greeting: "Hello, I'm",
@@ -195,6 +196,7 @@ const translations = {
     nav_scientist: "Наука",
     nav_contributor: "Open Source",
     nav_professional: "Коммерция",
+    nav_writing: "Блог",
 
     // Landing
     landing_greeting: "Привет, я",

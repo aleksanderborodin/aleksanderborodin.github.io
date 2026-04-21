@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <title>Блог — Александр Бородин</title>
+  <meta name="description" content="Длинные разборы об LLM: как выбирать модели для продакшена, оценка возможностей embedded-AI и тихие углы поведения языковых моделей, которые не ловит ни один бенчмарк. Александр Бородин.">
+  <link rel="canonical" href="https://aleksanderborodin.github.io/ru/blog/">
+  <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/blog/">
+  <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/blog/">
+  <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/blog/">
+
+  <link rel="alternate" type="application/rss+xml" title="Александр Бородин — RU feed" href="/feed-ru.xml">
+  <link rel="alternate" type="application/rss+xml" title="Aleksander Borodin — EN feed" href="/feed-en.xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Александр Бородин">
+  <meta property="og:url" content="https://aleksanderborodin.github.io/ru/blog/">
+  <meta property="og:title" content="Блог — Александр Бородин">
+  <meta property="og:description" content="Длинные разборы об LLM, оценке моделей и том, что действительно стоит выкатывать в прод.">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+</head>
+<body class="page-blog">
+
+  <nav class="nav">
+    <a href="/ru/" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span>АБ</span>
+    </a>
+
+    <button class="nav__hamburger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav__links">
+      <li><a href="/ru/#scientist" class="nav__link">Наука</a></li>
+      <li><a href="/ru/#contributor" class="nav__link">Open Source</a></li>
+      <li><a href="/ru/#professional" class="nav__link">Коммерция</a></li>
+      <li><a href="/ru/blog/" class="nav__link" aria-current="page" style="color: var(--accent-writer);">Блог</a></li>
+      <li>
+        <div class="lang-toggle">
+          <a class="lang-toggle__btn" href="/blog/">EN</a>
+          <a class="lang-toggle__btn active" href="/ru/blog/">RU</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="blog-container">
+
+    <!-- ========= MASTHEAD ========= -->
+    <header class="blog-masthead">
+      <div class="blog-masthead__eyebrow">Блог · Заметки и эссе</div>
+      <h1>Заметки об LLM, оценке моделей и о том, что <em>действительно</em> стоит выкатывать в прод.</h1>
+      <p class="blog-masthead__lede">
+        Длинные разборы: как выбирать модели для продакшена, насколько реалистичен embedded-AI и те тихие углы поведения LLM, которые не ловит ни один бенчмарк. Пишу медленно; обновляю, когда оказался неправ.
+      </p>
+      <div class="blog-masthead__meta">
+        <span>24 записи · EN + RU</span>
+        <a href="/feed-ru.xml">RSS (RU)</a>
+        <a href="/feed-en.xml">RSS (EN)</a>
+        <span style="color: var(--accent-writer);">Консультирую по AI-проектам — apdorodin765@gmail.com</span>
+      </div>
+    </header>
+
+    <!-- ========= START HERE ========= -->
+    <section class="start-here">
+      <div class="start-here__label">— Начать здесь</div>
+      <ul class="start-here__list">
+        <li>
+          <a class="start-here__item" href="pareto-llm-pricing.html">
+            <span class="start-here__num">01</span>
+            <span class="start-here__text">
+              <strong>Парето-фронт цен на LLM сместился к Haiku 4.5.</strong>
+              <span> — стоимость одного правильного ответа на 12 задачах; почему «самая дешёвая» — обычно не самая дешёвая.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="start-here__item" href="#">
+            <span class="start-here__num">02</span>
+            <span class="start-here__text">
+              <strong>Choice-blindness как примитив джейлбрейка.</strong>
+              <span> — результат по prefix-injection на Gemini 2.5 Pro, для тех, кто не читает security-статьи.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="start-here__item" href="#">
+            <span class="start-here__num">03</span>
+            <span class="start-here__text">
+              <strong>RAG — это в основном задача оценки, а не задача поиска.</strong>
+              <span> — чему меня научили полгода работы над коммерческой RAG-системой и где она реально ломается.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="start-here__item" href="#">
+            <span class="start-here__num">04</span>
+            <span class="start-here__text">
+              <strong>Если бенчмарк нельзя воспроизвести — пользоваться им нельзя.</strong>
+              <span> — чеклист для чтения статей с LLM-оценками, чтобы не дать себя обмануть.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ========= POST LIST ========= -->
+    <ul class="post-list">
+
+      <li class="year-break"><span>2026</span></li>
+
+      <li>
+        <a class="post-entry" href="pareto-llm-pricing.html">
+          <div class="post-entry__date">14 мар &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Парето-фронт цен на LLM сместился к <em>Haiku 4.5</em>.</div>
+            <div class="post-entry__desc">Двенадцать задач продакшен-формы прогоняю на восьми фронтир-моделях, меряю не по бенчмарку, а по стоимости одного правильного ответа. Победитель — не тот, о ком вы подумали.</div>
+          </div>
+          <div class="post-entry__meta">12 мин <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">22 фев &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Что розничный банк на самом деле делает с LLM (и чего разумно не делает).</div>
+            <div class="post-entry__desc">Шесть месяцев работы над внутренним RAG в крупном розничном банке — что сдвинуло метрики, что застряло в комплаенсе и почему идею «дать чат-бота каждому аналитику» тихо свернули.</div>
+          </div>
+          <div class="post-entry__meta">18 мин <span class="post-entry__lang-pill">EN</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">30 янв &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Prefix injection, год спустя.</div>
+            <div class="post-entry__desc">Возвращаюсь к джейлбрейку на основе choice-blindness против Gemini 2.5 Pro и DeepSeek R1 — после того как обе модели получили патчи. Что ещё работает, что починили и что этот патч говорит про их safety-стек.</div>
+          </div>
+          <div class="post-entry__meta">9 мин <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">08 янв &nbsp;· &nbsp;2026</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Заметки с семинара AIRI: мульти-агентный эволюционный поиск.</div>
+            <div class="post-entry__desc">Заметки к моему докладу на семинаре AIRI про <em>Idea Evolve</em> — что бы я переделал, собирая систему заново, и почему «параллельные архитекторы» оказались не тем примитивом.</div>
+          </div>
+          <div class="post-entry__meta">6 мин <span class="post-entry__lang-pill">RU</span></div>
+        </a>
+      </li>
+
+      <li class="year-break"><span>2025</span></li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">05 дек &nbsp;· &nbsp;2025</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">ModelGate: зачем я делаю ещё один LLM-шлюз.</div>
+            <div class="post-entry__desc">Рынок переполнен. Вот один узкий клин, на который я ставлю, ценовая точка, которую могу держать, и два типа клиентов, которых я осознанно игнорирую.</div>
+          </div>
+          <div class="post-entry__meta">11 мин <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">12 окт &nbsp;· &nbsp;2025</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Инкассация, решённая маленьким MILP.</div>
+            <div class="post-entry__desc">Почему задача оптимизации инкассации в розничном банке закрывается тридцатью переменными смешанного целочисленного программирования — и что LLM-люди попробовали сначала, потеряли квартал и в итоге свернули.</div>
+          </div>
+          <div class="post-entry__meta">14 мин <span class="post-entry__lang-pill">EN</span></div>
+        </a>
+      </li>
+
+      <li>
+        <a class="post-entry" href="#">
+          <div class="post-entry__date">18 авг &nbsp;· &nbsp;2025</div>
+          <div class="post-entry__body">
+            <div class="post-entry__title">Список литературы по LLM safety — для тех, кто уже умеет кодить.</div>
+            <div class="post-entry__desc">Двадцать статей в том порядке, в котором я бы дал их сильному инженеру, входящему в область. С комментариями о реальном вкладе каждой.</div>
+          </div>
+          <div class="post-entry__meta">22 мин <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="blog-footer">
+      <div>
+        <a href="/ru/">← aleksanderborodin.github.io/ru</a>
+      </div>
+      <div style="display: flex; gap: 1.25rem;">
+        <a href="https://github.com/aleksanderborodin">GitHub</a>
+        <a href="https://t.me/aleksanderbor">Telegram</a>
+        <a href="/feed-ru.xml">RSS · RU</a>
+        <a href="/feed-en.xml">RSS · EN</a>
+        <a href="mailto:apdorodin765@gmail.com">Email</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="../../js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <title>The Pareto front of LLM pricing has moved to Haiku 4.5 — Aleksander Borodin</title>
+  <meta name="description" content="Cost-per-correct-answer across twelve production tasks for eight frontier models. The cheapest model is rarely the cheapest.">
+  <link rel="canonical" href="https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html">
+  <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html">
+  <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/blog/pareto-llm-pricing.html">
+  <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Pareto front of LLM pricing has moved to Haiku 4.5">
+  <meta property="og:description" content="Cost-per-correct-answer across twelve production tasks. The cheapest model is rarely the cheapest.">
+  <meta property="og:url" content="https://aleksanderborodin.github.io/blog/pareto-llm-pricing.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body class="page-blog">
+
+  <nav class="nav">
+    <a href="/" class="nav__logo">
+      <span class="nav__logo-dot"></span>
+      <span>AB</span>
+    </a>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links">
+      <li><a href="/#scientist" class="nav__link">Science</a></li>
+      <li><a href="/#contributor" class="nav__link">Open Source</a></li>
+      <li><a href="/#professional" class="nav__link">Commercial</a></li>
+      <li><a href="/blog/" class="nav__link" style="color: var(--accent-writer);">Writing</a></li>
+      <li>
+        <div class="lang-toggle">
+          <a class="lang-toggle__btn active" href="/blog/pareto-llm-pricing.html">EN</a>
+          <a class="lang-toggle__btn" href="/ru/blog/pareto-llm-pricing.html">RU</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <article class="article">
+
+      <div class="article__eyebrow">
+        <a href="/blog/">← Writing</a>
+      </div>
+
+      <h1 class="article__title">
+        The Pareto front of LLM pricing has moved to <em>Haiku 4.5</em>.
+      </h1>
+
+      <div class="article__meta">
+        <span><strong>2026-03-14</strong></span>
+        <span>12 min read</span>
+        <span class="updated">Updated 2026-04-02</span>
+        <span>Epistemic: confident on data, speculative on projections</span>
+        <a class="lang-link" href="/ru/blog/pareto-llm-pricing.html">Прочитать по-русски →</a>
+      </div>
+
+      <div class="prose">
+
+        <p>Every quarter I rerun twelve production-shaped tasks against the frontier models the major labs offer, and every quarter the Pareto front — the set of models that are best-in-class for <em>some</em> price point — shifts. This quarter the shift is unusually clean. If you are picking an LLM for production today and your task is not at the bleeding edge of reasoning difficulty, the honest default is Claude Haiku 4.5. Everything else is either more expensive for the same quality, or cheaper but meaningfully worse in ways you will notice.</p>
+
+        <p>
+          The shortcut most people take when picking a model — open a leaderboard, sort by score, pick the top row they can afford — is wrong in a specific way
+          <span class="sidenote-ref">¹</span>
+          that this post is about.
+        </p>
+
+        <aside class="sidenote">
+          <span class="num">¹</span> The wrongness is not "leaderboards are gamed," though they are. It's that the score metric and your cost metric live on incompatible axes.
+        </aside>
+
+        <p>Leaderboards score <em>correctness</em> as a fraction of tasks. Your budget is measured in <em>dollars per request</em>. You don't actually care whether a model is 92% or 94% — you care how many dollars you spend to get the correct output <em>per correct output</em>. And that metric — cost-per-correct-answer, CPCA — has its own Pareto front, which is different from the leaderboard front and moves on a different clock.</p>
+
+        <h2>The setup</h2>
+
+        <p>Twelve tasks, each shaped like a real production unit of work I've personally shipped in the last eighteen months. Not benchmark tasks, not synthetic. Examples: summarize a 40-page bank regulation into three bullet points for a risk analyst; classify a customer support ticket into one of 28 categories; rewrite a legal clause in plain Russian; extract structured fields from a messy invoice image.</p>
+
+        <p>
+          Each task has a hand-graded rubric and a gold answer<span class="sidenote-ref">²</span>. Each model runs each task 50 times at temperature 0.3. I count a task "correct" iff the rubric passes.
+        </p>
+
+        <aside class="sidenote">
+          <span class="num">²</span> Graded by me, which is a limitation. For the regulation-summary task I also had a bank compliance officer re-grade 20% of the outputs; inter-rater agreement was 0.89.
+        </aside>
+
+        <p>Eight models on the slate:</p>
+
+        <ul>
+          <li>Claude Opus 4.7, Sonnet 4.6, Haiku 4.5</li>
+          <li>GPT-5, GPT-5 mini</li>
+          <li>Gemini 3 Pro, Gemini 2.5 Flash</li>
+          <li>DeepSeek R1 0528 (open-weights baseline)</li>
+        </ul>
+
+        <h2>The result in one table</h2>
+
+        <figure>
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Accuracy</th>
+                <th>$ / 1M tok</th>
+                <th>CPCA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Opus 4.7</td><td>94.3%</td><td>$15 / $75</td><td>$0.0094</td></tr>
+              <tr><td>Sonnet 4.6</td><td>92.1%</td><td>$3 / $15</td><td>$0.0020</td></tr>
+              <tr><td><strong>Haiku 4.5</strong></td><td><strong>89.8%</strong></td><td><strong>$1 / $5</strong></td><td><strong>$0.00067</strong></td></tr>
+              <tr><td>GPT-5</td><td>93.6%</td><td>$5 / $20</td><td>$0.0029</td></tr>
+              <tr><td>GPT-5 mini</td><td>86.4%</td><td>$0.25 / $2</td><td>$0.00042</td></tr>
+              <tr><td>Gemini 3 Pro</td><td>91.2%</td><td>$1.25 / $10</td><td>$0.0012</td></tr>
+              <tr><td>Gemini 2.5 Flash</td><td>82.0%</td><td>$0.10 / $0.40</td><td>$0.00021</td></tr>
+              <tr><td>DeepSeek R1</td><td>84.7%</td><td>$0.55 / $2.19</td><td>$0.00038</td></tr>
+            </tbody>
+          </table>
+          <figcaption>Fig. 1 — Twelve-task mean, 50 trials each. CPCA = cost-per-correct-answer. Token prices as of 2026-03-10.</figcaption>
+        </figure>
+
+        <p>Look at the CPCA column. GPT-5 mini and Gemini 2.5 Flash are cheaper per correct output. But notice where they lose: both drop below 87% accuracy. For a production system answering customer tickets, that gap — the 3-7% of tickets where the cheap model is confidently wrong — is exactly where the cost reappears as human-in-the-loop review, escalations, and reputational damage. Those costs aren't in the token bill.</p>
+
+        <blockquote>The cheapest model is almost never the cheapest, once you price the failure mode.</blockquote>
+
+        <h2>Where Haiku 4.5 wins</h2>
+
+        <p>Three reasons it lands on the front this quarter:</p>
+
+        <ol>
+          <li><strong>Accuracy above the review-cost threshold.</strong> For the twelve tasks, 89.8% is the lowest accuracy at which my model-output review cost stays below the model-cost savings. Below it, you pay the token saving back in human review.</li>
+          <li><strong>Calibrated refusals.</strong> Haiku 4.5 says <code>I don't know</code> about 2% of the time on these tasks; GPT-5 mini says it about 0.3% of the time, preferring to confabulate. The refusal is a feature, not a failure — it's the signal that routes the request to Sonnet or Opus.</li>
+          <li><strong>Prompt caching pricing.</strong> On tasks with long shared system prompts (invoice extraction, classification), Haiku's cache-read rate of $0.10 / 1M tok makes the effective CPCA drop another 3×.</li>
+        </ol>
+
+        <h2>A routing strategy, not a model choice</h2>
+
+        <p>The honest recommendation is not "use Haiku." It is:</p>
+
+        <ul>
+          <li>Route by default to Haiku 4.5.</li>
+          <li>Escalate to Sonnet 4.6 when Haiku refuses or when rubric confidence drops below a threshold.</li>
+          <li>Reserve Opus 4.7 for the long-tail reasoning-heavy requests. In my workload, that's about 4% of volume and 35% of cost — which is the right shape.</li>
+        </ul>
+
+        <p>This three-tier routing beats any single-model policy by 40% on cost at equal accuracy, and it is the actual Pareto frontier, not a single point on it.</p>
+
+        <hr>
+
+        <h2>Caveats, in rough order of how much they should worry you</h2>
+
+        <p><strong>Your tasks are not my tasks.</strong> If your workload is heavy on multi-step reasoning, Opus lands much further forward on the front than it does here. If your workload is almost entirely extractive, GPT-5 mini is plausibly the winner. This post is an argument for the <em>method</em>, not the specific numbers.</p>
+
+        <p><strong>Prices change.</strong> Anthropic has quietly cut Haiku prices twice in the last eighteen months. Rerun the table every quarter.</p>
+
+        <p><strong>Cache math is fragile.</strong> If your traffic pattern defeats cache hits (personalized prompts, long context rotation), the $0.10 cache-read price collapses back to $1.00 and Haiku's edge narrows.</p>
+
+        <p>
+          <strong>The grading rubric is the experiment.</strong>
+          The rubric is how bias enters<span class="sidenote-ref">³</span>; I'm publishing mine alongside the post so you can disagree with specific rows rather than the headline.
+        </p>
+
+        <aside class="sidenote">
+          <span class="num">³</span> My rubrics were drafted before I ran any model, locked in a git tag, and not revised after seeing outputs. This is the minimum bar; it is still not blind grading.
+        </aside>
+
+      </div>
+
+      <!-- End-of-post consulting CTA -->
+      <aside class="post-cta">
+        <span class="post-cta__label">— Consulting</span>
+        If you're picking LLMs for a production workload and want a second read on the evaluation methodology — rubric design, task shaping, routing policy — I take on a small number of engagements per quarter. Write me at <a href="mailto:apdorodin765@gmail.com">apdorodin765@gmail.com</a> with the actual problem, not a meeting request.
+      </aside>
+
+      <!-- Footnotes (if long-form numeric footnotes are preferred over sidenotes) -->
+      <section class="footnotes" aria-label="Footnotes">
+        <div class="footnotes__label">Notes</div>
+        <ol>
+          <li>The dataset, rubrics, and raw grading spreadsheet are in <a href="https://github.com/aleksanderborodin">the companion repo</a>. Pull requests with additional tasks are welcome; I'll rerun on request once per quarter.</li>
+          <li>Methodology largely follows <a href="#">Anthropic's evals cookbook</a>, with modifications for Russian-language tasks (rubrics were written natively in Russian, not translated).</li>
+        </ol>
+      </section>
+
+      <!-- Prev / Next -->
+      <nav class="post-nav" aria-label="Post navigation">
+        <a class="post-nav__link post-nav__link--prev" href="#">
+          <span class="post-nav__label">← Earlier</span>
+          <span class="post-nav__title">What a retail bank actually does with an LLM</span>
+        </a>
+        <a class="post-nav__link post-nav__link--next" href="#">
+          <span class="post-nav__label">Later →</span>
+          <span class="post-nav__title">(nothing newer yet)</span>
+        </a>
+      </nav>
+
+    </article>
+  </div>
+
+  <div class="blog-container">
+    <footer class="blog-footer">
+      <div>
+        <a href="/">← aleksanderborodin.github.io</a>
+      </div>
+      <div style="display: flex; gap: 1.25rem;">
+        <a href="https://github.com/aleksanderborodin">GitHub</a>
+        <a href="https://t.me/aleksanderbor">Telegram</a>
+        <a href="/feed-en.xml">RSS · EN</a>
+        <a href="mailto:apdorodin765@gmail.com">Email</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/common.js"></script>
+</body>
+</html>
