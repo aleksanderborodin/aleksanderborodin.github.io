@@ -14,8 +14,8 @@ const translations = {
     // Landing
     landing_greeting: "Hello, I'm",
     landing_name: "Aleksander Borodin",
-    landing_role: "Embedded AI Developer · MIPT",
-    landing_intro: "MIPT student building embedded AI as part of the Applied Math & CS program — with side projects in LLM safety, multi-agent systems, and other things that catch my attention.",
+    landing_role: "Embedded AI Developer – MIPT",
+    landing_intro: "MIPT student building embedded AI as part of the curriculum — with side projects in LLM safety, multi-agent systems, and other things that catch my attention.",
     landing_explore: "Explore my world",
 
     // Portal cards
@@ -106,7 +106,7 @@ const translations = {
 
     // Footer
     footer_copy: "Aleksander Borodin",
-    footer_built: "Built with curiosity",
+    footer_built: "Built with curiosity and Claude Code",
 
     // Common
     view_on_github: "View on GitHub",
@@ -201,8 +201,8 @@ const translations = {
     // Landing
     landing_greeting: "Привет, я",
     landing_name: "Александр Бородин",
-    landing_role: "Разработчик встроенного ИИ · МФТИ",
-    landing_intro: "Студент МФТИ — разрабатываю встроенные ИИ-системы в рамках учебной программы по прикладной математике, а в свободное время занимаюсь LLM, мульти-агентными системами и другим интересным.",
+    landing_role: "Разработчик воплощённого ИИ – МФТИ",
+    landing_intro: "Студент МФТИ — разрабатываю системы воплощённого ИИ в рамках учебной программы, а в свободное время занимаюсь LLM, мульти-агентными системами и другим интересным.",
     landing_explore: "Исследуйте мой мир",
 
     // Portal cards
@@ -293,7 +293,7 @@ const translations = {
 
     // Footer
     footer_copy: "Александр Бородин",
-    footer_built: "Создано с любопытством",
+    footer_built: "Создано с любопытством и Claude Code",
 
     // Common
     view_on_github: "Смотреть на GitHub",
