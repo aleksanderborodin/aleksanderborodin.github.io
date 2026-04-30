@@ -150,7 +150,6 @@
     </button>
 
     <ul class="nav__links">
-      <li><a href="#scientist" class="nav__link">Наука</a></li>
       <li><a href="#contributor" class="nav__link">Open Source</a></li>
       <li><a href="#professional" class="nav__link">Коммерция</a></li>
       <li><a href="/ru/blog/" class="nav__link">Блог</a></li>
@@ -221,97 +220,6 @@
     </div>
   </div>
 
-  <!-- Portal Cards -->
-  <section class="portals">
-    <div class="container">
-      <p class="portals__label">Исследуйте мой мир</p>
-      <div class="portals__grid reveal">
-        <a href="#scientist" class="portal portal--scientist stagger shine-effect">
-          <div class="portal__glow"></div>
-          <div class="portal__diagonal" aria-hidden="true"></div>
-          <span class="portal__number">01</span>
-          <div class="portal__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16.5h10"/></svg>
-          </div>
-          <div class="portal__content">
-            <h3 class="portal__title">Наука</h3>
-            <p class="portal__desc">Исследования безопасности LLM, джейлбрейкинг и извлечение знаний. Там, где любопытство встречает строгость.</p>
-            <span class="portal__cta"><span>Исследования</span> <span class="portal__cta-arrow">&rarr;</span></span>
-          </div>
-        </a>
-        <a href="#contributor" class="portal portal--contributor stagger shine-effect">
-          <div class="portal__glow"></div>
-          <div class="portal__diagonal" aria-hidden="true"></div>
-          <span class="portal__number">02</span>
-          <div class="portal__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="portal__content">
-            <h3 class="portal__title">Open Source</h3>
-            <p class="portal__desc">Инструменты с открытым кодом — от эволюционных ИИ-агентов до расширений, расшифровывающих юридический язык.</p>
-            <span class="portal__cta"><span>Проекты</span> <span class="portal__cta-arrow">&rarr;</span></span>
-          </div>
-        </a>
-        <a href="#professional" class="portal portal--professional stagger shine-effect">
-          <div class="portal__glow"></div>
-          <div class="portal__diagonal" aria-hidden="true"></div>
-          <span class="portal__number">03</span>
-          <div class="portal__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          </div>
-          <div class="portal__content">
-            <h3 class="portal__title">Коммерция</h3>
-            <p class="portal__desc">Реальное влияние: алгоритмы оптимизации, RAG-системы и пайплайны данных для продакшена.</p>
-            <span class="portal__cta"><span>Опыт работы</span> <span class="portal__cta-arrow">&rarr;</span></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       SCIENTIST SECTION
-       ==================================================================== -->
-  <section class="section section--scientist-preview" id="scientist">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__label">Исследовательские проекты</span>
-        <h2 class="section-header__title">Исследования безопасности LLM</h2>
-        <p class="section-header__desc">Исследование границ безопасности языковых моделей, извлечения знаний и прикладного NLP. Каждый эксперимент — это вопрос, каждый результат — новое направление.</p>
-      </div>
-
-      <div class="reveal">
-        <div class="card stagger" style="max-width:720px">
-          <h3 class="card__title">Prefix Injection Jailbreak</h3>
-          <p class="card__desc">Исследование префиксных атак на LLM, вдохновлённое экспериментами BBC по Choice Blindness. Имитируя начало ответа модели на запрещённый запрос, модели Gemini 2.5 Pro и DeepSeek R1 давали вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag">Python</span><span class="card__tag">LLM APIs</span><span class="card__tag">Prompt Engineering</span></div>
-          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:0.5rem">
-            <a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" target="_blank" rel="noopener" class="card__link"><span>Смотреть на GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Education & Achievements -->
-      <div class="grid-2 reveal" style="margin-top:var(--space-lg)">
-        <div class="card stagger">
-          <span class="section-header__label">Образование</span>
-          <h3 class="card__title" style="margin-top:0.5rem">Бакалавриат (в процессе)</h3>
-          <p class="card__desc" style="margin-bottom:0.25rem">ФПМИ МФТИ — Прикладная математика и информатика</p>
-          <p style="font-family:var(--font-mono);font-size:0.82rem;color:var(--text-muted);margin-bottom:0.5rem">Средний балл: 7.8 / 10</p>
-          <p class="card__desc" style="font-size:0.88rem">Профильные: Матанализ, Теория вероятностей, Линейная алгебра, Вычислительная сложность, Алгоритмы, ML, Физика, Экономика</p>
-        </div>
-        <div class="card stagger">
-          <span class="section-header__label">Достижения</span>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem">
-            <li style="font-size:0.92rem;color:var(--text-secondary);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent-scientist);opacity:0.6"></span> Победитель — <a href="https://iepho.ru/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:0.85">Международная экспериментальная олимпиада по физике (IEPhO)</a>, 2023</li>
-            <li style="font-size:0.92rem;color:var(--text-secondary);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent-scientist);opacity:0.6"></span> Призёр — <a href="https://vos.olimpiada.ru/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:0.85">Всероссийская олимпиада по физике</a>, 10 класс (2022) и 11 класс (2023)</li>
-            <li style="font-size:0.92rem;color:var(--text-secondary);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent-scientist);opacity:0.6"></span> Победитель — командные Wiki-гонки, <a href="https://sochisirius.ru/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:0.85">Сириус</a>, 2023</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Wave divider -->
   <div class="divider-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
@@ -320,7 +228,7 @@
   </div>
 
   <!-- ====================================================================
-       CONTRIBUTOR SECTION
+       OPEN SOURCE SECTION
        ==================================================================== -->
   <section class="section divider-diagonal" id="contributor" style="background:var(--bg-secondary)">
     <div class="container">
@@ -345,6 +253,12 @@
           <p class="card__desc">Браузерное расширение, упрощающее пользовательские соглашения с помощью ИИ-генерируемых резюме. Извлекает текст ToS, отправляет в LLM через OpenRouter и возвращает структурированные сводки с ключевыми пунктами и предупреждениями. Мультиязычность и кэширование.</p>
           <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">JavaScript</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">FastAPI</span></div>
           <a href="https://github.com/aleksanderborodin/yoola_explain" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)">GitHub <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        </div>
+        <div class="card stagger" style="grid-column:1 / -1">
+          <h3 class="card__title">Prefix Injection Jailbreak</h3>
+          <p class="card__desc">Префиксные атаки на LLM, вдохновлённые экспериментами BBC по Choice Blindness. Имитация начала ответа модели на запрещённый запрос заставила Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.</p>
+          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">LLM APIs</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Prompt Engineering</span></div>
+          <a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor);margin-top:0.5rem"><span>Смотреть на GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
         </div>
       </div>
 

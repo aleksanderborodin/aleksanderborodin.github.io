@@ -6,7 +6,6 @@ const translations = {
   en: {
     // Nav
     nav_home: "Home",
-    nav_scientist: "Science",
     nav_contributor: "Open Source",
     nav_professional: "Commercial",
     nav_writing: "Writing",
@@ -16,40 +15,6 @@ const translations = {
     landing_name: "Aleksander Borodin",
     landing_role: "Embedded AI Developer – MIPT",
     landing_intro: "MIPT student building embedded AI as part of the curriculum — with side projects in LLM safety, multi-agent systems, and other things that catch my attention.",
-    landing_explore: "Explore my world",
-
-    // Portal cards
-    portal_scientist_title: "Science",
-    portal_scientist_desc: "Research in LLM safety, jailbreaking, and knowledge extraction. Where curiosity meets rigor.",
-    portal_scientist_cta: "View Research",
-
-    portal_contributor_title: "Open Source",
-    portal_contributor_desc: "Open-source tools — from evolutionary AI agents to browser extensions that decode legalese.",
-    portal_contributor_cta: "View Projects",
-
-    portal_professional_title: "Commercial",
-    portal_professional_desc: "Real-world impact: optimization algorithms, RAG systems, and data pipelines for production.",
-    portal_professional_cta: "View Experience",
-
-    // Scientist page
-    sci_hero_title: "LLM Safety Research & NLP",
-    sci_hero_desc: "Exploring the boundaries of language model safety, knowledge extraction, and applied NLP. Every experiment is a question — every result, a new direction.",
-    sci_label: "Research Projects",
-
-    sci_proj1_title: "Prefix Injection Jailbreak",
-    sci_proj1_desc: "Researched prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. By simulating the start of a model's response to a forbidden query, models like Gemini 2.5 Pro and DeepSeek R1 were tricked into completing harmful answers — achieving near-100% success on MaliciousInstruct vs. near-zero baseline.",
-    sci_proj1_stack: "Python · LLM APIs · Prompt Engineering",
-
-    sci_education_label: "Education",
-    sci_education_degree: "Bachelor's degree (in progress)",
-    sci_education_school: "FPMI MIPT — Applied Mathematics and Computer Science",
-    sci_education_gpa: "GPA: 7.8 / 10",
-    sci_education_courses: "Relevant: Math Analysis, Probability Theory, Linear Algebra, Computational Complexity, Algorithms, ML, Physics, Economics",
-
-    sci_achievements_label: "Achievements",
-    sci_achievement_1: "Winner — International Experimental Physics Olympiad (IEPhO), 2023",
-    sci_achievement_2: "Prize-winner — All-Russian Physics Olympiad, Grade 10 (2022) & Grade 11 (2023)",
-    sci_achievement_3: "Winner — Team Wiki-races, Sirius, 2023",
 
     // Contributor page
     contrib_hero_title: "Open Source",
@@ -63,6 +28,10 @@ const translations = {
     contrib_proj2_title: "Yoola Explain",
     contrib_proj2_desc: "A browser extension that simplifies Terms of Service by providing AI-generated summaries. Extracts ToS text, sends it to an LLM via OpenRouter, and returns structured summaries with key points, data collection info, and warnings. Multi-language support with caching.",
     contrib_proj2_stack: "JavaScript · FastAPI · SQLite · OpenRouter",
+
+    contrib_proj3_title: "Prefix Injection Jailbreak",
+    contrib_proj3_desc: "Prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. Simulating the start of a model's response to a forbidden query tricked Gemini 2.5 Pro and DeepSeek R1 into completing harmful answers — near-100% success on MaliciousInstruct vs. near-zero baseline.",
+    contrib_proj3_stack: "Python · LLM APIs · Prompt Engineering",
 
     contrib_github_label: "GitHub Profile",
     contrib_github_stats: "12 public repositories",
@@ -193,7 +162,6 @@ const translations = {
   ru: {
     // Nav
     nav_home: "Главная",
-    nav_scientist: "Наука",
     nav_contributor: "Open Source",
     nav_professional: "Коммерция",
     nav_writing: "Блог",
@@ -203,40 +171,6 @@ const translations = {
     landing_name: "Александр Бородин",
     landing_role: "Разработчик воплощённого ИИ – МФТИ",
     landing_intro: "Студент МФТИ — разрабатываю системы воплощённого ИИ в рамках учебной программы, а в свободное время занимаюсь LLM, мульти-агентными системами и другим интересным.",
-    landing_explore: "Исследуйте мой мир",
-
-    // Portal cards
-    portal_scientist_title: "Наука",
-    portal_scientist_desc: "Исследования безопасности LLM, джейлбрейкинг и извлечение знаний. Там, где любопытство встречает строгость.",
-    portal_scientist_cta: "Исследования",
-
-    portal_contributor_title: "Open Source",
-    portal_contributor_desc: "Инструменты с открытым кодом — от эволюционных ИИ-агентов до расширений, расшифровывающих юридический язык.",
-    portal_contributor_cta: "Проекты",
-
-    portal_professional_title: "Коммерция",
-    portal_professional_desc: "Реальное влияние: алгоритмы оптимизации, RAG-системы и пайплайны данных для продакшена.",
-    portal_professional_cta: "Опыт работы",
-
-    // Scientist page
-    sci_hero_title: "Исследования безопасности LLM",
-    sci_hero_desc: "Исследование границ безопасности языковых моделей, извлечения знаний и прикладного NLP. Каждый эксперимент — это вопрос, каждый результат — новое направление.",
-    sci_label: "Исследовательские проекты",
-
-    sci_proj1_title: "Prefix Injection Jailbreak",
-    sci_proj1_desc: "Исследование префиксных атак на LLM, вдохновлённое экспериментами BBC по Choice Blindness. Имитируя начало ответа модели на запрещённый запрос, модели Gemini 2.5 Pro и DeepSeek R1 давали вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.",
-    sci_proj1_stack: "Python · LLM API · Prompt Engineering",
-
-    sci_education_label: "Образование",
-    sci_education_degree: "Бакалавриат (в процессе)",
-    sci_education_school: "ФПМИ МФТИ — Прикладная математика и информатика",
-    sci_education_gpa: "Средний балл: 7.8 / 10",
-    sci_education_courses: "Профильные: Матанализ, Теория вероятностей, Линейная алгебра, Вычислительная сложность, Алгоритмы, ML, Физика, Экономика",
-
-    sci_achievements_label: "Достижения",
-    sci_achievement_1: "Победитель — Международная экспериментальная олимпиада по физике (IEPhO), 2023",
-    sci_achievement_2: "Призёр — Всероссийская олимпиада по физике, 10 класс (2022) и 11 класс (2023)",
-    sci_achievement_3: "Победитель — командные Wiki-гонки, Сириус, 2023",
 
     // Contributor page
     contrib_hero_title: "Open Source",
@@ -250,6 +184,10 @@ const translations = {
     contrib_proj2_title: "Yoola Explain",
     contrib_proj2_desc: "Браузерное расширение, упрощающее пользовательские соглашения с помощью ИИ-генерируемых резюме. Извлекает текст ToS, отправляет в LLM через OpenRouter и возвращает структурированные сводки с ключевыми пунктами и предупреждениями. Мультиязычность и кэширование.",
     contrib_proj2_stack: "JavaScript · FastAPI · SQLite · OpenRouter",
+
+    contrib_proj3_title: "Prefix Injection Jailbreak",
+    contrib_proj3_desc: "Префиксные атаки на LLM, вдохновлённые экспериментами BBC по Choice Blindness. Имитация начала ответа модели на запрещённый запрос заставила Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.",
+    contrib_proj3_stack: "Python · LLM API · Prompt Engineering",
 
     contrib_github_label: "Профиль GitHub",
     contrib_github_stats: "12 публичных репозиториев",
