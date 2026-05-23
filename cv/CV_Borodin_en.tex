@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,margin=1.05cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\definecolor{accent}{HTML}{1F5F8B}
+\definecolor{textgray}{HTML}{4B5563}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+\setlist[itemize]{leftmargin=1.0em,itemsep=0.16em,topsep=0.14em,parsep=0pt,partopsep=0pt}
+\renewcommand\labelitemi{--}
+
+\newcommand{\sectiontitle}[1]{%
+  \vspace{0.55em}%
+  {\normalsize\bfseries\color{accent} #1}\par
+  \vspace{0.12em}\hrule\vspace{0.32em}%
+}
+
+\newcommand{\entry}[4]{%
+  \textbf{#1}\hfill {\color{textgray}#2}\par
+  {\color{textgray}#3}\par
+  #4\vspace{0.4em}%
+}
+
+\begin{document}
+\fontsize{10.35}{11.75}\selectfont
+
+\begin{minipage}[c]{0.76\textwidth}
+{\LARGE\bfseries Aleksander Borodin}\par
+\vspace{0.08em}
+{\large Agentic / Embedded AI Developer}\par
+\vspace{0.2em}
+\href{mailto:apdorodin765@gmail.com}{apdorodin765@gmail.com} \quad
++7 908 971 16 97 \quad
+\href{https://github.com/aleksanderborodin}{github.com/aleksanderborodin}\par
+\href{https://aleksanderborodin.github.io/}{aleksanderborodin.github.io}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.16\textwidth}
+  \raggedleft
+  \includegraphics[width=2.65cm]{assets/profile-original.jpg}
+\end{minipage}
+
+\sectiontitle{Summary}
+MIPT student and AI developer focused on LLM systems, RAG, multi-agent workflows, model evaluation/safety, and applied optimization. Build working AI tools: backend services, LLM integrations, evaluation loops, dashboards, and research prototypes.
+
+\sectiontitle{Education}
+\entry{Bachelor's degree, Applied Mathematics and Physics}{2023--2027}{FPMI MIPT, in progress; GPA 7.8/10}{Coursework: mathematical analysis, probability, linear algebra, algorithms, computational complexity, ML, physics, economics.}
+
+\sectiontitle{Professional Experience}
+\entry{Product / AI Engineer}{Jan--May 2026}{ModelGate.ru -- LLM API gateway and proxy service}{%
+\begin{itemize}
+  \item Built core platform functionality end to end, including API routing, the public website, and domain setup.
+  \item Worked extensively with LLM provider APIs and integrated smart-router functionality for model/provider selection.
+  \item Made product design choices across user flows, positioning, and service behavior. Stack: Python, LLM APIs, product design.
+\end{itemize}
+}
+
+\entry{Model and Algorithm Developer}{Sep 2024--Feb 2025}{Regional Bank, client project}{%
+\begin{itemize}
+  \item Developed and simulated a cash collection optimization algorithm; historical-data analysis projected a 20M RUB annual profit increase.
+  \item Built a CBR web-scraping/analysis pipeline for data unavailable via API, plus an internal document Q\&A RAG system.
+  \item Stack: Python, NumPy, Pandas, RAG, web scraping.
+\end{itemize}
+}
+
+\sectiontitle{Projects}
+\entry{Idea Evolve}{2026}{\href{https://github.com/aleksanderborodin/idea_evolve}{github.com/aleksanderborodin/idea\_evolve}}{%
+\begin{itemize}
+  \item Evolutionary multi-agent framework: specialized Claude agents work in parallel across generations and build a shared knowledge base.
+  \item Improved Sidon set search from 66 to 105 elements in 7 autonomous generations, passing the $\sqrt{N}\approx100$ reference for $N=10000$.
+  \item Implemented role-specialized agents, resumable filesystem state, evaluation/knowledge extraction, and a Flask run-inspection dashboard.
+  \item Stack: Python 3.12+, Claude Code CLI, OpenCode, Anthropic API, Flask, multi-agent orchestration.
+\end{itemize}
+}
+
+\entry{Prefix Injection Jailbreak}{2025}{\href{https://github.com/aleksanderborodin/prefix_injection_jailbreak}{github.com/aleksanderborodin/prefix\_injection\_jailbreak}}{%
+\begin{itemize}
+  \item Researched Choice-Blindness-inspired prefix attacks on LLMs; templates made Gemini 2.5 Pro and DeepSeek R1 complete harmful MaliciousInstruct prompts with near-100\% success vs. near-zero baseline.
+  \item Stack: Python, LLM APIs, model evaluation, prompt/context engineering.
+\end{itemize}
+}
+
+\entry{Yoola Explain}{2025}{\href{https://github.com/aleksanderborodin/yoola_explain}{github.com/aleksanderborodin/yoola\_explain}}{%
+\begin{itemize}
+  \item Browser extension that extracts Terms of Service text and returns structured LLM summaries: key points, data collection notes, and warnings.
+  \item Added multi-language support and caching. Stack: JavaScript, FastAPI, OpenRouter, LLM APIs.
+\end{itemize}
+}
+
+\sectiontitle{Skills}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.75cm}X@{}}
+Programming & Python advanced; C++ intermediate; C and Assembler basic code reading. \\
+Data / ML & PyTorch basic; NumPy; Pandas; PostgreSQL; Matplotlib; ClearML; Excel. \\
+NLP / LLM & BM25; embeddings; RAG; LLM APIs; evaluation; prompt/context engineering; jailbreak testing. \\
+Agentic tools & Claude Code CLI; OpenCode; multi-agent orchestration; filesystem-based workflows. \\
+Backend / systems & FastAPI; Flask; LangChain; LangGraph; Linux home server administration and workstation usage. \\
+Languages & Russian native; English B2+ certified by MIPT placement test. \\
+\end{tabularx}
+
+\end{document}

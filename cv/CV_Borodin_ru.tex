@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,margin=1.05cm]{geometry}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{fontspec}
+
+\setmainfont{DejaVu Sans}
+\definecolor{accent}{HTML}{1F5F8B}
+\definecolor{textgray}{HTML}{4B5563}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+\emergencystretch=2em
+\setlist[itemize]{leftmargin=1.0em,itemsep=0.12em,topsep=0.1em,parsep=0pt,partopsep=0pt}
+\renewcommand\labelitemi{--}
+
+\newcommand{\sectiontitle}[1]{%
+  \vspace{0.45em}%
+  {\normalsize\bfseries\color{accent} #1}\par
+  \vspace{0.1em}\hrule\vspace{0.24em}%
+}
+
+\newcommand{\entry}[4]{%
+  \textbf{#1}\hfill {\color{textgray}#2}\par
+  {\color{textgray}#3}\par
+  #4\vspace{0.3em}%
+}
+
+\begin{document}
+\fontsize{9.25}{10.55}\selectfont
+
+\begin{minipage}[c]{0.76\textwidth}
+{\LARGE\bfseries Александр Бородин}\par
+\vspace{0.08em}
+{\large Разработчик агентных систем и встроенного ИИ}\par
+\vspace{0.2em}
+\href{mailto:apdorodin765@gmail.com}{apdorodin765@gmail.com} \quad
++7 908 971 16 97 \quad
+\href{https://github.com/aleksanderborodin}{github.com/aleksanderborodin}\par
+\href{https://aleksanderborodin.github.io/}{aleksanderborodin.github.io}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.16\textwidth}
+  \raggedleft
+  \includegraphics[width=2.65cm]{assets/profile-original.jpg}
+\end{minipage}
+
+\sectiontitle{Профиль}
+Студент МФТИ и AI-разработчик: LLM, RAG, агентные процессы, оценка/безопасность моделей и прикладная оптимизация. Собираю AI-инструменты: backend-сервисы, LLM-интеграции, циклы оценки, дашборды и исследовательские прототипы.
+
+\sectiontitle{Образование}
+\entry{Бакалавриат, прикладная математика и физика}{2023--2027}{ФПМИ МФТИ, учусь; GPA 7.8/10}{Курсы: матанализ, теория вероятностей, линейная алгебра, алгоритмы, вычислительная сложность, ML, физика, экономика.}
+
+\sectiontitle{Опыт работы}
+\entry{Продуктовый AI-инженер}{янв.--май 2026}{ModelGate.ru -- LLM API-шлюз и прокси-сервис}{%
+\begin{itemize}
+  \item Полностью построил ключевую функциональность платформы: маршрутизацию API, публичный сайт и настройку домена.
+  \item Много работал с API LLM-провайдеров и интегрировал smart-router для выбора модели и провайдера.
+  \item Принимал продуктовые решения по пользовательским сценариям, позиционированию и поведению сервиса. Стек: Python, LLM API, продуктовый дизайн.
+\end{itemize}
+}
+
+\entry{Разработчик моделей и алгоритмов}{сент. 2024--февр. 2025}{Розничный банк, клиентский проект}{%
+\begin{itemize}
+  \item Разработал алгоритм оптимизации инкассации; анализ исторических данных дал прогноз +20 млн руб. годовой прибыли.
+  \item Построил пайплайн для скрапинга и анализа данных ЦБ РФ, недоступных через API, и внутреннюю RAG-систему для вопросов по документам.
+  \item Стек: Python, NumPy, Pandas, RAG, скрапинг.
+\end{itemize}
+}
+
+\sectiontitle{Проекты}
+\entry{Idea Evolve}{2026}{\href{https://github.com/aleksanderborodin/idea_evolve}{github.com/aleksanderborodin/idea\_evolve}}{%
+\begin{itemize}
+  \item Эволюционный мульти-агентный фреймворк: специализированные Claude-агенты работают параллельно по поколениям и строят общую базу знаний.
+  \item Улучшил поиск множества Сидона с 66 до 105 элементов за 7 автономных поколений, выше ориентира \(\sqrt{N}\approx100\) при \(N=10000\).
+  \item Реализовал ролевую специализацию агентов, возобновляемое состояние в файловой системе, извлечение знаний и Flask-дашборд для анализа прогонов.
+  \item Стек: Python 3.12+, Claude Code CLI, OpenCode, Anthropic API, Flask, мульти-агентная оркестрация.
+\end{itemize}
+}
+
+\entry{Prefix Injection Jailbreak}{2025}{\href{https://github.com/aleksanderborodin/prefix_injection_jailbreak}{github.com/aleksanderborodin/prefix\_injection\_jailbreak}}{%
+\begin{itemize}
+  \item Исследовал префиксные атаки, вдохновленные Choice Blindness: шаблоны заставляли Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные MaliciousInstruct-запросы почти в 100\% случаев против почти нулевого базового уровня.
+  \item Стек: Python, LLM API, оценка моделей, проектирование промптов и контекста.
+\end{itemize}
+}
+
+\entry{Yoola Explain}{2025}{\href{https://github.com/aleksanderborodin/yoola_explain}{github.com/aleksanderborodin/yoola\_explain}}{%
+\begin{itemize}
+  \item Браузерное расширение: извлекает Terms of Service и возвращает структурированное LLM-резюме -- ключевые пункты, сбор данных и предупреждения.
+  \item Добавил мультиязычность и кэширование. Стек: JavaScript, FastAPI, OpenRouter, LLM API.
+\end{itemize}
+}
+
+\sectiontitle{Навыки}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.65cm}X@{}}
+Код & Python: продвинутый; C++: средний; чтение кода на C и Assembler. \\
+Данные / ML & PyTorch: базовый; NumPy; Pandas; PostgreSQL; Matplotlib; ClearML; Excel. \\
+NLP / LLM & BM25; эмбеддинги; RAG; LLM API; оценка моделей; проектирование промптов и контекста; тестирование джейлбрейков. \\
+Агенты & Claude Code CLI; OpenCode; мульти-агентная оркестрация; файловые процессы. \\
+Бэкенд & FastAPI; Flask; LangChain; LangGraph; Linux: домашний сервер и рабочая станция. \\
+Языки & Русский: родной; английский: B2+ по placement test МФТИ. \\
+\end{tabularx}
+
+\end{document}

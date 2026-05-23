@@ -13,7 +13,7 @@ const translations = {
     // Landing
     landing_greeting: "Hello, I'm",
     landing_name: "Aleksander Borodin",
-    landing_role: "Embedded AI Developer – MIPT",
+    landing_role: "Agentic / Embedded AI Developer – MIPT",
     landing_intro: "MIPT student building embedded AI as part of the curriculum — with side projects in LLM safety, multi-agent systems, and other things that catch my attention.",
 
     // Contributor page
@@ -44,23 +44,23 @@ const translations = {
 
     prof_job1_title: "Model & Algorithm Developer",
     prof_job1_company: "Retail Bank (Client Project)",
-    prof_job1_period: "2024 — 2025",
+    prof_job1_period: "Sep 2024 — Feb 2025",
     prof_job1_item1: "Developed and simulated a cash collection optimization algorithm; analysis of historical data projected a 20M RUB annual profit increase.",
     prof_job1_item2: "Engineered a web scraping and analysis system to extract key data from the central bank's website that was unavailable via API.",
     prof_job1_item3: "Built an internal RAG system to support business operations with document-based Q&A.",
     prof_job1_stack: "Python · NumPy · Pandas · RAG · Web Scraping",
 
-    prof_job2_title: "Project Manager / Vibe-Coder",
+    prof_job2_title: "Product / AI Engineer",
     prof_job2_company: "ModelGate.ru",
-    prof_job2_period: "2025 — Present",
-    prof_job2_desc: "LLM API gateway and proxy service. Managing product development and building features with AI-assisted coding workflows.",
-    prof_job2_stack: "Python · LLM APIs · Product Management",
+    prof_job2_period: "Jan — May 2026",
+    prof_job2_desc: "LLM API gateway and proxy service. Built core platform functionality including API routing, the public website, and domain setup; worked extensively with provider APIs and integrated smart-router functionality.",
+    prof_job2_stack: "Python · LLM APIs · Smart Routing · Product Design",
 
     prof_skills_label: "Technical Skills",
     prof_skill_programming: "Programming",
     prof_skill_programming_val: "Python (advanced) · C++ (intermediate) · C · Assembler",
     prof_skill_data: "Data / ML",
-    prof_skill_data_val: "PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · Excel",
+    prof_skill_data_val: "PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · ClearML · Excel",
     prof_skill_nlp: "NLP / LLM",
     prof_skill_nlp_val: "BM25 · Embeddings · RAG · LLM APIs · Evaluation · Prompt Engineering",
     prof_skill_backend: "Backend",
@@ -169,8 +169,8 @@ const translations = {
     // Landing
     landing_greeting: "Привет, я",
     landing_name: "Александр Бородин",
-    landing_role: "Разработчик воплощённого ИИ – МФТИ",
-    landing_intro: "Студент МФТИ — разрабатываю системы воплощённого ИИ в рамках учебной программы, а в свободное время занимаюсь LLM, мульти-агентными системами и другим интересным.",
+    landing_role: "Разработчик агентных систем и встроенного ИИ – МФТИ",
+    landing_intro: "Студент МФТИ и разработчик агентных систем и встроенного ИИ; в свободное время занимаюсь LLM, мульти-агентными системами и open-source AI-инструментами.",
 
     // Contributor page
     contrib_hero_title: "Open Source",
@@ -200,23 +200,23 @@ const translations = {
 
     prof_job1_title: "Разработчик моделей и алгоритмов",
     prof_job1_company: "Розничный банк (клиентский проект)",
-    prof_job1_period: "2024 — 2025",
+    prof_job1_period: "сентябрь 2024 — февраль 2025",
     prof_job1_item1: "Разработал и смоделировал алгоритм оптимизации инкассации; анализ исторических данных спрогнозировал увеличение годовой прибыли на 20 млн руб.",
     prof_job1_item2: "Создал систему веб-скрапинга и анализа для извлечения ключевых данных с сайта ЦБ РФ, недоступных через API.",
     prof_job1_item3: "Построил внутреннюю RAG-систему для поддержки бизнес-операций с документо-ориентированным Q&A.",
     prof_job1_stack: "Python · NumPy · Pandas · RAG · Web Scraping",
 
-    prof_job2_title: "Проджект-менеджер / Вайб-кодер",
+    prof_job2_title: "Продуктовый / AI-инженер",
     prof_job2_company: "ModelGate.ru",
-    prof_job2_period: "2025 — настоящее время",
-    prof_job2_desc: "API-шлюз и прокси-сервис для LLM. Управление развитием продукта и разработка функциональности с помощью ИИ-ассистированного кодинга.",
-    prof_job2_stack: "Python · LLM API · Управление продуктом",
+    prof_job2_period: "январь — май 2026",
+    prof_job2_desc: "API-шлюз и прокси-сервис для LLM. Построил core-функциональность платформы: API routing, публичный сайт и настройку домена; много работал с API провайдеров и интегрировал smart-router.",
+    prof_job2_stack: "Python · LLM API · Smart Routing · Product Design",
 
     prof_skills_label: "Технические навыки",
     prof_skill_programming: "Программирование",
     prof_skill_programming_val: "Python (продвинутый) · C++ (средний) · C · Assembler",
     prof_skill_data: "Data / ML",
-    prof_skill_data_val: "PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · Excel",
+    prof_skill_data_val: "PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · ClearML · Excel",
     prof_skill_nlp: "NLP / LLM",
     prof_skill_nlp_val: "BM25 · Эмбеддинги · RAG · LLM API · Оценка · Prompt Engineering",
     prof_skill_backend: "Backend",
