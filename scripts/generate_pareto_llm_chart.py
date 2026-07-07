@@ -152,6 +152,89 @@ def decode_json_string(value: str) -> str:
         return value
 
 
+def decode_json_array_after_key(payload: str, key: str) -> list[dict[str, Any]]:
+    start = payload.find(f'"{key}":')
+    if start == -1:
+        return []
+
+    start += len(key) + 3
+    try:
+        value, _ = json.JSONDecoder().raw_decode(payload[start:])
+    except json.JSONDecodeError:
+        return []
+
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, dict)]
+
+
+def decode_model_objects(payload: str) -> list[dict[str, Any]]:
+    """Decode model-shaped JSON objects embedded in the Next flight payload."""
+    decoder = json.JSONDecoder()
+    models: list[dict[str, Any]] = []
+    position = 0
+
+    while True:
+        position = payload.find('{"id":"', position)
+        if position == -1:
+            break
+
+        try:
+            value, end = decoder.raw_decode(payload[position:])
+        except json.JSONDecodeError:
+            position += 1
+            continue
+
+        if (
+            isinstance(value, dict)
+            and value.get("slug")
+            and (value.get("name") or value.get("shortName") or value.get("short_name"))
+            and (
+                value.get("releaseDate")
+                or value.get("release_date")
+                or value.get("intelligenceIndexCost")
+                or value.get("intelligence_index_cost")
+            )
+        ):
+            models.append(value)
+
+        position += end
+
+    return models
+
+
+def index_total_cost(model: dict[str, Any]) -> float | None:
+    cost = model.get("intelligenceIndexCost") or model.get("intelligence_index_cost") or {}
+    if not isinstance(cost, dict):
+        return None
+    return as_number(cost.get("total") or cost.get("total_cost"))
+
+
+def add_public_metadata_entry(
+    metadata: dict[str, dict[str, Any]],
+    *,
+    slug: str | None,
+    name: str | None,
+    release_date: Any = None,
+    index_cost: Any = None,
+) -> None:
+    entry: dict[str, Any] = {}
+    if release_date:
+        entry["release_date"] = str(release_date)
+    normalized_cost = as_number(index_cost)
+    if normalized_cost is not None:
+        entry["index_cost"] = normalized_cost
+    if not entry:
+        return
+
+    if slug:
+        metadata.setdefault(f"slug:{slug}", {}).update(entry)
+
+    normalized_name = normalize_lookup_name(name)
+    if normalized_name:
+        metadata.setdefault(f"name:{normalized_name}", {}).update(entry)
+
+
 def fetch_public_model_metadata() -> dict[str, dict[str, Any]]:
     """Read AA's public page data for fields not exposed by the free API."""
     html = fetch_public_models_page()
@@ -159,24 +242,48 @@ def fetch_public_model_metadata() -> dict[str, dict[str, Any]]:
 
     metadata: dict[str, dict[str, Any]] = {}
 
+    models_by_slug: dict[str, dict[str, Any]] = {}
+    decoded_models = (
+        decode_json_array_after_key(flight_payload, "initialModels")
+        + decode_model_objects(flight_payload)
+    )
+    for model in decoded_models:
+        slug = model.get("slug")
+        if not slug or slug in models_by_slug:
+            continue
+        models_by_slug[slug] = model
+
+    for model in models_by_slug.values():
+        add_public_metadata_entry(
+            metadata,
+            slug=model.get("slug"),
+            name=model.get("shortName") or model.get("short_name") or model.get("name"),
+            release_date=model.get("releaseDate") or model.get("release_date"),
+            index_cost=index_total_cost(model),
+        )
+
+    if metadata:
+        return metadata
+
     release_pattern = re.compile(
-        r'"release_date":"(?P<release_date>\d{4}-\d{2}-\d{2})".{0,3000}?'
-        r'"short_name":"(?P<short_name>(?:[^"\\]|\\.)*)".{0,3000}?'
+        r'"(?:release_date|releaseDate)":"(?P<release_date>\d{4}-\d{2}-\d{2})".{0,3000}?'
+        r'"(?:short_name|shortName)":"(?P<short_name>(?:[^"\\]|\\.)*)".{0,3000}?'
         r'"slug":"(?P<slug>[^"\\]+)"',
         re.S,
     )
     for match in release_pattern.finditer(flight_payload):
-        entry = {"release_date": match.group("release_date")}
-        metadata[f"slug:{match.group('slug')}"] = entry
-
-        short_name = normalize_lookup_name(decode_json_string(match.group("short_name")))
-        if short_name:
-            metadata[f"name:{short_name}"] = entry
+        add_public_metadata_entry(
+            metadata,
+            slug=match.group("slug"),
+            name=decode_json_string(match.group("short_name")),
+            release_date=match.group("release_date"),
+        )
 
     cost_pattern = re.compile(
-        r'"short_name":"(?P<short_name>(?:[^"\\]|\\.)*)".{0,3000}?'
+        r'"(?:short_name|shortName)":"(?P<short_name>(?:[^"\\]|\\.)*)".{0,3000}?'
         r'"slug":"(?P<slug>[^"\\]+)".{0,40000}?'
-        r'"intelligence_index_cost":\{"total_cost":(?P<cost>[0-9.eE+-]+|null)',
+        r'"(?:intelligence_index_cost|intelligenceIndexCost)":\{'
+        r'(?:"total_cost"|"total"):(?P<cost>[0-9.eE+-]+|null)',
         re.S,
     )
     for match in cost_pattern.finditer(flight_payload):
@@ -184,14 +291,12 @@ def fetch_public_model_metadata() -> dict[str, dict[str, Any]]:
         if cost == "null":
             continue
 
-        normalized_cost = round(float(cost), 3)
-        slug_key = f"slug:{match.group('slug')}"
-        metadata.setdefault(slug_key, {})["index_cost"] = normalized_cost
-
-        short_name = normalize_lookup_name(decode_json_string(match.group("short_name")))
-        if short_name:
-            name_key = f"name:{short_name}"
-            metadata.setdefault(name_key, {})["index_cost"] = normalized_cost
+        add_public_metadata_entry(
+            metadata,
+            slug=match.group("slug"),
+            name=decode_json_string(match.group("short_name")),
+            index_cost=cost,
+        )
 
     return metadata
 
@@ -963,8 +1068,11 @@ def main() -> int:
     models = fetch_models(api_key)
     public_metadata = fetch_public_model_metadata()
     if not public_metadata:
-        print("Could not extract public model metadata from Artificial Analysis.", file=sys.stderr)
-        return 1
+        print(
+            "Warning: could not extract public model metadata from Artificial Analysis; "
+            "continuing without release-date and index-cost enrichment.",
+            file=sys.stderr,
+        )
 
     chart_data = transform_models(models, public_metadata)
     if not chart_data:
