@@ -6,10 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Name scramble effect ---
   const nameEl = document.querySelector('.hero__name');
   if (nameEl) {
-    const fx = new TextScramble(nameEl);
     const lang = document.documentElement.lang;
     const finalName = lang === 'ru' ? 'Александр Бородин' : 'Aleksander Borodin';
-    setTimeout(() => { fx.setText(finalName); }, 600);
+    const keepNameStable = window.innerWidth <= 640 ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (keepNameStable) {
+      nameEl.textContent = finalName;
+    } else {
+      const fx = new TextScramble(nameEl);
+      setTimeout(() => { fx.setText(finalName); }, 600);
+    }
   }
 
   // --- Parallax floating shapes on mousemove ---

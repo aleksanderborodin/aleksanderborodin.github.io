@@ -110,7 +110,12 @@ class TextScramble {
     let output = '', complete = 0;
     for (let i = 0; i < this.queue.length; i++) {
       let { from, to, start, end, char } = this.queue[i];
-      if (this.frame >= end) {
+      if (to === ' ') {
+        // Keep word boundaries intact while scrambling so long names can
+        // wrap cleanly on narrow screens throughout the animation.
+        complete++;
+        output += ' ';
+      } else if (this.frame >= end) {
         complete++;
         output += to;
       } else if (this.frame >= start) {

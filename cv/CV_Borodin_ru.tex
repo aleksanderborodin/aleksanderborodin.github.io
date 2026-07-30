@@ -6,56 +6,79 @@
 \usepackage{tabularx}
 \usepackage{xcolor}
 \usepackage{array}
+\usepackage{graphicx}
 \usepackage{fontspec}
+\usepackage{polyglossia}
 
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
 \setmainfont{DejaVu Sans}
 \definecolor{accent}{HTML}{1F5F8B}
 \definecolor{textgray}{HTML}{4B5563}
+\hypersetup{
+  pdftitle={Александр Бородин -- Data Science / AI-агенты},
+  pdfauthor={Александр Бородин},
+  pdfsubject={Резюме}
+}
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\tabcolsep}{3pt}
 \emergencystretch=2em
-\setlist[itemize]{leftmargin=1.0em,itemsep=0.12em,topsep=0.1em,parsep=0pt,partopsep=0pt}
+\setlist[itemize]{leftmargin=1.0em,itemsep=0.08em,topsep=0.08em,parsep=0pt,partopsep=0pt}
 \renewcommand\labelitemi{--}
 
 \newcommand{\sectiontitle}[1]{%
-  \vspace{0.45em}%
+  \vspace{0.38em}%
   {\normalsize\bfseries\color{accent} #1}\par
-  \vspace{0.1em}\hrule\vspace{0.24em}%
+  \vspace{0.08em}\hrule\vspace{0.21em}%
 }
 
 \newcommand{\entry}[4]{%
   \textbf{#1}\hfill {\color{textgray}#2}\par
   {\color{textgray}#3}\par
-  #4\vspace{0.3em}%
+  #4\vspace{0.21em}%
+}
+
+\newcommand{\achievement}[2]{%
+  #1\hfill{\color{textgray}#2}\par
 }
 
 \begin{document}
 \fontsize{9.25}{10.55}\selectfont
 \raggedright
 
-{\LARGE\bfseries Александр Бородин}\par
-\vspace{0.08em}
-{\large Разработчик агентных систем и встроенного ИИ}\par
-\vspace{0.2em}
-\href{mailto:apdorodin765@gmail.com}{apdorodin765@gmail.com} \quad
-+7 908 971 16 97 \quad
-\href{https://github.com/aleksanderborodin}{github.com/aleksanderborodin}\par
-\href{https://aleksanderborodin.github.io/}{aleksanderborodin.github.io}
+\begin{minipage}[c]{0.78\textwidth}
+  {\LARGE\bfseries Александр Бородин}\par
+  \vspace{0.04em}
+  {\large Data Science / AI-агенты}\par
+  \vspace{0.16em}
+  \href{mailto:apdorodin765@gmail.com}{apdorodin765@gmail.com} \quad
+  +7 908 971 16 97 \quad
+  \href{https://github.com/aleksanderborodin}{github.com/aleksanderborodin}\par
+  \href{https://t.me/aleksanderbor}{Telegram: @aleksanderbor} \quad
+  \href{https://aleksanderborodin.github.io/}{aleksanderborodin.github.io}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.15\textwidth}
+  \raggedleft
+  \setlength{\fboxsep}{0pt}
+  \setlength{\fboxrule}{0.6pt}
+  \fcolorbox{accent}{white}{\includegraphics[width=2.55cm]{assets/profile-original.jpg}}
+\end{minipage}
 
 \sectiontitle{Профиль}
-Студент МФТИ и AI-разработчик: LLM, RAG, агентные процессы, оценка/безопасность моделей и прикладная оптимизация. Собираю AI-инструменты: backend-сервисы, LLM-интеграции, циклы оценки, дашборды и исследовательские прототипы.
+Начинающий специалист по Data Science и разработчик AI-агентов: LLM, RAG, мультиагентные процессы, оценка и безопасность моделей, прикладная оптимизация. Создаю backend-сервисы, LLM-интеграции, циклы оценки, дашборды и исследовательские прототипы.
 
 \sectiontitle{Образование}
 \entry{Бакалавриат, прикладная математика и физика}{2023--2027}{ФПМИ МФТИ, учусь; GPA 7.8/10}{Курсы: матанализ, теория вероятностей, линейная алгебра, алгоритмы, вычислительная сложность, ML, физика, экономика.}
 
 \sectiontitle{Опыт работы}
-\entry{Продуктовый AI-инженер}{янв.--май 2026}{ModelGate.ru -- LLM API-шлюз и прокси-сервис}{%
+\entry{Продуктовый AI-инженер}{янв.--май 2026}{\href{https://modelgate.ru}{ModelGate.ru} -- LLM API-шлюз и прокси-сервис}{%
 \begin{itemize}
   \item Полностью построил ключевую функциональность платформы: маршрутизацию API, публичный сайт и настройку домена.
-  \item Много работал с API LLM-провайдеров и интегрировал smart-router для выбора модели и провайдера.
+  \item Интегрировал API LLM-провайдеров и smart-router для выбора модели и провайдера.
   \item Принимал продуктовые решения по пользовательским сценариям, позиционированию и поведению сервиса. Стек: Python, LLM API, продуктовый дизайн.
 \end{itemize}
 }
@@ -71,35 +94,40 @@
 \sectiontitle{Проекты}
 \entry{Idea Evolve}{2026}{\href{https://github.com/aleksanderborodin/idea_evolve}{github.com/aleksanderborodin/idea\_evolve}}{%
 \begin{itemize}
-  \item Эволюционный мульти-агентный фреймворк: специализированные Claude-агенты работают параллельно по поколениям и строят общую базу знаний.
-  \item Улучшил поиск множества Сидона с 66 до 105 элементов за 7 автономных поколений, выше ориентира \(\sqrt{N}\approx100\) при \(N=10000\).
-  \item Реализовал ролевую специализацию агентов, возобновляемое состояние в файловой системе, извлечение знаний и Flask-дашборд для анализа прогонов.
-  \item Стек: Python 3.12+, Claude Code CLI, OpenCode, Anthropic API, Flask, мульти-агентная оркестрация.
+  \item Эволюционный мультиагентный фреймворк: специализированные Claude-агенты работают параллельно по поколениям и строят общую базу знаний.
+  \item Улучшил поиск множества Сидона с 66 до 105 элементов за 7 автономных поколений, выше ориентира $\sqrt{N}\approx100$ при $N=10000$.
+  \item Реализовал ролевую специализацию агентов, возобновляемое состояние, извлечение знаний и Flask-дашборд.
+  \item Стек: Python 3.12+, Claude Code CLI, OpenCode, Anthropic API, Flask, мультиагентная оркестрация.
 \end{itemize}
 }
 
 \entry{Prefix Injection Jailbreak}{2025}{\href{https://github.com/aleksanderborodin/prefix_injection_jailbreak}{github.com/aleksanderborodin/prefix\_injection\_jailbreak}}{%
 \begin{itemize}
-  \item Исследовал префиксные атаки, вдохновленные Choice Blindness: шаблоны заставляли Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные MaliciousInstruct-запросы почти в 100\% случаев против почти нулевого базового уровня.
+  \item Исследовал префиксные атаки, вдохновлённые Choice Blindness: шаблоны заставляли Gemini 2.5 Pro и DeepSeek R1 завершать MaliciousInstruct-запросы почти в 100\% случаев против почти нулевого базового уровня.
   \item Стек: Python, LLM API, оценка моделей, проектирование промптов и контекста.
 \end{itemize}
 }
 
 \entry{Yoola Explain}{2025}{\href{https://github.com/aleksanderborodin/yoola_explain}{github.com/aleksanderborodin/yoola\_explain}}{%
 \begin{itemize}
-  \item Браузерное расширение: извлекает Terms of Service и возвращает структурированное LLM-резюме -- ключевые пункты, сбор данных и предупреждения.
+  \item Браузерное расширение: извлекает Terms of Service и возвращает структурированное LLM-резюме — ключевые пункты, сбор данных и предупреждения.
   \item Добавил мультиязычность и кэширование. Стек: JavaScript, FastAPI, OpenRouter, LLM API.
 \end{itemize}
 }
 
 \sectiontitle{Навыки}
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.65cm}X@{}}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.50cm}X@{}}
 Код & Python: продвинутый; C++: средний; чтение кода на C и Assembler. \\
 Данные / ML & PyTorch: базовый; NumPy; Pandas; PostgreSQL; Matplotlib; ClearML; Excel. \\
 NLP / LLM & BM25; эмбеддинги; RAG; LLM API; оценка моделей; проектирование промптов и контекста; тестирование джейлбрейков. \\
-Агенты & Claude Code CLI; OpenCode; мульти-агентная оркестрация; файловые процессы. \\
+Агенты & Claude Code CLI; OpenCode; мультиагентная оркестрация; файловые процессы. \\
 Бэкенд & FastAPI; Flask; LangChain; LangGraph; Linux: домашний сервер и рабочая станция. \\
 Языки & Русский: родной; английский: B2+ по placement test МФТИ. \\
 \end{tabularx}
+
+\sectiontitle{Достижения}
+\achievement{\textbf{Золотая медаль}, \href{https://iepho.ru/}{Международная экспериментальная олимпиада по физике (IEPhO)}}{2023}
+\achievement{\textbf{Призёр заключительного этапа} \href{https://vos.olimpiada.ru/}{ВсОШ по физике} — 10 и 11 классы}{2022, 2023}
+\achievement{Победитель командных Wiki-гонок, Сириус}{2023}
 
 \end{document}

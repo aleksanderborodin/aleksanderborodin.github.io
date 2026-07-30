@@ -9,12 +9,13 @@ const translations = {
     nav_contributor: "Open Source",
     nav_professional: "Commercial",
     nav_writing: "Writing",
+    nav_telegram: "Telegram",
 
     // Landing
     landing_greeting: "Hello, I'm",
     landing_name: "Aleksander Borodin",
-    landing_role: "Agentic / Embedded AI Developer – MIPT",
-    landing_intro: "MIPT student building embedded AI as part of the curriculum — with side projects in LLM safety, multi-agent systems, and other things that catch my attention.",
+    landing_role: "Data Science / AI Agents",
+    landing_intro: "MIPT student blending mathematics, machine learning, and a relentless curiosity for how language models think — and how to break them.",
 
     // Contributor page
     contrib_hero_title: "Open Source",
@@ -165,12 +166,13 @@ const translations = {
     nav_contributor: "Open Source",
     nav_professional: "Коммерция",
     nav_writing: "Блог",
+    nav_telegram: "Telegram",
 
     // Landing
     landing_greeting: "Привет, я",
     landing_name: "Александр Бородин",
-    landing_role: "Разработчик агентных систем и встроенного ИИ – МФТИ",
-    landing_intro: "Студент МФТИ и разработчик агентных систем и встроенного ИИ; в свободное время занимаюсь LLM, мульти-агентными системами и open-source AI-инструментами.",
+    landing_role: "Data Science / AI-агенты",
+    landing_intro: "Студент МФТИ, объединяющий математику, машинное обучение и неуёмное любопытство к тому, как языковые модели думают — и как их сломать.",
 
     // Contributor page
     contrib_hero_title: "Open Source",
