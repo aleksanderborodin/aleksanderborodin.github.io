@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <title>My top benchmarks - Aleksander Borodin</title>
+  <meta name="description" content="Three LLM benchmark collections worth using: Artificial Analysis, DeepSWE, and Arena, with the specific questions each one answers best.">
+  <link rel="canonical" href="https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html">
+  <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html">
+  <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html">
+  <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aleksander Borodin">
+  <meta property="og:title" content="My top benchmarks">
+  <meta property="og:description" content="Three LLM benchmark collections worth using, and the questions each one answers best.">
+  <meta property="og:url" content="https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html">
+  <meta property="og:image" content="https://aleksanderborodin.github.io/assets/blog/top-llm-benchmarks-card.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="My top benchmarks. Writing by Aleksander Borodin.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@aleksanderbor">
+  <meta name="twitter:creator" content="@aleksanderbor">
+  <meta name="twitter:title" content="My top benchmarks">
+  <meta name="twitter:description" content="Artificial Analysis, DeepSWE, and Arena, and what each benchmark collection is good for.">
+  <meta name="twitter:image" content="https://aleksanderborodin.github.io/assets/blog/top-llm-benchmarks-card.webp">
+  <meta name="twitter:image:alt" content="My top benchmarks. Writing by Aleksander Borodin.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": "https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html",
+    "headline": "My top benchmarks",
+    "description": "Three LLM benchmark collections worth using: Artificial Analysis, DeepSWE, and Arena, with the specific questions each one answers best.",
+    "url": "https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html",
+    "datePublished": "2026-08-11",
+    "dateModified": "2026-08-11",
+    "author": { "@id": "https://aleksanderborodin.github.io/#person" },
+    "publisher": { "@id": "https://aleksanderborodin.github.io/#person" },
+    "inLanguage": "en",
+    "image": "https://aleksanderborodin.github.io/assets/blog/top-llm-benchmarks-card.webp",
+    "isPartOf": { "@type": "Blog", "url": "https://aleksanderborodin.github.io/blog/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aleksanderborodin.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://aleksanderborodin.github.io/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "My top benchmarks", "item": "https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body class="page-blog">
+
+  <nav class="nav">
+    <a href="/" class="nav__logo"><span class="nav__logo-dot"></span><span>AB</span></a>
+    <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav__links">
+      <li><a href="/#contributor" class="nav__link">Open Source</a></li>
+      <li><a href="/#professional" class="nav__link">Commercial</a></li>
+      <li><a href="/blog/" class="nav__link" style="color: var(--accent-writer);">Writing</a></li>
+      <li>
+        <div class="lang-toggle">
+          <a class="lang-toggle__btn active" href="/blog/top-llm-benchmarks.html">EN</a>
+          <a class="lang-toggle__btn" href="/ru/blog/top-llm-benchmarks.html">RU</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <article class="article">
+
+      <div class="article__eyebrow"><a href="/blog/">← Writing</a></div>
+
+      <h1 class="article__title">My top <em>benchmarks</em></h1>
+
+      <div class="article__meta">
+        <span><strong>2026-08-11</strong></span>
+        <span>3 min read</span>
+        <a class="lang-link" href="/ru/blog/top-llm-benchmarks.html">Прочитать по-русски →</a>
+      </div>
+
+      <div class="prose">
+
+        <p>Which model should you run on 2xV100s with 2x32 GB of VRAM: Gemma-4-26B or Qwen-3.6-35B? Both are modern. Both come from top companies, both are multimodal, and both have polished marketing. Their parameter counts and hardware requirements are similar. But Gemma is completely uncompetitive and measurably worse at every type of task. In cases this clear-cut, benchmarks describe models very well. They help in less obvious cases too, though there is some divergence from reality.</p>
+
+        <p><a href="https://artificialanalysis.ai/">https://artificialanalysis.ai/</a> - The top option in terms of popularity and how well-balanced the methodology is. It consists of 9 benchmarks and produces 3 indices from them: intelligence, coding, and agentic capabilities. It includes every model and adds them within 2 days of release. OpenAI models are added the same day. It changed its index to show that GPT-5.6 Sol is better than Opus 4.8, but if you use only one benchmark, make it this one.</p>
+
+        <p><a href="https://deepswe.datacurve.ai/">https://deepswe.datacurve.ai/</a> - A benchmark of SOTA models on real programming tasks. Its main format plots the percentage of tasks solved against the cost per task. That is even better than cost per token, because some models use more tokens than others. The tasks are exceptionally thoughtful and deep. Right now it is not overcrowded and genuinely shows how useful models are for programming.</p>
+
+        <p><a href="https://arena.ai/leaderboard">https://arena.ai/leaderboard</a> - Like Artificial Analysis, this is not one benchmark but an entire collection. It started by comparing user preferences, but now has many more sections. It has declined in popularity, but remains useful for niche questions such as comparing search quality or image generation.</p>
+
+      </div>
+
+      <nav class="post-nav" aria-label="Post navigation">
+        <a class="post-nav__link post-nav__link--prev" href="cli-vs-mcp.html">
+          <span class="post-nav__label">← Earlier</span>
+          <span class="post-nav__title">Agents don't need MCP. They need CLI.</span>
+        </a>
+        <a class="post-nav__link post-nav__link--next" href="#" style="pointer-events: none; opacity: 0.4;">
+          <span class="post-nav__label">Later →</span>
+          <span class="post-nav__title">(nothing newer yet)</span>
+        </a>
+      </nav>
+
+    </article>
+  </div>
+
+  <div class="blog-container">
+    <footer class="blog-footer">
+      <div><a href="/">← aleksanderborodin.github.io</a></div>
+      <div style="display: flex; gap: 1.25rem;">
+        <a href="https://github.com/aleksanderborodin">GitHub</a>
+        <a href="https://t.me/less_arrogant">Telegram</a>
+        <a href="mailto:apdorodin765@gmail.com">Email</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/common.js"></script>
+</body>
+</html>

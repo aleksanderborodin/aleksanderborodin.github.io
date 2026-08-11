@@ -2,7 +2,8 @@
 """Generate per-post and per-project social cards (1200x630 webp)."""
 
 from PIL import Image, ImageDraw, ImageFont
-import os, textwrap
+import os
+import sys
 
 W, H = 1200, 630
 SYNE = "/tmp/syne-bold.ttf"
@@ -48,6 +49,12 @@ CARDS = [
         "assets/blog/cli-vs-mcp-card.webp",
         "Writing",
         "Agents don't need MCP. They need CLI.",
+        BLOG_ACCENT, BLOG_SOFT,
+    ),
+    (
+        "assets/blog/top-llm-benchmarks-card.webp",
+        "Writing",
+        "My top benchmarks",
         BLOG_ACCENT, BLOG_SOFT,
     ),
     (
@@ -155,8 +162,11 @@ def make_card(path, label, title, accent, soft):
     img.save(path, "webp", quality=92)
     print(f"  saved {path}")
 
-base = "/home/sasha/Desktop/personal_website/"
+base = os.path.dirname(os.path.abspath(__file__))
+requested = set(sys.argv[1:])
 for (rel_path, label, title, accent, soft) in CARDS:
-    make_card(base + rel_path, label, title, accent, soft)
+    if requested and rel_path not in requested and os.path.basename(rel_path) not in requested:
+        continue
+    make_card(os.path.join(base, rel_path), label, title, accent, soft)
 
 print("Done.")

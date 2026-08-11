@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <title>Мой топ бэнчмарков - Александр Бородин</title>
+  <meta name="description" content="Три коллекции бенчмарков для оценки LLM: Artificial Analysis, DeepSWE и Arena, и конкретные вопросы, на которые каждая отвечает лучше всего.">
+  <link rel="canonical" href="https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html">
+  <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html">
+  <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html">
+  <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/blog/top-llm-benchmarks.html">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Александр Бородин">
+  <meta property="og:title" content="Мой топ бэнчмарков">
+  <meta property="og:description" content="Три коллекции бенчмарков для оценки LLM и задачи, для которых каждая подходит лучше всего.">
+  <meta property="og:url" content="https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html">
+  <meta property="og:image" content="https://aleksanderborodin.github.io/assets/blog/top-llm-benchmarks-card.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Мой топ бэнчмарков. Текст Александра Бородина.">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@aleksanderbor">
+  <meta name="twitter:creator" content="@aleksanderbor">
+  <meta name="twitter:title" content="Мой топ бэнчмарков">
+  <meta name="twitter:description" content="Artificial Analysis, DeepSWE и Arena, и для чего подходит каждая коллекция бенчмарков.">
+  <meta name="twitter:image" content="https://aleksanderborodin.github.io/assets/blog/top-llm-benchmarks-card.webp">
+  <meta name="twitter:image:alt" content="Мой топ бэнчмарков. Текст Александра Бородина.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": "https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html",
+    "headline": "Мой топ бэнчмарков",
+    "description": "Три коллекции бенчмарков для оценки LLM: Artificial Analysis, DeepSWE и Arena, и конкретные вопросы, на которые каждая отвечает лучше всего.",
+    "url": "https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html",
+    "datePublished": "2026-08-11",
+    "dateModified": "2026-08-11",
+    "author": { "@id": "https://aleksanderborodin.github.io/#person" },
+    "publisher": { "@id": "https://aleksanderborodin.github.io/#person" },
+    "inLanguage": "ru",
+    "image": "https://aleksanderborodin.github.io/assets/blog/top-llm-benchmarks-card.webp",
+    "isPartOf": { "@type": "Blog", "url": "https://aleksanderborodin.github.io/ru/blog/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aleksanderborodin.github.io/ru/" },
+      { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aleksanderborodin.github.io/ru/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Мой топ бэнчмарков", "item": "https://aleksanderborodin.github.io/ru/blog/top-llm-benchmarks.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+</head>
+<body class="page-blog">
+
+  <nav class="nav">
+    <a href="/ru/" class="nav__logo"><span class="nav__logo-dot"></span><span>АБ</span></a>
+    <button class="nav__hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <ul class="nav__links">
+      <li><a href="/ru/#contributor" class="nav__link">Open Source</a></li>
+      <li><a href="/ru/#professional" class="nav__link">Коммерция</a></li>
+      <li><a href="/ru/blog/" class="nav__link" style="color: var(--accent-writer);">Блог</a></li>
+      <li>
+        <div class="lang-toggle">
+          <a class="lang-toggle__btn" href="/blog/top-llm-benchmarks.html">EN</a>
+          <a class="lang-toggle__btn active" href="/ru/blog/top-llm-benchmarks.html">RU</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <article class="article">
+
+      <div class="article__eyebrow"><a href="/ru/blog/">← Блог</a></div>
+
+      <h1 class="article__title">Мой топ <em>бэнчмарков</em></h1>
+
+      <div class="article__meta">
+        <span><strong>11.08.2026</strong></span>
+        <span>3 мин чтения</span>
+        <a class="lang-link" href="/blog/top-llm-benchmarks.html">Read in English →</a>
+      </div>
+
+      <div class="prose">
+
+        <p>Какую модель запустить на 2xV100, 2x32 GB VRAM: Gemma-4-26B или Qwen-3.6-35B. Обе современные. Обе от топовых компаний, обе мультимодальные, у обеих качественный маркетинг. Количество параметров и требования к железу - аналогичные. Но Gemma абсолютно неконкурентна и в любом типе задач измеримо хуже. В таких грубых случаях бенчмарки отлично описывают модели. Они и в менее грубых помогают, но там уже есть некоторое отклонение от реальности.</p>
+
+        <p><a href="https://artificialanalysis.ai/">https://artificialanalysis.ai/</a> - Топ-1 по популярности и взвешенности решения. Состоит из 9 бенчмарков и составляет 3 индекса на их основе: интеллект, кодинг и агентные способности. Содержит все модели и добавляет их в течение 2 дней после выхода. Модели OpenAI добавляет день в день. Поменял свой индекс, чтобы показать, что GPT-5.6 Sol лучше Opus 4.8, но если вы пользуетесь только одним бенчмарком - пусть это будет он.</p>
+
+        <p><a href="https://deepswe.datacurve.ai/">https://deepswe.datacurve.ai/</a> - бенчмарк SOTA-моделей на реальных задачах программирования. Основной формат представления - процент решённых задач против цены на одну задачу. То есть даже лучше, чем цена за токен, ведь одни модели используют больше токенов, чем другие. Задачи максимально продуманы и глубоки. На данный момент не переполнен и реально показывает полезность моделей для программирования.</p>
+
+        <p><a href="https://arena.ai/leaderboard">https://arena.ai/leaderboard</a> - так же, как и Artificial Analysis, не один бенчмарк, а целая коллекция. Начинал со сравнения пользовательских предпочтений, но сейчас имеет куда больше разделов. Упал в популярности, но всё ещё полезен для нишевых вопросов вроде сравнения качества поиска или генерации картинок</p>
+
+      </div>
+
+      <nav class="post-nav" aria-label="Навигация по постам">
+        <a class="post-nav__link post-nav__link--prev" href="cli-vs-mcp.html">
+          <span class="post-nav__label">← Раньше</span>
+          <span class="post-nav__title">CLI против MCP</span>
+        </a>
+        <a class="post-nav__link post-nav__link--next" href="#" style="pointer-events: none; opacity: 0.4;">
+          <span class="post-nav__label">Позже →</span>
+          <span class="post-nav__title">(ничего нового пока)</span>
+        </a>
+      </nav>
+
+    </article>
+  </div>
+
+  <div class="blog-container">
+    <footer class="blog-footer">
+      <div><a href="/ru/">← aleksanderborodin.github.io/ru</a></div>
+      <div style="display: flex; gap: 1.25rem;">
+        <a href="https://github.com/aleksanderborodin">GitHub</a>
+        <a href="https://t.me/less_arrogant">Telegram</a>
+        <a href="mailto:apdorodin765@gmail.com">Email</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../../js/common.js"></script>
+</body>
+</html>
