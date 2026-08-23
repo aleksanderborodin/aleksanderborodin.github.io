@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d43">
+  <meta name="description" content="CapabilityBench evaluates embodied agents across a persistent world where time, people, tasks, and memory continue between episodes.">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CapabilityBench — Persistent-life evaluation for embodied agents">
+  <meta property="og:description" content="A benchmark and simulator for reasoning across time, memory, people, and a world that keeps changing.">
+  <meta property="og:url" content="https://aleksanderborodin.github.io/papers/capability_bench/">
+  <meta property="og:image" content="https://aleksanderborodin.github.io/papers/capability_bench/assets/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>CapabilityBench — Persistent-life evaluation</title>
+  <link rel="canonical" href="https://aleksanderborodin.github.io/papers/capability_bench/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" aria-label="Primary navigation">
+    <a class="brand" href="#top" aria-label="CapabilityBench home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>CapabilityBench</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span>Menu</span><i aria-hidden="true"></i>
+    </button>
+    <nav class="site-nav" id="site-nav">
+      <a href="#idea">Why it matters</a>
+      <a href="#timeline">Persistent life</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#livinggrid">LivingGrid</a>
+      <a class="nav-paper" href="assets/capabilitybench-paper.pdf">Paper <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Persistent-life evaluation for embodied agents</p>
+        <h1 id="hero-title">The world does not <em>reset</em> when the task ends.</h1>
+        <p class="hero-deck">CapabilityBench tests whether an agent can plan, remember, adapt, and act at the right time inside one continuing household world.</p>
+        <div class="hero-actions" aria-label="Project links">
+          <a class="button button-primary" href="assets/capabilitybench-paper.pdf">Read the paper <span aria-hidden="true">↗</span></a>
+          <a class="button button-quiet" href="https://github.com/Onishenko-sci/BenchPaper">Explore the code <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="hero-facts">
+          <div><dt>World</dt><dd>Persistent</dd></div>
+          <div><dt>Interface</dt><dd>Public JSON</dd></div>
+          <div><dt>Focus</dt><dd>High-level reasoning</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-world" aria-label="A living household simulation continuing through time">
+        <div class="world-toolbar">
+          <span><i class="live-dot" aria-hidden="true"></i> LivingGrid / simple</span>
+          <time datetime="08:15">day 01 · 08:15:00</time>
+        </div>
+        <div class="sim-viewport" aria-hidden="true">
+          <img src="assets/apartment.webp" width="1800" height="1800" alt="">
+          <svg class="sim-route" viewBox="0 0 750 751" preserveAspectRatio="none">
+            <path d="M274 508 C352 470 427 425 492 357 S558 240 590 186" />
+          </svg>
+          <span class="sim-marker sim-marker-robot"><i></i> robot</span>
+          <span class="sim-marker sim-marker-event"><i></i> oven ready</span>
+          <div class="sim-status"><span>active</span><b>wash dishes</b><i>1 pending event</i></div>
+        </div>
+        <div class="world-log" aria-hidden="true">
+          <span>08:15:00</span><strong>world</strong><p>oven.finished_heating</p>
+          <span>08:15:01</span><strong>scheduler</strong><p>event_conditioned ready</p>
+          <span>08:15:02</span><strong>robot</strong><p>interrupt accepted</p>
+        </div>
+      </div>
+
+      <p class="hero-note">LivingGrid keeps the clock moving <span aria-hidden="true">→</span></p>
+    </section>
+
+    <section class="thesis section-dark" id="idea" data-section="idea">
+      <div class="section-index" aria-hidden="true">The premise</div>
+      <div class="thesis-grid">
+        <div>
+          <p class="eyebrow">Beyond reset-and-score</p>
+          <h2>A useful robot lives through the consequences.</h2>
+        </div>
+        <div class="thesis-copy">
+          <p>Most embodied benchmarks isolate one instruction inside a fresh world. That is useful for grounding, but it removes the pressures that appear between tasks.</p>
+          <p>Here, the same world persists. Residents follow routines. Appliances finish processes. Objects move. Earlier interactions become the context for what happens next.</p>
+        </div>
+      </div>
+      <div class="comparison" aria-label="Comparison of isolated and persistent evaluation">
+        <article class="comparison-isolated">
+          <div class="comparison-head">
+            <p class="comparison-label">The usual benchmark</p>
+            <span>state erased</span>
+          </div>
+          <h3>Three tasks.<br>Three disposable worlds.</h3>
+          <div class="episode-stack" aria-hidden="true">
+            <div><span>01</span><b>put away dishes</b><i>world A</i></div>
+            <em>reset</em>
+            <div><span>02</span><b>monitor oven</b><i>world B</i></div>
+            <em>reset</em>
+            <div><span>03</span><b>recall lunch</b><i>world C</i></div>
+          </div>
+          <p>Each score is valid, but nothing has to survive the boundary between them.</p>
+        </article>
+        <article class="comparison-persistent">
+          <div class="comparison-head">
+            <p class="comparison-label">CapabilityBench</p>
+            <span>state retained</span>
+          </div>
+          <h3>One world.<br>A history the agent must carry.</h3>
+          <div class="life-trace" aria-hidden="true">
+            <div class="trace-line"><i></i></div>
+            <div class="trace-event"><span>08:00</span><i></i><b>task</b></div>
+            <div class="trace-event"><span>08:02</span><i></i><b>request</b></div>
+            <div class="trace-event trace-world"><span>08:15</span><i></i><b>event</b></div>
+            <div class="trace-event"><span>08:16</span><i></i><b>resume</b></div>
+            <div class="trace-event trace-recall"><span>18:30</span><i></i><b>recall</b></div>
+            <p><span>memory link</span> the afternoon answer depends on the morning event</p>
+          </div>
+          <p>Tasks, residents, and autonomous processes share a clock. Earlier actions become later evidence.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="timeline-section" id="timeline" data-section="timeline">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">One world, many obligations</p>
+          <h2>Follow a day in the benchmark.</h2>
+        </div>
+        <p>Choose a moment. The task changes, but the house and its history remain.</p>
+      </div>
+
+      <div class="timeline-shell">
+        <div class="timeline-sticky">
+          <div class="timeline-rail" role="tablist" aria-label="Persistent household timeline">
+            <div class="timeline-track" aria-hidden="true"><i></i></div>
+            <button class="timeline-tab is-active" role="tab" aria-selected="true" aria-controls="timeline-detail" data-step="0" data-time="08:00" data-title="A routine task begins." data-copy="A resident asks the robot to wash the dishes. The world clock continues while the robot acts." data-status="washing dishes" data-current="Wash the dishes" data-pending="No queued request" data-memory="08:00 · instruction received"><span>08:00</span><i></i><b>Instruction</b></button>
+            <button class="timeline-tab" role="tab" aria-selected="false" aria-controls="timeline-detail" data-step="1" data-time="08:02" data-title="A future condition arrives." data-copy="The resident puts a pizza in the oven and asks the robot to take it out when it is ready." data-status="monitoring oven" data-current="Wash the dishes" data-pending="Take pizza out when ready" data-memory="Future condition stored"><span>08:02</span><i></i><b>New request</b></button>
+            <button class="timeline-tab" role="tab" aria-selected="false" aria-controls="timeline-detail" data-step="2" data-time="08:15" data-title="The world changes on its own." data-copy="The oven finishes heating. This event was not caused by the robot's current action." data-status="event detected" data-current="Wash the dishes" data-pending="Pizza is ready now" data-memory="Oven event matched to request"><span>08:15</span><i></i><b>World event</b></button>
+            <button class="timeline-tab" role="tab" aria-selected="false" aria-controls="timeline-detail" data-step="3" data-time="08:15+" data-title="The agent interrupts itself." data-copy="It takes out the pizza, then resumes the unfinished dishwashing task instead of losing the earlier goal." data-status="task resumed" data-current="Take out the pizza" data-pending="Resume washing dishes" data-memory="Original goal kept active"><span>08:15+</span><i></i><b>Adaptation</b></button>
+            <button class="timeline-tab" role="tab" aria-selected="false" aria-controls="timeline-detail" data-step="4" data-time="18:30" data-title="Hours later, history matters." data-copy="A resident asks what they had for lunch. The answer depends on an event from the same lived timeline." data-status="memory recalled" data-current="Answer the resident" data-pending="No queued request" data-memory="09:00 · resident ate pizza"><span>18:30</span><i></i><b>Recall</b></button>
+          </div>
+
+          <div class="timeline-stage" id="timeline-detail" role="tabpanel" tabindex="0" data-step="0">
+            <div class="stage-scene" aria-hidden="true">
+              <div class="stage-toolbar"><span><i></i> LivingGrid / simple</span><b>seed 0042</b><time>day 01 · 08:00:00</time></div>
+              <img src="assets/apartment.webp" width="1800" height="1800" alt="">
+              <svg class="stage-route" viewBox="0 0 750 751" preserveAspectRatio="none"><path d="M269 510 C345 468 411 428 481 366 S548 250 585 183" /></svg>
+              <span class="stage-pin stage-pin-robot"><i></i> robot</span>
+              <span class="stage-pin stage-pin-event"><i></i> event</span>
+              <div class="stage-legend"><span><i></i> robot</span><span><i></i> resident</span><span><i></i> world event</span></div>
+            </div>
+            <div class="stage-copy" aria-live="polite">
+              <p class="stage-time">08:00</p>
+              <p class="stage-status"><i></i><span>washing dishes</span></p>
+              <h3>A routine task begins.</h3>
+              <p>A resident asks the robot to wash the dishes. The world clock continues while the robot acts.</p>
+              <div class="task-ledger">
+                <div><span>Now</span><strong class="task-current">Wash the dishes</strong></div>
+                <div><span>Pending</span><strong class="task-pending">No queued request</strong></div>
+                <div><span>Remembered</span><strong class="task-memory">08:00 · instruction received</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities section-dark" id="capabilities" data-section="capabilities">
+      <div class="section-index" aria-hidden="true">What is measured</div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Capability profile, not one score</p>
+          <h2>Four pressures reveal where an agent breaks.</h2>
+        </div>
+        <p>The paper groups evaluated scenarios by the source of difficulty, so partial success remains interpretable.</p>
+      </div>
+      <div class="capability-list">
+        <article class="capability capability-foundational">
+          <span class="capability-code">F</span>
+          <div><p>Ground and decompose</p><h3>Foundational</h3></div>
+          <p>From atomic manipulation to long-horizon household plans across multiple rooms and object classes.</p>
+          <ul><li>Pick and place</li><li>Tool use</li><li>Long sequences</li></ul>
+        </article>
+        <article class="capability capability-memory">
+          <span class="capability-code">M</span>
+          <div><p>Retain and retrieve</p><h3>Memory</h3></div>
+          <p>Carry task-critical information across simulated time gaps and intervening experiences.</p>
+          <ul><li>Recall location</li><li>Recall actions</li><li>Past requests</li></ul>
+        </article>
+        <article class="capability capability-dynamic">
+          <span class="capability-code">D</span>
+          <div><p>Re-ground online</p><h3>Dynamic</h3></div>
+          <p>Keep a goal active while people, objects, instructions, or autonomous processes change.</p>
+          <ul><li>World changes</li><li>Human activity</li><li>Plan repair</li></ul>
+        </article>
+        <article class="capability capability-temporal">
+          <span class="capability-code">T</span>
+          <div><p>Know when to act</p><h3>Temporal</h3></div>
+          <p>Wait for a time or event, respond inside the right window, and preserve pending work.</p>
+          <ul><li>Scheduled action</li><li>Event condition</li><li>Ordering</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="livinggrid" id="livinggrid" data-section="livinggrid">
+      <div class="section-index" aria-hidden="true">The environment</div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LivingGrid</p>
+          <h2>A spatial world with a semantic spine.</h2>
+        </div>
+        <p>Every state is both a traversable top-down grid and a scene graph of rooms, assets, surfaces, objects, and agents.</p>
+      </div>
+
+      <div class="representation">
+        <figure class="representation-figure">
+          <img src="assets/livinggrid-scene.webp" width="1800" height="1013" alt="LivingGrid layout alongside its semantic scene graph hierarchy">
+          <figcaption>Spatial layout and semantic graph are two views of the same generated state.</figcaption>
+        </figure>
+        <div class="graph-stack" aria-label="LivingGrid scene graph hierarchy">
+          <div><span>01</span><b>House</b><small>world root</small></div>
+          <div><span>02</span><b>Rooms</b><small>spatial regions</small></div>
+          <div><span>03</span><b>Assets</b><small>fixed furniture</small></div>
+          <div><span>04</span><b>Surfaces</b><small>interaction slots</small></div>
+          <div><span>05</span><b>Objects</b><small>movable items</small></div>
+        </div>
+      </div>
+
+      <div class="world-variants">
+        <div class="world-variants-copy">
+          <p class="eyebrow">Generated, not hand-staged</p>
+          <h3>Short YAML descriptions become complete inhabited spaces.</h3>
+          <p>A seeded pipeline solves room geometry, cuts doors, places furniture, populates surfaces, and initializes agents. The same benchmark can therefore run across layouts without changing its interface.</p>
+        </div>
+        <div class="world-samples" aria-label="LivingGrid scene variants">
+          <figure><img src="assets/apartment.webp" width="1800" height="1800" alt="Complete generated compact-home layout"><figcaption><span>Compact</span> home</figcaption></figure>
+          <figure><img src="assets/house.webp" width="1800" height="1800" alt="Complete generated large-house layout"><figcaption><span>Large</span> house</figcaption></figure>
+          <figure><img src="assets/office.webp" width="1800" height="1800" alt="Complete generated office layout"><figcaption><span>Domain</span> office</figcaption></figure>
+        </div>
+      </div>
+
+      <figure class="pipeline-figure">
+        <div class="figure-label"><span>Generation pipeline</span><b>YAML → inhabitable world</b></div>
+        <img src="assets/generation-pipeline.webp" width="1800" height="1012" alt="Seven-stage LivingGrid generation pipeline from YAML configuration to final scene">
+        <figcaption>Constraint-based generation stays reproducible per seed while varying layout, placement, people, and scenario bindings.</figcaption>
+      </figure>
+    </section>
+
+    <section class="contract section-blue" id="contract" data-section="contract">
+      <div class="section-index" aria-hidden="true">A shared contract</div>
+      <div class="contract-grid">
+        <div class="contract-copy">
+          <p class="eyebrow">Reasoning in, action out</p>
+          <h2>Compare agents through one public boundary.</h2>
+          <p>The robot receives structured observations and returns grounded JSON actions. Navigation and manipulation primitives work; the benchmark concentrates on the cognitive layer above them.</p>
+          <a href="https://github.com/Onishenko-sci/BenchPaper/tree/main/CapabilityBench/docs" class="text-link">Read the agent contract <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="code-window" aria-label="Example observation and action">
+          <div class="code-tabs"><span class="is-active">observation.json</span><span>action.json</span><i>public interface</i></div>
+          <pre><code><span class="code-dim">{</span>
+  <span class="code-key">"time"</span>: <span class="code-string">"08:15:02"</span>,
+  <span class="code-key">"layout"</span>: <span class="code-dim">{</span>
+    <span class="code-key">"kitchen"</span>: <span class="code-dim">{</span> <span class="code-key">"type"</span>: <span class="code-string">"kitchen"</span>, … <span class="code-dim">}</span>
+  <span class="code-dim">}</span>,
+  <span class="code-key">"events"</span>: [<span class="code-string">"oven finished heating"</span>],
+  <span class="code-key">"feedback"</span>: <span class="code-string">"action completed"</span>
+<span class="code-dim">}</span>
+
+<span class="code-comment">// next grounded decision</span>
+<span class="code-dim">{</span> <span class="code-key">"action"</span>: <span class="code-string">"pickup"</span>, <span class="code-key">"target"</span>: <span class="code-string">"hot_pizza"</span> <span class="code-dim">}</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="measurement" id="measurement" data-section="measurement">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Milestone-based evaluation</p>
+          <h2>A pass/fail number cannot explain the failure.</h2>
+        </div>
+        <p>Each scenario is decomposed into weighted, latched milestones. Four complementary views expose correctness and practical cost.</p>
+      </div>
+      <div class="metric-list">
+        <article><span>01</span><h3>Success rate</h3><p>Did every capability milestone close?</p><b>completion</b></article>
+        <article><span>02</span><h3>Scenario score</h3><p>How much meaningful progress was made?</p><b>partial credit</b></article>
+        <article><span>03</span><h3>Executability</h3><p>How many proposed actions could the world apply?</p><b>grounding</b></article>
+        <article><span>04</span><h3>Token cost</h3><p>What did the reasoning loop spend per scenario?</p><b>efficiency</b></article>
+      </div>
+      <div class="run-structure" aria-label="CapabilityBench evaluation hierarchy">
+        <div><span>Run</span><small>one continuing world</small></div>
+        <i aria-hidden="true"></i>
+        <div><span>Scenario</span><small>one capability test</small></div>
+        <i aria-hidden="true"></i>
+        <div><span>Episode</span><small>one local phase</small></div>
+        <i aria-hidden="true"></i>
+        <div><span>Milestone</span><small>one latched condition</small></div>
+      </div>
+    </section>
+
+    <section class="closing section-dark" id="resources">
+      <div class="closing-main">
+        <p class="eyebrow">Build, inspect, compare</p>
+        <h2>The benchmark is open for agents that need a world with a past.</h2>
+        <div class="hero-actions">
+          <a class="button button-light" href="https://github.com/Onishenko-sci/BenchPaper">View repository <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="assets/capabilitybench-paper.pdf">Download paper <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="citation">
+        <div><p class="eyebrow">Citation</p><button type="button" class="copy-citation">Copy BibTeX</button></div>
+        <pre id="bibtex"><code>@article{capabilitybench2026,
+  title   = {CapabilityBench: A Persistent-Life Benchmark
+             for Embodied Agent Capabilities},
+  author  = {Anonymous},
+  year    = {2026},
+  note    = {Under review}
+}</code></pre>
+        <p>Citation metadata will be updated with the public release.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>CapabilityBench</span></a>
+    <p>Built on LivingGrid. Designed for persistent-life evaluation.</p>
+    <div><a href="assets/capabilitybench-paper.pdf">Paper</a><a href="https://github.com/Onishenko-sci/BenchPaper">Code</a><a href="#top">Back to top ↑</a></div>
+  </footer>
+</body>
+</html>

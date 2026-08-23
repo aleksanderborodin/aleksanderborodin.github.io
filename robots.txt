@@ -1,23 +1,30 @@
 User-agent: *
 Allow: /
+Disallow: /papers/capability_bench/
 
 # AI retrieval crawlers — allow (content intended for broad discovery)
 User-agent: GPTBot
 Allow: /
+Disallow: /papers/capability_bench/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /papers/capability_bench/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /papers/capability_bench/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /papers/capability_bench/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /papers/capability_bench/
 
 User-agent: CCBot
 Allow: /
+Disallow: /papers/capability_bench/
 
 Sitemap: https://aleksanderborodin.github.io/sitemap.xml
