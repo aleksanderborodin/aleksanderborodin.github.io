@@ -33,8 +33,15 @@ paper is public.
   (license texts are included beside the font files).
 - Site copy follows the paper's four-cluster evaluation view and the public
   interfaces documented under `CapabilityBench/docs/`.
+- Result tables reproduce only the completed Apartment/House ReAct cells from
+  `CapabilityBench/latex/ACL_August/main.tex`. They are explicitly a historical
+  paper-draft snapshot; pending Office, memory, planning-wrapper, partial, and
+  experimental runs must not be presented as benchmark scores.
 
 The page uses a centered academic demo-paper composition. Its main interaction
 is an ordered, guided task trace; it illustrates public benchmark state but is
 explicitly not a live policy evaluation. The generated-environment viewer is an
 accessible tab set with keyboard navigation and complete uncropped renders.
+Visible type never drops below 10 CSS px; body copy stays at least 15 px. On
+phones, only the labelled result-table regions scroll horizontally—the page
+itself must remain viewport-bound.

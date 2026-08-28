@@ -27,7 +27,7 @@
     <a class="brand" href="#top" aria-label="CapabilityBench home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>CapabilityBench</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu <i aria-hidden="true"></i></button>
     <nav id="site-nav" aria-label="Primary navigation">
-      <a href="#abstract">Abstract</a><a href="#benchmark">Benchmark</a><a href="#demo">Interactive demo</a><a href="#evaluation">Evaluation</a><a href="#citation">BibTeX</a>
+      <a href="#abstract">Abstract</a><a href="#benchmark">Benchmark</a><a href="#demo">Interactive demo</a><a href="#results">Results</a><a href="#evaluation">Evaluation</a><a href="#citation">BibTeX</a>
     </nav>
   </header>
 
@@ -138,20 +138,90 @@
       <div class="table-wrap"><table><caption>CapabilityBench scenario structure in the paper draft</caption><thead><tr><th>Cluster</th><th>What changes the difficulty</th><th>Representative tasks</th><th>Scenarios</th></tr></thead><tbody><tr><td><i class="table-dot dot-foundation"></i>Foundational</td><td>Action chain and grounding</td><td>Tool use, delivery, set table</td><td>6</td></tr><tr><td><i class="table-dot dot-memory"></i>Memory</td><td>Relevant evidence moves to the past</td><td>Recall location, recall action</td><td>3</td></tr><tr><td><i class="table-dot dot-dynamic"></i>Dynamic</td><td>World state changes during the goal</td><td>Relocation, human activity</td><td>4</td></tr><tr><td><i class="table-dot dot-temporal"></i>Temporal</td><td>Success depends on when</td><td>Scheduled, event-conditioned</td><td>2</td></tr></tbody><tfoot><tr><td colspan="3">Total</td><td>15</td></tr></tfoot></table></div>
     </section>
 
+    <section class="paper-section wide-paper results-section" id="results">
+      <p class="section-number">06</p><h2>Results snapshot</h2>
+      <p class="section-lead">A frozen view of the completed ReAct experiments reported in the current paper draft. Larger models improve grounding and action validity, but progress remains far from saturation.</p>
+
+      <div class="results-protocol" aria-label="Result provenance">
+        <div><span>Agent</span><b>ReAct</b></div><div><span>Protocol</span><b>50 paired rollouts</b></div><div><span>Scenes</span><b>Apartment + House</b></div><div><span>Sampling</span><b>Temperature 0</b></div>
+      </div>
+
+      <div class="result-table-wrap" role="region" aria-label="Headline ReAct results" tabindex="0">
+        <table class="headline-results">
+          <caption>Headline results · mean ± standard deviation across rollout seeds</caption>
+          <thead><tr><th scope="col">Scene</th><th scope="col">Model</th><th scope="col">Success rate</th><th scope="col">Milestone score</th><th scope="col">Executability</th><th scope="col">Tokens / run</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Apartment</th><td>Gemma 4 e4b</td><td><b>7.5</b><small>± 6.5%</small></td><td><b>10.9</b><small>± 6.3%</small></td><td><b>82.8</b><small>± 11.0%</small></td><td><b>317.6k</b><small>± 131.4k</small></td></tr>
+            <tr class="model-strong"><th scope="row">Apartment</th><td>Gemma 4 31b</td><td><b>14.1</b><small>± 5.4%</small></td><td><b>22.3</b><small>± 5.8%</small></td><td><b>89.9</b><small>± 7.9%</small></td><td><b>559.5k</b><small>± 347.7k</small></td></tr>
+            <tr><th scope="row">House</th><td>Gemma 4 e4b</td><td><b>7.5</b><small>± 5.3%</small></td><td><b>11.5</b><small>± 6.1%</small></td><td><b>83.5</b><small>± 7.9%</small></td><td><b>615.9k</b><small>± 298.2k</small></td></tr>
+            <tr class="model-strong"><th scope="row">House</th><td>Gemma 4 31b</td><td><b>12.7</b><small>± 6.8%</small></td><td><b>17.8</b><small>± 7.9%</small></td><td><b>91.7</b><small>± 6.1%</small></td><td><b>744.1k</b><small>± 220.2k</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scaling-story">
+        <article>
+          <header><div><span>Apartment</span><h3>Scaling roughly doubles score.</h3></div><b>+11.4 pp</b></header>
+          <div class="score-plot" aria-label="Apartment milestone score: Gemma 4 e4b 10.9 percent, Gemma 4 31b 22.3 percent">
+            <div><span>e4b</span><i class="score-bar score-apartment-small"></i><b>10.9</b></div>
+            <div><span>31b</span><i class="score-bar score-apartment-large"></i><b>22.3</b></div>
+          </div>
+          <p>Executability rises by 7.1 points while token cost grows 1.76×.</p>
+        </article>
+        <article>
+          <header><div><span>House</span><h3>The gain contracts as the world grows.</h3></div><b>+6.3 pp</b></header>
+          <div class="score-plot" aria-label="House milestone score: Gemma 4 e4b 11.5 percent, Gemma 4 31b 17.8 percent">
+            <div><span>e4b</span><i class="score-bar score-house-small"></i><b>11.5</b></div>
+            <div><span>31b</span><i class="score-bar score-house-large"></i><b>17.8</b></div>
+          </div>
+          <p>Executability rises by 8.2 points, but score improves less than in the apartment.</p>
+        </article>
+      </div>
+      <p class="plot-scale">Milestone score (%) · common 0–25 scale</p>
+
+      <details class="scenario-results">
+        <summary><span><b>Scenario-level breakdown</b><small>15 scenarios · Score (%) · mean ± standard deviation</small></span><i aria-hidden="true"></i></summary>
+        <div class="result-table-wrap" role="region" aria-label="Scenario-level ReAct scores" tabindex="0">
+          <table class="detailed-results">
+            <caption>Per-scenario milestone score from the paper draft</caption>
+            <thead><tr><th rowspan="2" scope="col">Cluster</th><th rowspan="2" scope="col">Scenario</th><th colspan="2" scope="colgroup">Apartment</th><th colspan="2" scope="colgroup">House</th></tr><tr><th scope="col">e4b</th><th scope="col">31b</th><th scope="col">e4b</th><th scope="col">31b</th></tr></thead>
+            <tbody>
+              <tr class="cluster-start"><th rowspan="6" scope="rowgroup"><i class="table-dot dot-foundation"></i>Foundational</th><th scope="row">PickAndPlace</th><td>17.5 ± 36.2</td><td>38.2 ± 43.3</td><td>12.5 ± 35.4</td><td>12.7 ± 31.3</td></tr>
+              <tr><th scope="row">PickAndPlace (i)</th><td>0.0 ± 0.0</td><td>40.9 ± 40.1</td><td>0.0 ± 0.0</td><td>34.5 ± 44.8</td></tr>
+              <tr><th scope="row">DeliverToMoving</th><td>17.5 ± 36.2</td><td>34.5 ± 28.4</td><td>10.0 ± 18.5</td><td>9.1 ± 30.2</td></tr>
+              <tr><th scope="row">StateChange</th><td>0.0 ± 0.0</td><td>41.8 ± 47.5</td><td>3.8 ± 10.6</td><td>45.5 ± 52.2</td></tr>
+              <tr><th scope="row">ToolUse</th><td>5.0 ± 9.3</td><td>40.0 ± 39.0</td><td>12.5 ± 10.4</td><td>25.5 ± 39.1</td></tr>
+              <tr><th scope="row">LongSequence</th><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td></tr>
+              <tr class="cluster-start"><th rowspan="3" scope="rowgroup"><i class="table-dot dot-memory"></i>Memory</th><th scope="row">RecallLocation</th><td>3.8 ± 4.0</td><td>10.7 ± 12.7</td><td>2.8 ± 3.9</td><td>12.5 ± 20.8</td></tr>
+              <tr><th scope="row">RecallAction</th><td>0.0 ± 0.0</td><td>5.7 ± 15.2</td><td>6.2 ± 17.7</td><td>9.1 ± 20.2</td></tr>
+              <tr><th scope="row">RecallRequest</th><td>6.2 ± 17.7</td><td>12.3 ± 21.4</td><td>6.2 ± 17.7</td><td>13.6 ± 23.4</td></tr>
+              <tr class="cluster-start"><th rowspan="4" scope="rowgroup"><i class="table-dot dot-dynamic"></i>Dynamic</th><th scope="row">StateMonitoring</th><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>5.5 ± 12.1</td></tr>
+              <tr><th scope="row">TrackHumanActivity</th><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td></tr>
+              <tr><th scope="row">AdaptToRelocation</th><td>0.0 ± 0.0</td><td>10.9 ± 18.7</td><td>5.0 ± 14.1</td><td>25.5 ± 40.1</td></tr>
+              <tr><th scope="row">InstructionUpdate</th><td>20.0 ± 35.1</td><td>2.7 ± 9.0</td><td>12.5 ± 35.4</td><td>11.8 ± 30.6</td></tr>
+              <tr class="cluster-start"><th rowspan="2" scope="rowgroup"><i class="table-dot dot-temporal"></i>Temporal</th><th scope="row">ScheduledAction</th><td>35.0 ± 30.7</td><td>40.0 ± 34.1</td><td>31.2 ± 25.9</td><td>19.1 ± 33.6</td></tr>
+              <tr><th scope="row">EventConditioned</th><td>33.8 ± 25.9</td><td>50.0 ± 22.9</td><td>40.0 ± 26.7</td><td>38.2 ± 39.7</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <p class="results-note"><strong>Scope note.</strong> These are completed historical results already present in the bundled draft, not new reruns. Empty Office cells and unfinished memory/planning baseline experiments are intentionally omitted.</p>
+    </section>
+
     <section class="paper-section wide-paper" id="environments">
-      <p class="section-number">06</p><h2>Generated environments</h2><p class="section-lead">The complete layouts are shown without crops. The same benchmark interface spans different scales and domains.</p>
+      <p class="section-number">07</p><h2>Generated environments</h2><p class="section-lead">The complete layouts are shown without crops. The same benchmark interface spans different scales and domains.</p>
       <div class="environment-tabs" role="tablist" aria-label="Generated LivingGrid environments"><button id="scene-tab-apartment" type="button" role="tab" aria-selected="true" aria-controls="scene-panel" data-scene="apartment"><span>01</span>Compact home</button><button id="scene-tab-house" type="button" role="tab" aria-selected="false" aria-controls="scene-panel" data-scene="house" tabindex="-1"><span>02</span>Large home</button><button id="scene-tab-office" type="button" role="tab" aria-selected="false" aria-controls="scene-panel" data-scene="office" tabindex="-1"><span>03</span>Office</button></div>
       <figure class="environment-viewer" id="scene-panel" role="tabpanel" aria-labelledby="scene-tab-apartment"><div class="environment-frame"><img src="assets/apartment.webp" width="1800" height="1800" alt="Complete generated compact-home layout"></div><figcaption><span class="scene-name">Compact home</span><b class="scene-meta">5 rooms · seed 42 · complete layout</b></figcaption></figure>
     </section>
 
     <section class="paper-section paper-width" id="evaluation">
-      <p class="section-number">07</p><h2>Evaluation protocol</h2><p class="section-lead">Weighted, latched milestones preserve partial progress and support four complementary views of agent behavior.</p>
+      <p class="section-number">08</p><h2>Evaluation protocol</h2><p class="section-lead">Weighted, latched milestones preserve partial progress and support four complementary views of agent behavior.</p>
       <div class="metrics-grid"><article><span>01</span><h3>Success rate</h3><p>Did every capability milestone close?</p></article><article><span>02</span><h3>Scenario score</h3><p>How much meaningful progress was made?</p></article><article><span>03</span><h3>Executability</h3><p>How many proposed actions could the world apply?</p></article><article><span>04</span><h3>Token cost</h3><p>What did the reasoning loop spend per scenario?</p></article></div>
       <div class="evaluation-flow" aria-label="Evaluation hierarchy"><div><b>Run</b><small>continuing world</small></div><i></i><div><b>Scenario</b><small>capability test</small></div><i></i><div><b>Episode</b><small>local phase</small></div><i></i><div><b>Milestone</b><small>latched condition</small></div></div>
     </section>
 
     <section class="paper-section paper-width citation-section" id="citation">
-      <p class="section-number">08</p><h2>BibTeX</h2>
+      <p class="section-number">09</p><h2>BibTeX</h2>
       <div class="citation-box"><button type="button" class="copy-citation">Copy BibTeX</button><pre id="bibtex"><code>@article{capabilitybench2026,
   title  = {CapabilityBench: A Persistent-Life Benchmark
             for Embodied Agent Capabilities},
