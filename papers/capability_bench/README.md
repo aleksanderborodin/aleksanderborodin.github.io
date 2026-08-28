@@ -34,6 +34,7 @@ paper is public.
 - Site copy follows the paper's four-cluster evaluation view and the public
   interfaces documented under `CapabilityBench/docs/`.
 
-On desktop, the persistent-life example advances through five states as the
-reader scrolls. Below 981 px, or when reduced motion is requested, it becomes a
-normal tabbed section so the page remains compact and predictable.
+The page uses a centered academic demo-paper composition. Its main interaction
+is an ordered, guided task trace; it illustrates public benchmark state but is
+explicitly not a live policy evaluation. The generated-environment viewer is an
+accessible tab set with keyboard navigation and complete uncropped renders.
