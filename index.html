@@ -163,8 +163,8 @@
           <h1 class="pt"><a href="/projects/idea-evolve.html" style="text-decoration: none;">Idea Evolve</a></h1>
           <p class="lede">Evolutionary code optimization through collaborative AI agent work sessions. Multiple specialized Claude agents (architects, explorers, researchers) work in parallel to evolve increasingly better solutions to hard optimization problems.</p>
           <figure class="fig">
-            <a class="thumb" href="/projects/idea-evolve.html" style="display: block;"><img src="/assets/idea-evolve/overview.webp" alt="Idea Evolve dashboard — score progression, generation timeline, and key metrics across a run." width="1400" height="900" fetchpriority="high"></a>
-            <figcaption>Sidon set: 66 → 105 in 7 autonomous generations. Dashboard Overview tab — score progression, generation timeline, and key metrics across a run.</figcaption>
+            <a class="thumb" href="/projects/idea-evolve.html" style="display: block;"><img src="/assets/diagrams/idea-evolve-en.webp" alt="Diagram: one Idea Evolve generation. Architect, agent work, evaluator, critic and finalize; the evaluator writes ideas, patterns and facts to a shared knowledge base that the next agents read first." width="2400" height="1184" fetchpriority="high"></a>
+            <figcaption>One generation: agents write candidates, the evaluator extracts what worked, the next generation reads it first. Sidon set: 66 → 105 in 7 autonomous generations.</figcaption>
           </figure>
           <div class="alinks">
             <a class="alink alink--ember" href="/projects/idea-evolve.html"><i>→</i>Read more</a>
@@ -180,15 +180,15 @@
         </div>
         <div class="sec__body cards">
           <article class="card">
-            <div class="frame"><span>02</span><b>Browser extension</b></div>
-            <p class="lab">JavaScript · FastAPI</p>
+            <a class="thumb" href="/assets/diagrams/yoola-explain-en.webp" style="display: block;"><img src="/assets/diagrams/yoola-explain-en.webp" alt="Diagram: Yoola Explain extracts the terms text, the FastAPI backend checks its cache, an LLM via OpenRouter returns key points, data collected and warnings." width="2400" height="1184" loading="lazy"></a>
+            <p class="lab">Browser extension · JavaScript · FastAPI</p>
             <h2 class="ct"><a href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">Yoola Explain</a></h2>
             <p class="small">A browser extension that simplifies Terms of Service by providing AI-generated summaries. Extracts ToS text, sends it to an LLM via OpenRouter, and returns structured summaries with key points, data collection info, and warnings. Multi-language support with caching.</p>
             <div class="card__links"><a class="tlink" href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">GitHub ↗</a></div>
           </article>
           <article class="card">
-            <div class="frame"><span>03</span><b>LLM safety</b></div>
-            <p class="lab">Python · LLM APIs · Prompt Engineering</p>
+            <a class="thumb" href="/assets/diagrams/prefix-injection-en.webp" style="display: block;"><img src="/assets/diagrams/prefix-injection-en.webp" alt="Diagram: a forbidden request plus a pre-written answer start goes to the model, which continues instead of refusing. Gemini 2.5 Pro answered 20 of 20 prompts." width="2400" height="1184" loading="lazy"></a>
+            <p class="lab">LLM safety · Python · LLM APIs · Prompt Engineering</p>
             <h2 class="ct"><a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" rel="noopener">Prefix Injection Jailbreak</a></h2>
             <p class="small">Prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. Simulating the start of a model's response to a forbidden query tricked Gemini 2.5 Pro and DeepSeek R1 into completing harmful answers — near-100% success on MaliciousInstruct vs. near-zero baseline.</p>
             <div class="card__links">

@@ -148,8 +148,8 @@
           <h1 class="pt"><a href="/ru/projects/idea-evolve.html" style="text-decoration: none;">Idea Evolve</a></h1>
           <p class="lede">Эволюционная оптимизация кода через совместные рабочие сессии ИИ-агентов. Специализированные агенты Claude (архитекторы, исследователи) работают параллельно, эволюционируя решения сложных задач оптимизации.</p>
           <figure class="fig">
-            <a class="thumb" href="/ru/projects/idea-evolve.html" style="display: block;"><img src="/assets/idea-evolve/overview.webp" alt="Дашборд Idea Evolve — прогресс скоров, таймлайн поколений и ключевые метрики за прогон." width="1400" height="900" fetchpriority="high"></a>
-            <figcaption>Множество Сидона: 66 → 105 за 7 автономных поколений. Вкладка Overview в дашборде — прогресс скоров, таймлайн поколений и ключевые метрики за прогон.</figcaption>
+            <a class="thumb" href="/ru/projects/idea-evolve.html" style="display: block;"><img src="/assets/diagrams/idea-evolve-ru.webp" alt="Схема: одно поколение Idea Evolve. Архитектор, работа агентов, оценщик, критик и финализация; оценщик пишет идеи, паттерны и факты в общую базу знаний, которую следующие агенты читают первой." width="2400" height="1184" fetchpriority="high"></a>
+            <figcaption>Одно поколение: агенты пишут кандидатов, оценщик извлекает то, что сработало, следующее поколение читает это первым. Множество Сидона: 66 → 105 за 7 автономных поколений.</figcaption>
           </figure>
           <div class="alinks">
             <a class="alink alink--ember" href="/ru/projects/idea-evolve.html"><i>→</i>Подробнее</a>
@@ -165,15 +165,15 @@
         </div>
         <div class="sec__body cards">
           <article class="card">
-            <div class="frame"><span>02</span><b>Браузерное расширение</b></div>
-            <p class="lab">JavaScript · FastAPI</p>
+            <a class="thumb" href="/assets/diagrams/yoola-explain-ru.webp" style="display: block;"><img src="/assets/diagrams/yoola-explain-ru.webp" alt="Схема: Yoola Explain извлекает текст условий, бэкенд на FastAPI проверяет кэш, LLM через OpenRouter возвращает главное, собираемые данные и предупреждения." width="2400" height="1184" loading="lazy"></a>
+            <p class="lab">Браузерное расширение · JavaScript · FastAPI</p>
             <h2 class="ct"><a href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">Yoola Explain</a></h2>
             <p class="small">Браузерное расширение, упрощающее пользовательские соглашения с помощью ИИ-генерируемых резюме. Извлекает текст ToS, отправляет в LLM через OpenRouter и возвращает структурированные сводки с ключевыми пунктами и предупреждениями. Мультиязычность и кэширование.</p>
             <div class="card__links"><a class="tlink" href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">GitHub ↗</a></div>
           </article>
           <article class="card">
-            <div class="frame"><span>03</span><b>Безопасность LLM</b></div>
-            <p class="lab">Python · LLM APIs · Prompt Engineering</p>
+            <a class="thumb" href="/assets/diagrams/prefix-injection-ru.webp" style="display: block;"><img src="/assets/diagrams/prefix-injection-ru.webp" alt="Схема: запрещённый запрос и заранее написанное начало ответа уходят в модель, и она продолжает вместо отказа. Gemini 2.5 Pro ответила на 20 из 20 запросов." width="2400" height="1184" loading="lazy"></a>
+            <p class="lab">Безопасность LLM · Python · LLM APIs · Prompt Engineering</p>
             <h2 class="ct"><a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" rel="noopener">Prefix Injection Jailbreak</a></h2>
             <p class="small">Префиксные атаки на LLM, вдохновлённые экспериментами BBC по Choice Blindness. Имитация начала ответа модели на запрещённый запрос заставила Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.</p>
             <div class="card__links">

@@ -239,6 +239,7 @@ code, .code {
 .article__head { grid-column: 1 / span 8; }
 .article__notes { grid-column: 10 / span 3; grid-row: 1 / span 2; align-self: start; padding-top: 28px; }
 .article__notes dd { overflow-wrap: anywhere; }
+.article__notes .tlink { white-space: normal; }
 .article__notes dl > div + div { margin-top: 20px; }
 .article__notes dd { font: 400 14px/20px var(--font-sans); margin-top: 4px; }
 .article__body { grid-column: 1 / span 8; margin-top: 48px; }
