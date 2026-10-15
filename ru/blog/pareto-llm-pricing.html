@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
-  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta name="theme-color" content="#f3efe7">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
   <title>Какие LLM имеют смысл — Александр Бородин</title>
   <meta name="description" content="График интеллект × цена для сотен LLM показывает: большинство моделей бессмысленны. Вот Парето-фронт и четыре модели, которые стоит выбрать.">
@@ -65,53 +65,46 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
-  <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/blog.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/kiln.css">
 </head>
-<body class="page-blog">
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <div class="wrap">
+    <header class="nav">
+      <a class="nav__brand" href="/ru/">Александр Бородин</a>
+      <ul class="nav__links">
+        <li><a href="/ru/">Проекты</a></li>
+        <li><a href="/ru/blog/" aria-current="page">Блог</a></li>
+        <li><a href="/ru/about.html">Обо мне</a></li>
+      </ul>
+      <div class="lang"><a href="/blog/pareto-llm-pricing.html" hreflang="en" lang="en">En</a><span class="ink-muted">/</span><span aria-current="true">Ru</span></div>
+    </header>
 
-  <nav class="nav">
-    <a href="/ru/" class="nav__logo"><span class="nav__logo-dot"></span><span>АБ</span></a>
-    <button class="nav__hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
-    <ul class="nav__links">
-      <li><a href="/ru/#contributor" class="nav__link">Open Source</a></li>
-      <li><a href="/ru/#professional" class="nav__link">Коммерция</a></li>
-      <li><a href="/ru/blog/" class="nav__link" style="color: var(--accent-writer);">Блог</a></li>
-      <li>
-        <div class="lang-toggle">
-          <a class="lang-toggle__btn" href="/blog/pareto-llm-pricing.html">EN</a>
-          <a class="lang-toggle__btn active" href="/ru/blog/pareto-llm-pricing.html">RU</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="article-wrap">
-    <article class="article">
-
-      <div class="article__eyebrow"><a href="/ru/blog/">← Блог</a></div>
-
-      <h1 class="article__title">Какие LLM имеют <em>смысл</em>.</h1>
-
-      <div class="article__meta">
-        <span><strong>26.01.2026</strong></span>
-        <span>3 мин чтения</span>
-        <a class="lang-link" href="/blog/pareto-llm-pricing.html">Read in English →</a>
-      </div>
-
-      <div class="prose">
+    <main id="main">
+      <article class="article g">
+        <header class="article__head">
+          <p class="lab"><a href="/ru/blog/">Блог</a> · 26&nbsp;янв 2026</p>
+          <h1 class="pt">Какие LLM имеют <em>смысл</em>.</h1>
+        </header>
+        <aside class="article__notes">
+          <dl>
+            <div><dt class="lab">Опубликовано</dt><dd><time datetime="2026-01-26">26&nbsp;янв 2026</time></dd></div>
+            <div><dt class="lab">Время чтения</dt><dd>3 мин чтения</dd></div>
+            <div><dt class="lab">Язык</dt><dd><a class="tlink" href="/blog/pareto-llm-pricing.html" hreflang="en">Read in English →</a></dd></div>
+          </dl>
+        </aside>
+        <div class="article__body prose">
 
         <p>Сейчас существуют сотни LLM моделей. Цены варьируются от $0.025/M токенов (Gemma 3n) до $14/M (GPT-5.2 xhigh) — разница в 560 раз. При этом большинство моделей не имеют смысла вообще: они либо слишком дорогие для своего уровня интеллекта, либо слишком глупые для своей цены.</p>
 
         <p>Я построил график на данных <a href="https://artificialanalysis.ai/">artificialanalysis.ai</a>, где по оси X — цена, по оси Y — интеллект (композитный индекс из бенчмарков + несколько других вариантов). А также линию максимального интеллекта для данной цены (Парето-границу). Соответственно модели, не лежащие на этой линии, — бессмысленные: всегда можно найти модель не хуже за меньшую цену.</p>
 
-        <figure class="chart-figure" style="margin: 2rem 0;">
+        <figure class="fig">
           <iframe src="/assets/pareto-llm-pricing/chart.html"
                   title="Интерактивный Парето-фронт цены и интеллекта LLM"
-                  loading="lazy"
-                  style="width: 100%; height: 760px; border: 1px solid rgba(26,24,25,0.1); border-radius: 8px; background: #f5f1eb; display: block;"></iframe>
-          <figcaption style="font-size: 0.85em; color: #6b6461; margin-top: 0.5rem; text-align: center;">
+                  loading="lazy" style="height: 760px;"></iframe>
+          <figcaption>
             Интерактив: цена × интеллект по пяти бенчмаркам. Ступенчатая линия — Парето-фронт; всё, что ниже, — модели, которые всегда можно заменить. Кликните по точке, чтобы увидеть детали.
           </figcaption>
         </figure>
@@ -127,33 +120,28 @@
 
         <p>Все модели ниже этой линии — это то, за что вы переплачиваете.</p>
 
-      </div>
+        </div>
+        <nav class="article__body postnav" aria-label="Навигация по записям">
+          <a href="llms-trained-to-guess.html">
+            <p class="lab">← Раньше</p>
+            <p class="ct">Угадайка</p>
+          </a>
+          <a href="cli-vs-mcp.html">
+            <p class="lab">Позже →</p>
+            <p class="ct">CLI против MCP</p>
+          </a>
+        </nav>
+      </article>
+    </main>
 
-      <nav class="post-nav" aria-label="Навигация по постам">
-        <a class="post-nav__link post-nav__link--prev" href="llms-trained-to-guess.html">
-          <span class="post-nav__label">← Раньше</span>
-          <span class="post-nav__title">Угадайка</span>
-        </a>
-        <a class="post-nav__link post-nav__link--next" href="cli-vs-mcp.html">
-          <span class="post-nav__label">Позже →</span>
-          <span class="post-nav__title">CLI против MCP</span>
-        </a>
-      </nav>
-
-    </article>
-  </div>
-
-  <div class="blog-container">
-    <footer class="blog-footer">
-      <div><a href="/ru/">← aleksanderborodin.github.io/ru</a></div>
-      <div style="display: flex; gap: 1.25rem;">
-        <a href="https://github.com/aleksanderborodin">GitHub</a>
-        <a href="https://t.me/less_arrogant">Telegram</a>
-        <a href="mailto:apdorodin765@gmail.com">Email</a>
-      </div>
+    <footer class="foot">
+      <p class="lab">© 2026 Александр Бородин</p>
+      <ul class="lab">
+        <li><a href="https://github.com/aleksanderborodin" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://t.me/less_arrogant" rel="noopener">Telegram ↗</a></li>
+        <li><a href="mailto:apdorodin765@gmail.com">Почта →</a></li>
+      </ul>
     </footer>
   </div>
-
-  <script src="../../js/common.js"></script>
 </body>
 </html>

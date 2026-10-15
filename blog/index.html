@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#f3efe7">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
   <title>Writing — Aleksander Borodin</title>
   <meta name="description" content="Long-form notes on LLM evaluation, embedded AI, and the economics of picking models for production. By Aleksander Borodin.">
@@ -51,168 +51,102 @@
   }
   </script>
 
-  <!-- Fonts: reuse site fonts + add Fraunces for long-form reading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
-
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/kiln.css">
 </head>
-<body class="page-blog">
-
-  <!-- Navigation (shared site nav + Writing link) -->
-  <nav class="nav">
-    <a href="/" class="nav__logo">
-      <span class="nav__logo-dot"></span>
-      <span>AB</span>
-    </a>
-
-    <button class="nav__hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <ul class="nav__links">
-      <li><a href="/#contributor" class="nav__link">Open Source</a></li>
-      <li><a href="/#professional" class="nav__link">Commercial</a></li>
-      <li><a href="/blog/" class="nav__link" aria-current="page" style="color: var(--accent-writer);">Writing</a></li>
-      <li>
-        <div class="lang-toggle">
-          <a class="lang-toggle__btn active" href="/blog/">EN</a>
-          <a class="lang-toggle__btn" href="/ru/blog/">RU</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-
-  <main class="blog-container">
-
-    <!-- ========= MASTHEAD ========= -->
-    <header class="blog-masthead">
-      <div class="blog-masthead__eyebrow">Writing · Notes &amp; essays</div>
-      <h1>My notes on LLMs and agents. What <em>actually</em> works, what doesn't.</h1>
-      <p class="blog-masthead__lede">
-        Mostly about not falling for the hype and getting some real numbers. Sometimes just my opinion.
-      </p>
-      <div class="blog-masthead__meta">
-        <span>6 posts · EN + RU</span>
-      </div>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="nav">
+      <a class="nav__brand" href="/">Aleksander Borodin</a>
+      <ul class="nav__links">
+        <li><a href="/">Projects</a></li>
+        <li><a href="/blog/" aria-current="page">Writing</a></li>
+        <li><a href="/about.html">About</a></li>
+      </ul>
+      <div class="lang"><span aria-current="true">En</span><span class="ink-muted">/</span><a href="/ru/blog/" hreflang="ru" lang="ru">Ru</a></div>
     </header>
 
-    <!-- ========= START HERE ========= -->
-    <section class="start-here">
-      <div class="start-here__label">— Start here</div>
-      <ul class="start-here__list">
-        <li>
-          <a class="start-here__item" href="pareto-llm-pricing.html">
-            <span class="start-here__num">01</span>
-            <span class="start-here__text">
-              <strong>Most LLMs are strictly dominated.</strong>
-              <span> — intelligence vs. price across hundreds of models; the Pareto frontier and the four that actually matter.</span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a class="start-here__item" href="llms-not-just-statistics.html">
-            <span class="start-here__num">02</span>
-            <span class="start-here__text">
-              <strong>The "LLMs are just statistics" argument is stuck in 2022.</strong>
-              <span> — a timeline of the key architectural shifts that took LLMs past next-token prediction.</span>
-            </span>
-          </a>
-        </li>
+    <main id="main">
+      <div class="g page-head">
+        <div class="c1-8">
+          <p class="lab">Writing · Notes &amp; essays · 6 posts · EN + RU</p>
+          <h1 class="pt">My notes on LLMs and agents. What <em>actually</em> works, what doesn't.</h1>
+          <p class="lede">Mostly about not falling for the hype and getting some real numbers. Sometimes just my opinion.</p>
+        </div>
+      </div>
+
+      <section class="sec">
+        <p class="lab">01 — Start here</p>
+        <div class="steps steps--2">
+            <a class="step step--key" href="pareto-llm-pricing.html">
+              <p class="step__n">01</p>
+              <p class="step__name">Most LLMs are strictly dominated.</p>
+              <p class="step__text">Intelligence vs. price across hundreds of models; the Pareto frontier and the four that actually matter.</p>
+            </a>
+            <a class="step" href="llms-not-just-statistics.html">
+              <p class="step__n">02</p>
+              <p class="step__name">The "LLMs are just statistics" argument is stuck in 2022.</p>
+              <p class="step__text">A timeline of the key architectural shifts that took LLMs past next-token prediction.</p>
+            </a>
+        </div>
+      </section>
+
+      <section class="sec">
+        <p class="lab">02 — All posts</p>
+        <ul class="rows">
+          <li class="year"><p class="lab">2026</p></li>
+          <li><a class="row" href="top-llm-benchmarks.html">
+            <span class="row__d">Aug 11</span>
+            <span><span class="row__t">My top <em>benchmarks</em>.</span><span class="row__x">Artificial Analysis, DeepSWE, and Arena answer different questions. Here is where each benchmark collection is genuinely useful.</span></span>
+            <span class="row__m">3 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="cli-vs-mcp.html">
+            <span class="row__d">Mar 22</span>
+            <span><span class="row__t">Agents don't need MCP. They need <em>CLI</em>.</span><span class="row__x">An agent with a shell can use any CLI. MCP was a detour. Why plain command-line tools are the simpler, better default for agentic systems.</span></span>
+            <span class="row__m">2 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="pareto-llm-pricing.html">
+            <span class="row__d">Jan 26</span>
+            <span><span class="row__t">Most LLMs are <em>strictly dominated</em>.</span><span class="row__x">Plotting intelligence vs price for hundreds of LLMs shows most are strictly dominated. Here is the Pareto frontier and the four models that matter.</span></span>
+            <span class="row__m">3 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li class="year"><p class="lab">2025</p></li>
+          <li><a class="row" href="llms-trained-to-guess.html">
+            <span class="row__d">Sep 08</span>
+            <span><span class="row__t">LLMs are trained to <em>guess</em>.</span><span class="row__x">OpenAI's hallucination research in one sentence: LLMs never say "I don't know" because post-training never rewards it. And that's fixable cheaply.</span></span>
+            <span class="row__m">3 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="prefix-injection-jailbreak.html">
+            <span class="row__d">Aug 14</span>
+            <span><span class="row__t">A psychology trick beats <em>LLM jailbreak defenses</em>.</span><span class="row__x">A 2008 BBC Choice Blindness setup, reshaped as a prefix-injection jailbreak against top LLMs. Tested on 20 MaliciousInstruct prompts.</span></span>
+            <span class="row__m">2 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="llms-not-just-statistics.html">
+            <span class="row__d">Aug 10</span>
+            <span><span class="row__t">The <em>"LLMs are just statistics"</em> argument is stuck in 2022.</span><span class="row__x">A timeline of architectural and training-recipe changes since 2020 that pushed LLMs past next-token prediction.</span></span>
+            <span class="row__m">4 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p class="lab">© 2026 Aleksander Borodin</p>
+      <ul class="lab">
+        <li><a href="https://github.com/aleksanderborodin" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://t.me/aleksanderbor" rel="noopener">Telegram ↗</a></li>
+        <li><a href="mailto:apdorodin765@gmail.com">Email →</a></li>
       </ul>
-    </section>
-
-    <!-- ========= POST LIST ========= -->
-    <ul class="post-list">
-
-      <li class="year-break"><span>2026</span></li>
-
-      <li>
-        <a class="post-entry" href="top-llm-benchmarks.html">
-          <div class="post-entry__date">Aug 11 &nbsp;· &nbsp;2026</div>
-          <div class="post-entry__body">
-            <div class="post-entry__title">My top <em>benchmarks</em>.</div>
-            <div class="post-entry__desc">Artificial Analysis, DeepSWE, and Arena answer different questions. Here is where each benchmark collection is genuinely useful.</div>
-          </div>
-          <div class="post-entry__meta">3 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
-        </a>
-      </li>
-
-      <li>
-        <a class="post-entry" href="cli-vs-mcp.html">
-          <div class="post-entry__date">Mar 22 &nbsp;· &nbsp;2026</div>
-          <div class="post-entry__body">
-            <div class="post-entry__title">Agents don't need MCP. They need <em>CLI</em>.</div>
-            <div class="post-entry__desc">An agent with a shell can use any CLI. MCP was a detour. Why plain command-line tools are the simpler, better default for agentic systems.</div>
-          </div>
-          <div class="post-entry__meta">2 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
-        </a>
-      </li>
-
-      <li>
-        <a class="post-entry" href="pareto-llm-pricing.html">
-          <div class="post-entry__date">Jan 26 &nbsp;· &nbsp;2026</div>
-          <div class="post-entry__body">
-            <div class="post-entry__title">Most LLMs are <em>strictly dominated</em>.</div>
-            <div class="post-entry__desc">Plotting intelligence vs price for hundreds of LLMs shows most are strictly dominated. Here is the Pareto frontier and the four models that matter.</div>
-          </div>
-          <div class="post-entry__meta">3 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
-        </a>
-      </li>
-
-      <li class="year-break"><span>2025</span></li>
-
-      <li>
-        <a class="post-entry" href="llms-trained-to-guess.html">
-          <div class="post-entry__date">Sep 08 &nbsp;· &nbsp;2025</div>
-          <div class="post-entry__body">
-            <div class="post-entry__title">LLMs are trained to <em>guess</em>.</div>
-            <div class="post-entry__desc">OpenAI's hallucination research in one sentence: LLMs never say "I don't know" because post-training never rewards it. And that's fixable cheaply.</div>
-          </div>
-          <div class="post-entry__meta">3 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
-        </a>
-      </li>
-
-      <li>
-        <a class="post-entry" href="prefix-injection-jailbreak.html">
-          <div class="post-entry__date">Aug 14 &nbsp;· &nbsp;2025</div>
-          <div class="post-entry__body">
-            <div class="post-entry__title">A psychology trick beats <em>LLM jailbreak defenses</em>.</div>
-            <div class="post-entry__desc">A 2008 BBC Choice Blindness setup, reshaped as a prefix-injection jailbreak against top LLMs. Tested on 20 MaliciousInstruct prompts.</div>
-          </div>
-          <div class="post-entry__meta">2 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
-        </a>
-      </li>
-
-      <li>
-        <a class="post-entry" href="llms-not-just-statistics.html">
-          <div class="post-entry__date">Aug 10 &nbsp;· &nbsp;2025</div>
-          <div class="post-entry__body">
-            <div class="post-entry__title">The <em>"LLMs are just statistics"</em> argument is stuck in 2022.</div>
-            <div class="post-entry__desc">A timeline of architectural and training-recipe changes since 2020 that pushed LLMs past next-token prediction.</div>
-          </div>
-          <div class="post-entry__meta">4 min <span class="post-entry__lang-pill post-entry__lang-pill--both">EN · RU</span></div>
-        </a>
-      </li>
-
-    </ul>
-
-    <!-- ========= FOOTER ========= -->
-    <footer class="blog-footer">
-      <div>
-        <a href="/">← aleksanderborodin.github.io</a>
-      </div>
-      <div style="display: flex; gap: 1.25rem;">
-        <a href="https://github.com/aleksanderborodin">GitHub</a>
-        <a href="https://t.me/aleksanderbor">Telegram</a>
-        <a href="mailto:apdorodin765@gmail.com">Email</a>
-      </div>
     </footer>
-
-  </main>
-
-  <script src="../js/common.js"></script>
+  </div>
 </body>
 </html>

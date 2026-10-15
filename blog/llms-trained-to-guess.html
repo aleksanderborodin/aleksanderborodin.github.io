@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#f3efe7">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
   <title>LLMs are trained to guess — Aleksander Borodin</title>
   <meta name="description" content="OpenAI's hallucination research in one sentence: LLMs never say 'I don't know' because post-training never rewards it. And that's fixable cheaply.">
@@ -65,42 +65,36 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/kiln.css">
 </head>
-<body class="page-blog">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="nav">
+      <a class="nav__brand" href="/">Aleksander Borodin</a>
+      <ul class="nav__links">
+        <li><a href="/">Projects</a></li>
+        <li><a href="/blog/" aria-current="page">Writing</a></li>
+        <li><a href="/about.html">About</a></li>
+      </ul>
+      <div class="lang"><span aria-current="true">En</span><span class="ink-muted">/</span><a href="/ru/blog/llms-trained-to-guess.html" hreflang="ru" lang="ru">Ru</a></div>
+    </header>
 
-  <nav class="nav">
-    <a href="/" class="nav__logo"><span class="nav__logo-dot"></span><span>AB</span></a>
-    <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    <ul class="nav__links">
-      <li><a href="/#contributor" class="nav__link">Open Source</a></li>
-      <li><a href="/#professional" class="nav__link">Commercial</a></li>
-      <li><a href="/blog/" class="nav__link" style="color: var(--accent-writer);">Writing</a></li>
-      <li>
-        <div class="lang-toggle">
-          <a class="lang-toggle__btn active" href="/blog/llms-trained-to-guess.html">EN</a>
-          <a class="lang-toggle__btn" href="/ru/blog/llms-trained-to-guess.html">RU</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="article-wrap">
-    <article class="article">
-
-      <div class="article__eyebrow"><a href="/blog/">← Writing</a></div>
-
-      <h1 class="article__title">LLMs are trained to <em>guess</em>.</h1>
-
-      <div class="article__meta">
-        <span><strong>2025-09-08</strong></span>
-        <span>3 min read</span>
-        <a class="lang-link" href="/ru/blog/llms-trained-to-guess.html">Прочитать по-русски →</a>
-      </div>
-
-      <div class="prose">
+    <main id="main">
+      <article class="article g">
+        <header class="article__head">
+          <p class="lab"><a href="/blog/">Writing</a> · Sep&nbsp;8, 2025</p>
+          <h1 class="pt">LLMs are trained to <em>guess</em>.</h1>
+        </header>
+        <aside class="article__notes">
+          <dl>
+            <div><dt class="lab">Published</dt><dd><time datetime="2025-09-08">Sep&nbsp;8, 2025</time></dd></div>
+            <div><dt class="lab">Reading time</dt><dd>3 min read</dd></div>
+            <div><dt class="lab">Language</dt><dd><a class="tlink" href="/ru/blog/llms-trained-to-guess.html" hreflang="ru">Прочитать по-русски →</a></dd></div>
+          </dl>
+        </aside>
+        <div class="article__body prose">
 
         <p>LLMs hallucinate — they confidently produce wrong answers. They almost never say "I don't know," even when they could. You might think this is a pretraining issue (bad data, underfitting, insufficient examples). In practice, it isn't.</p>
 
@@ -116,33 +110,28 @@
 
         <p>This is only the base case. The paper itself has many more experimental observations on how post-training subtly breaks the model.</p>
 
-      </div>
+        </div>
+        <nav class="article__body postnav" aria-label="Post navigation">
+          <a href="prefix-injection-jailbreak.html">
+            <p class="lab">← Earlier</p>
+            <p class="ct">A psychology trick beats LLM jailbreak defenses</p>
+          </a>
+          <a href="pareto-llm-pricing.html">
+            <p class="lab">Later →</p>
+            <p class="ct">Most LLMs are strictly dominated</p>
+          </a>
+        </nav>
+      </article>
+    </main>
 
-      <nav class="post-nav" aria-label="Post navigation">
-        <a class="post-nav__link post-nav__link--prev" href="prefix-injection-jailbreak.html">
-          <span class="post-nav__label">← Earlier</span>
-          <span class="post-nav__title">A psychology trick beats LLM jailbreak defenses</span>
-        </a>
-        <a class="post-nav__link post-nav__link--next" href="pareto-llm-pricing.html">
-          <span class="post-nav__label">Later →</span>
-          <span class="post-nav__title">Most LLMs are strictly dominated</span>
-        </a>
-      </nav>
-
-    </article>
-  </div>
-
-  <div class="blog-container">
-    <footer class="blog-footer">
-      <div><a href="/">← aleksanderborodin.github.io</a></div>
-      <div style="display: flex; gap: 1.25rem;">
-        <a href="https://github.com/aleksanderborodin">GitHub</a>
-        <a href="https://t.me/less_arrogant">Telegram</a>
-        <a href="mailto:apdorodin765@gmail.com">Email</a>
-      </div>
+    <footer class="foot">
+      <p class="lab">© 2026 Aleksander Borodin</p>
+      <ul class="lab">
+        <li><a href="https://github.com/aleksanderborodin" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://t.me/less_arrogant" rel="noopener">Telegram ↗</a></li>
+        <li><a href="mailto:apdorodin765@gmail.com">Email →</a></li>
+      </ul>
     </footer>
   </div>
-
-  <script src="../js/common.js"></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#f3efe7">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
   <!-- Language auto-redirect: send Russian-language browsers to /ru/.
        HOMEPAGE ONLY — do not copy this script onto deeper pages: it always
@@ -33,9 +33,6 @@
   <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/">
   <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/">
   <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/">
-
-  <!-- Preload hero image for LCP -->
-  <link rel="preload" as="image" href="assets/profile.webp" type="image/webp" fetchpriority="high">
 
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
@@ -133,285 +130,136 @@
   }
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/kiln.css">
 </head>
-<body class="grain">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="nav">
+      <a class="nav__brand" href="/">Aleksander Borodin</a>
+      <ul class="nav__links">
+        <li><a href="/" aria-current="page">Projects</a></li>
+        <li><a href="/blog/">Writing</a></li>
+        <li><a href="/about.html">About</a></li>
+      </ul>
+      <div class="lang"><span aria-current="true">En</span><span class="ink-muted">/</span><a href="/ru/" hreflang="ru" lang="ru">Ru</a></div>
+    </header>
 
-  <!-- Floating geometric shapes -->
-  <div class="geo-shapes" aria-hidden="true">
-    <div class="geo-shape geo-shape--1"></div>
-    <div class="geo-shape geo-shape--2"></div>
-    <div class="geo-shape geo-shape--3"></div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav">
-    <a href="#home" class="nav__logo">
-      <span class="nav__logo-dot"></span>
-      <span data-i18n="logo_text">AB</span>
-    </a>
-
-    <button class="nav__hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <ul class="nav__links">
-      <li><a href="#contributor" class="nav__link" data-i18n="nav_contributor">Open Source</a></li>
-      <li><a href="#professional" class="nav__link" data-i18n="nav_professional">Commercial</a></li>
-      <li><a href="/blog/" class="nav__link" data-i18n="nav_writing">Writing</a></li>
-      <li>
-        <a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="nav__link nav__telegram" aria-label="Telegram @aleksanderbor">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
-          <span data-i18n="nav_telegram">Telegram</span>
-        </a>
-      </li>
-      <li>
-        <div class="lang-toggle">
-          <a class="lang-toggle__btn active" href="/">EN</a>
-          <a class="lang-toggle__btn" href="/ru/">RU</a>
+    <main id="main">
+      <div class="g page-head">
+        <div class="c1-3">
+          <p class="lab">Projects and notes</p>
+          <p class="ct">Building tools that solve real problems — then sharing them with the world.</p>
+          <p class="lab" style="margin-top: 36px;">Topics</p>
+          <p class="small">Research · Open source · Machine learning · NLP · LLM safety · Optimization</p>
+          <p class="lab" style="margin-top: 36px;">About</p>
+          <p class="small"><a href="/about.html">Experience, CV and contact →</a></p>
         </div>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- ====== HERO ====== -->
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero__content">
-        <div class="hero__text">
-          <p class="hero__greeting" data-i18n="landing_greeting">Hello, I'm</p>
-          <h1 class="hero__name">Aleksander Borodin</h1>
-          <p class="hero__role" data-i18n="landing_role">Data Science / AI Agents</p>
-          <p class="hero__intro" data-i18n="landing_intro">MIPT student blending mathematics, machine learning, and a relentless curiosity for how language models think — and how to break them.</p>
-
-          <div class="hero__socials">
-            <a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="hero__social-link" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </a>
-            <a href="mailto:apdorodin765@gmail.com" class="hero__social-link" aria-label="Email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            </a>
-            <a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="hero__social-link" aria-label="Telegram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
-            </a>
+        <div class="c5-12">
+          <p class="lab">Featured project · Open source</p>
+          <h1 class="pt"><a href="/projects/idea-evolve.html" style="text-decoration: none;">Idea Evolve</a></h1>
+          <p class="lede">Evolutionary code optimization through collaborative AI agent work sessions. Multiple specialized Claude agents (architects, explorers, researchers) work in parallel to evolve increasingly better solutions to hard optimization problems.</p>
+          <figure class="fig">
+            <a class="thumb" href="/projects/idea-evolve.html" style="display: block;"><img src="/assets/idea-evolve/overview.webp" alt="Idea Evolve dashboard — score progression, generation timeline, and key metrics across a run." width="1400" height="900" fetchpriority="high"></a>
+            <figcaption>Sidon set: 66 → 105 in 7 autonomous generations. Dashboard Overview tab — score progression, generation timeline, and key metrics across a run.</figcaption>
+          </figure>
+          <div class="alinks">
+            <a class="alink alink--ember" href="/projects/idea-evolve.html"><i>→</i>Read more</a>
+            <a class="alink" href="https://github.com/aleksanderborodin/idea_evolve" rel="noopener"><i>↗</i>View on GitHub</a>
           </div>
         </div>
-
-        <div class="hero__photo-wrapper">
-          <div class="hero__photo-ring" aria-hidden="true"></div>
-          <img src="assets/profile.webp" alt="Aleksander Borodin — data scientist and AI agent developer at MIPT" class="hero__photo" width="286" height="286" loading="eager" fetchpriority="high" decoding="async">
-          <span class="hero__photo-label">FPMI MIPT '27</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Diagonal divider -->
-  <div class="landing-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-      <path d="M0,0 L1440,60 L1440,100 L0,100 Z" fill="var(--bg-secondary)" opacity="0.5"/>
-      <path d="M0,30 Q360,80 720,50 T1440,70 L1440,100 L0,100 Z" fill="var(--bg-secondary)"/>
-    </svg>
-  </div>
-
-  <!-- Marquee strip -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__inner">
-      <span class="marquee__item">RESEARCH <span class="dot"></span></span>
-      <span class="marquee__item">OPEN SOURCE <span class="dot"></span></span>
-      <span class="marquee__item">MACHINE LEARNING <span class="dot"></span></span>
-      <span class="marquee__item">NLP <span class="dot"></span></span>
-      <span class="marquee__item">LLM SAFETY <span class="dot"></span></span>
-      <span class="marquee__item">OPTIMIZATION <span class="dot"></span></span>
-      <span class="marquee__item">RESEARCH <span class="dot"></span></span>
-      <span class="marquee__item">OPEN SOURCE <span class="dot"></span></span>
-      <span class="marquee__item">MACHINE LEARNING <span class="dot"></span></span>
-      <span class="marquee__item">NLP <span class="dot"></span></span>
-      <span class="marquee__item">LLM SAFETY <span class="dot"></span></span>
-      <span class="marquee__item">OPTIMIZATION <span class="dot"></span></span>
-    </div>
-  </div>
-
-  <!-- Wave divider -->
-  <div class="divider-wave" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-      <path d="M0,40 Q360,80 720,40 T1440,50 L1440,80 L0,80 Z" fill="var(--bg-secondary)"/>
-    </svg>
-  </div>
-
-  <!-- ====================================================================
-       OPEN SOURCE SECTION
-       ==================================================================== -->
-  <section class="section divider-diagonal" id="contributor" style="background:var(--bg-secondary)">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__label" style="--accent:var(--accent-contributor);color:var(--accent-contributor)" data-i18n="contrib_label">Projects</span>
-        <h2 class="section-header__title" data-i18n="contrib_hero_title">Open Source</h2>
-        <p class="section-header__desc" data-i18n="contrib_hero_desc">Building tools that solve real problems — then sharing them with the world. From multi-agent AI systems to browser extensions that protect users.</p>
       </div>
 
-      <div class="grid-2 reveal">
-        <div class="card stagger">
-          <h3 class="card__title" data-i18n="contrib_proj1_title">Idea Evolve</h3>
-          <p class="card__desc" data-i18n="contrib_proj1_desc">Evolutionary code optimization through collaborative AI agent work sessions. Multiple specialized Claude agents (architects, explorers, researchers) work in parallel to evolve increasingly better solutions to hard optimization problems.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Claude API</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Evolutionary</span></div>
-          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:0.5rem">
-            <a href="projects/idea-evolve.html" class="card__link" style="color:var(--accent-contributor)" aria-label="Read more about Idea Evolve multi-agent framework"><span data-i18n="read_more">Read more</span> <span>&rarr;</span></a>
-            <a href="https://github.com/aleksanderborodin/idea_evolve" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)"><span data-i18n="view_on_github">View on GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
-          </div>
+      <section class="sec">
+        <div class="sec__head">
+          <p class="lab">01 — Open source</p>
+          <a class="tlink" href="https://github.com/aleksanderborodin" rel="noopener">@aleksanderborodin · 12 public repositories ↗</a>
         </div>
-        <div class="card stagger">
-          <h3 class="card__title" data-i18n="contrib_proj2_title">Yoola Explain</h3>
-          <p class="card__desc" data-i18n="contrib_proj2_desc">A browser extension that simplifies Terms of Service by providing AI-generated summaries. Extracts ToS text, sends it to an LLM via OpenRouter, and returns structured summaries with key points, data collection info, and warnings. Multi-language support with caching.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">JavaScript</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">FastAPI</span></div>
-          <a href="https://github.com/aleksanderborodin/yoola_explain" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)">GitHub <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        <div class="sec__body cards">
+          <article class="card">
+            <div class="frame"><span>02</span><b>Browser extension</b></div>
+            <p class="lab">JavaScript · FastAPI</p>
+            <h2 class="ct"><a href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">Yoola Explain</a></h2>
+            <p class="small">A browser extension that simplifies Terms of Service by providing AI-generated summaries. Extracts ToS text, sends it to an LLM via OpenRouter, and returns structured summaries with key points, data collection info, and warnings. Multi-language support with caching.</p>
+            <div class="card__links"><a class="tlink" href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">GitHub ↗</a></div>
+          </article>
+          <article class="card">
+            <div class="frame"><span>03</span><b>LLM safety</b></div>
+            <p class="lab">Python · LLM APIs · Prompt Engineering</p>
+            <h2 class="ct"><a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" rel="noopener">Prefix Injection Jailbreak</a></h2>
+            <p class="small">Prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. Simulating the start of a model's response to a forbidden query tricked Gemini 2.5 Pro and DeepSeek R1 into completing harmful answers — near-100% success on MaliciousInstruct vs. near-zero baseline.</p>
+            <div class="card__links">
+              <a class="tlink" href="/blog/prefix-injection-jailbreak.html">Read the post →</a>
+              <a class="tlink" href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="frame"><span>12</span><b>Repositories</b></div>
+            <p class="lab">GitHub Profile</p>
+            <h2 class="ct"><a href="https://github.com/aleksanderborodin" rel="noopener">@aleksanderborodin</a></h2>
+            <p class="small">12 public repositories</p>
+            <div class="card__links"><a class="tlink" href="https://github.com/aleksanderborodin" rel="noopener">View on GitHub ↗</a></div>
+          </article>
         </div>
-        <div class="card stagger" style="grid-column:1 / -1">
-          <h3 class="card__title" data-i18n="contrib_proj3_title">Prefix Injection Jailbreak</h3>
-          <p class="card__desc" data-i18n="contrib_proj3_desc">Prefix attacks on LLMs inspired by BBC's Choice Blindness experiments. Simulating the start of a model's response to a forbidden query tricked Gemini 2.5 Pro and DeepSeek R1 into completing harmful answers — near-100% success on MaliciousInstruct vs. near-zero baseline.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">LLM APIs</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Prompt Engineering</span></div>
-          <a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor);margin-top:0.5rem"><span data-i18n="view_on_github">View on GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
-        </div>
-      </div>
+      </section>
 
-      <!-- GitHub profile block -->
-      <div style="margin-top:var(--space-lg);background:var(--bg-dark);border-radius:var(--radius-xl);padding:var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;position:relative;overflow:hidden" class="reveal">
-        <div style="position:absolute;top:-50%;right:-10%;width:60%;height:200%;background:linear-gradient(135deg,transparent 40%,rgba(13,148,99,0.08) 100%);transform:rotate(-15deg);pointer-events:none"></div>
-        <div style="position:relative;z-index:1">
-          <span style="font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-contributor)" data-i18n="contrib_github_label">GitHub Profile</span>
-          <h3 style="font-family:var(--font-heading);font-size:var(--step-2);font-weight:700;color:var(--text-on-dark);margin-top:0.25rem">@aleksanderborodin</h3>
-          <p style="font-size:0.95rem;color:var(--text-muted)" data-i18n="contrib_github_stats">12 public repositories</p>
+      <section class="sec">
+        <div class="sec__head">
+          <p class="lab">02 — Writing</p>
+          <a class="tlink" href="/blog/">All writing →</a>
         </div>
-        <div style="position:relative;z-index:1">
-          <a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="btn" style="border-color:var(--accent-contributor);color:var(--accent-contributor)">
-            <span data-i18n="contrib_github_cta">View on GitHub</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       PROFESSIONAL SECTION
-       ==================================================================== -->
-  <section class="section" id="professional">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__label" style="--accent:var(--accent-professional);color:var(--accent-professional)" data-i18n="prof_label">Experience</span>
-        <h2 class="section-header__title" data-i18n="prof_hero_title">ML Engineering & AI Development</h2>
-        <p class="section-header__desc" data-i18n="prof_hero_desc">Delivering measurable business impact through AI, optimization, and data engineering. Building systems that generate real value.</p>
-      </div>
-
-      <!-- Job card -->
-      <div class="card reveal" style="max-width:900px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
-          <h3 class="card__title" style="margin-bottom:0" data-i18n="prof_job1_title">Model & Algorithm Developer</h3>
-          <span class="card__tag" style="background:var(--accent-professional-soft);color:var(--accent-professional)" data-i18n="prof_job1_period">Sep 2024 — Feb 2025</span>
-        </div>
-        <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem" data-i18n="prof_job1_company">Retail Bank (Client Project)</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem">
-          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> <span data-i18n="prof_job1_item1">Developed and simulated a cash collection optimization algorithm; analysis of historical data projected a 20M RUB annual profit increase.</span></li>
-          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> <span data-i18n="prof_job1_item2">Engineered a web scraping and analysis system to extract key data from the central bank's website that was unavailable via API.</span></li>
-          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> <span data-i18n="prof_job1_item3">Built an internal RAG system to support business operations with document-based Q&A.</span></li>
-        </ul>
-        <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);margin-top:1rem" data-i18n="prof_job1_stack">Python · NumPy · Pandas · RAG · Web Scraping</p>
-      </div>
-
-      <!-- Modelgate -->
-      <div class="card reveal" style="max-width:900px;margin-top:var(--space-md)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
-          <h3 class="card__title" style="margin-bottom:0" data-i18n="prof_job2_title">Product / AI Engineer</h3>
-          <span class="card__tag" style="background:var(--accent-professional-soft);color:var(--accent-professional)" data-i18n="prof_job2_period">Jan — May 2026</span>
-        </div>
-        <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem">
-          <a href="https://modelgate.ru" target="_blank" rel="noopener" style="color:var(--accent-professional);font-weight:600" data-i18n="prof_job2_company">ModelGate.ru</a>
-        </p>
-        <p class="card__desc" data-i18n="prof_job2_desc">LLM API gateway and proxy service. Built core platform functionality including API routing, the public website, and domain setup; worked extensively with provider APIs and integrated smart-router functionality.</p>
-        <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);margin-top:1rem" data-i18n="prof_job2_stack">Python · LLM APIs · Smart Routing · Product Design</p>
-      </div>
-
-      <!-- Skills -->
-      <div class="section-header reveal" style="margin-top:var(--space-xl)">
-        <span class="section-header__label" style="--accent:var(--accent-professional);color:var(--accent-professional)" data-i18n="prof_skills_label">Technical Skills</span>
-      </div>
-      <div class="grid-2 reveal">
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_programming">Programming</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_programming_val">Python (advanced) · C++ (intermediate) · C · Assembler</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_data">Data / ML</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_data_val">PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · ClearML · Excel</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_nlp">NLP / LLM</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_nlp_val">BM25 · Embeddings · RAG · LLM APIs · Evaluation · Prompt Engineering</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_backend">Backend</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_backend_val">FastAPI · LangChain · LangGraph</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem" data-i18n="prof_skill_systems">Systems</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6" data-i18n="prof_skill_systems_val">Linux (home server admin, workstation usage)</div>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div style="margin-top:var(--space-xl);background:var(--bg-dark);border-radius:var(--radius-xl);padding:var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;position:relative;overflow:hidden" class="reveal">
-        <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(217,119,6,0.03) 40px,rgba(217,119,6,0.03) 80px);pointer-events:none"></div>
-        <div style="position:relative;z-index:1">
-          <span style="font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-professional)" data-i18n="prof_contact_label">Get in Touch</span>
-          <h3 style="font-size:var(--step-2);color:var(--text-on-dark);margin-top:0.25rem" data-i18n="prof_contact_desc">Interested in collaboration or have a project in mind? Let's talk.</h3>
-        </div>
-        <div style="display:flex;gap:var(--space-sm);position:relative;z-index:1;flex-wrap:wrap">
-          <a href="assets/CV_Borodin_en.pdf" download="CV_Borodin_en.pdf" class="btn" style="border-color:var(--accent-professional);color:var(--accent-professional)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span data-i18n="prof_download_cv">Download CV</span>
-          </a>
-          <a href="mailto:apdorodin765@gmail.com" class="btn" style="border-color:var(--text-muted);color:var(--text-on-dark)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span data-i18n="prof_email">Email me</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <span class="footer__copy">&copy; 2026 <span data-i18n="footer_copy">Aleksander Borodin</span></span>
-        <ul class="footer__links">
-          <li><a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="footer__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            GitHub
+        <ul class="rows sec__body">
+          <li><a class="row" href="/blog/top-llm-benchmarks.html">
+            <span class="row__d">Aug&nbsp;11, 2026</span>
+            <span><span class="row__t">My top <em>benchmarks</em>.</span><span class="row__x">Artificial Analysis, DeepSWE, and Arena answer different questions. Here is where each benchmark collection is genuinely useful.</span></span>
+            <span class="row__m">3 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
           </a></li>
-          <li><a href="mailto:apdorodin765@gmail.com" class="footer__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Email
+          <li><a class="row" href="/blog/cli-vs-mcp.html">
+            <span class="row__d">Mar&nbsp;22, 2026</span>
+            <span><span class="row__t">Agents don't need MCP. They need <em>CLI</em>.</span><span class="row__x">An agent with a shell can use any CLI. MCP was a detour. Why plain command-line tools are the simpler, better default for agentic systems.</span></span>
+            <span class="row__m">2 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
           </a></li>
-          <li><a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="footer__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
-            Telegram
+          <li><a class="row" href="/blog/pareto-llm-pricing.html">
+            <span class="row__d">Jan&nbsp;26, 2026</span>
+            <span><span class="row__t">Most LLMs are <em>strictly dominated</em>.</span><span class="row__x">Plotting intelligence vs price for hundreds of LLMs shows most are strictly dominated. Here is the Pareto frontier and the four models that matter.</span></span>
+            <span class="row__m">3 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="/blog/llms-trained-to-guess.html">
+            <span class="row__d">Sep&nbsp;8, 2025</span>
+            <span><span class="row__t">LLMs are trained to <em>guess</em>.</span><span class="row__x">OpenAI's hallucination research in one sentence: LLMs never say "I don't know" because post-training never rewards it. And that's fixable cheaply.</span></span>
+            <span class="row__m">3 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="/blog/prefix-injection-jailbreak.html">
+            <span class="row__d">Aug&nbsp;14, 2025</span>
+            <span><span class="row__t">A psychology trick beats <em>LLM jailbreak defenses</em>.</span><span class="row__x">A 2008 BBC Choice Blindness setup, reshaped as a prefix-injection jailbreak against top LLMs. Tested on 20 MaliciousInstruct prompts.</span></span>
+            <span class="row__m">2 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="/blog/llms-not-just-statistics.html">
+            <span class="row__d">Aug&nbsp;10, 2025</span>
+            <span><span class="row__t">The <em>"LLMs are just statistics"</em> argument is stuck in 2022.</span><span class="row__x">A timeline of architectural and training-recipe changes since 2020 that pushed LLMs past next-token prediction.</span></span>
+            <span class="row__m">4 min · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
           </a></li>
         </ul>
-        <span class="footer__copy" data-i18n="footer_built">Built with curiosity and Claude Code</span>
-      </div>
-    </div>
-  </footer>
+      </section>
+    </main>
 
-  <!-- Scripts -->
-  <script src="js/common.js" defer></script>
-  <script src="js/landing.js" defer></script>
+    <footer class="foot">
+      <p class="lab">© 2026 Aleksander Borodin</p>
+      <ul class="lab">
+        <li><a href="https://github.com/aleksanderborodin" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://t.me/aleksanderbor" rel="noopener">Telegram ↗</a></li>
+        <li><a href="mailto:apdorodin765@gmail.com">Email →</a></li>
+      </ul>
+    </footer>
+  </div>
 </body>
 </html>

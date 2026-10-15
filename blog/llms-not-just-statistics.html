@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#f3efe7">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
   <title>The "LLMs are just statistics" argument is stuck in 2022 — Aleksander Borodin</title>
   <meta name="description" content="A timeline of architectural and training-recipe changes since 2020 that pushed LLMs past next-token prediction.">
@@ -65,42 +65,36 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Epilogue:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/kiln.css">
 </head>
-<body class="page-blog">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="nav">
+      <a class="nav__brand" href="/">Aleksander Borodin</a>
+      <ul class="nav__links">
+        <li><a href="/">Projects</a></li>
+        <li><a href="/blog/" aria-current="page">Writing</a></li>
+        <li><a href="/about.html">About</a></li>
+      </ul>
+      <div class="lang"><span aria-current="true">En</span><span class="ink-muted">/</span><a href="/ru/blog/llms-not-just-statistics.html" hreflang="ru" lang="ru">Ru</a></div>
+    </header>
 
-  <nav class="nav">
-    <a href="/" class="nav__logo"><span class="nav__logo-dot"></span><span>AB</span></a>
-    <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    <ul class="nav__links">
-      <li><a href="/#contributor" class="nav__link">Open Source</a></li>
-      <li><a href="/#professional" class="nav__link">Commercial</a></li>
-      <li><a href="/blog/" class="nav__link" style="color: var(--accent-writer);">Writing</a></li>
-      <li>
-        <div class="lang-toggle">
-          <a class="lang-toggle__btn active" href="/blog/llms-not-just-statistics.html">EN</a>
-          <a class="lang-toggle__btn" href="/ru/blog/llms-not-just-statistics.html">RU</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="article-wrap">
-    <article class="article">
-
-      <div class="article__eyebrow"><a href="/blog/">← Writing</a></div>
-
-      <h1 class="article__title">The <em>"LLMs are just statistics"</em> argument is stuck in 2022.</h1>
-
-      <div class="article__meta">
-        <span><strong>2025-08-10</strong></span>
-        <span>4 min read</span>
-        <a class="lang-link" href="/ru/blog/llms-not-just-statistics.html">Прочитать по-русски →</a>
-      </div>
-
-      <div class="prose">
+    <main id="main">
+      <article class="article g">
+        <header class="article__head">
+          <p class="lab"><a href="/blog/">Writing</a> · Aug&nbsp;10, 2025</p>
+          <h1 class="pt">The <em>"LLMs are just statistics"</em> argument is stuck in 2022.</h1>
+        </header>
+        <aside class="article__notes">
+          <dl>
+            <div><dt class="lab">Published</dt><dd><time datetime="2025-08-10">Aug&nbsp;10, 2025</time></dd></div>
+            <div><dt class="lab">Reading time</dt><dd>4 min read</dd></div>
+            <div><dt class="lab">Language</dt><dd><a class="tlink" href="/ru/blog/llms-not-just-statistics.html" hreflang="ru">Прочитать по-русски →</a></dd></div>
+          </dl>
+        </aside>
+        <div class="article__body prose">
 
         <p>There's a claim that LLMs are just advanced systems predicting the most likely next token given average text. I don't buy it.</p>
 
@@ -120,33 +114,28 @@
 
         <p>If the "LLMs are just statistics" argument doesn't hold, it brings me back to this channel's main question: what's stopping them from writing texts with answers no human can give, or asking questions no human would think to ask?</p>
 
-      </div>
+        </div>
+        <nav class="article__body postnav" aria-label="Post navigation">
+          <a aria-disabled="true">
+            <p class="lab">← Earlier</p>
+            <p class="ct">(nothing older yet)</p>
+          </a>
+          <a href="prefix-injection-jailbreak.html">
+            <p class="lab">Later →</p>
+            <p class="ct">A psychology trick beats LLM jailbreak defenses</p>
+          </a>
+        </nav>
+      </article>
+    </main>
 
-      <nav class="post-nav" aria-label="Post navigation">
-        <a class="post-nav__link post-nav__link--prev" href="#" style="pointer-events: none; opacity: 0.4;">
-          <span class="post-nav__label">← Earlier</span>
-          <span class="post-nav__title">(nothing older yet)</span>
-        </a>
-        <a class="post-nav__link post-nav__link--next" href="prefix-injection-jailbreak.html">
-          <span class="post-nav__label">Later →</span>
-          <span class="post-nav__title">A psychology trick beats LLM jailbreak defenses</span>
-        </a>
-      </nav>
-
-    </article>
-  </div>
-
-  <div class="blog-container">
-    <footer class="blog-footer">
-      <div><a href="/">← aleksanderborodin.github.io</a></div>
-      <div style="display: flex; gap: 1.25rem;">
-        <a href="https://github.com/aleksanderborodin">GitHub</a>
-        <a href="https://t.me/less_arrogant">Telegram</a>
-        <a href="mailto:apdorodin765@gmail.com">Email</a>
-      </div>
+    <footer class="foot">
+      <p class="lab">© 2026 Aleksander Borodin</p>
+      <ul class="lab">
+        <li><a href="https://github.com/aleksanderborodin" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://t.me/less_arrogant" rel="noopener">Telegram ↗</a></li>
+        <li><a href="mailto:apdorodin765@gmail.com">Email →</a></li>
+      </ul>
     </footer>
   </div>
-
-  <script src="../js/common.js"></script>
 </body>
 </html>

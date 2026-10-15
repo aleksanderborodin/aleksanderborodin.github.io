@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#f3efe7">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
   <title>Александр Бородин — Data Science / AI-агенты</title>
   <meta name="description" content="Александр Бородин — специалист по Data Science и разработчик AI-агентов в МФТИ, исследователь безопасности LLM и автор open-source AI-инструментов.">
@@ -17,9 +17,6 @@
   <link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/">
   <link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/">
   <link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/">
-
-  <!-- Preload hero image for LCP -->
-  <link rel="preload" as="image" href="../assets/profile.webp" type="image/webp" fetchpriority="high">
 
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
@@ -118,285 +115,136 @@
   }
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/landing.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/kiln.css">
 </head>
-<body class="grain">
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <div class="wrap">
+    <header class="nav">
+      <a class="nav__brand" href="/ru/">Александр Бородин</a>
+      <ul class="nav__links">
+        <li><a href="/ru/" aria-current="page">Проекты</a></li>
+        <li><a href="/ru/blog/">Блог</a></li>
+        <li><a href="/ru/about.html">Обо мне</a></li>
+      </ul>
+      <div class="lang"><a href="/" hreflang="en" lang="en">En</a><span class="ink-muted">/</span><span aria-current="true">Ru</span></div>
+    </header>
 
-  <!-- Floating geometric shapes -->
-  <div class="geo-shapes" aria-hidden="true">
-    <div class="geo-shape geo-shape--1"></div>
-    <div class="geo-shape geo-shape--2"></div>
-    <div class="geo-shape geo-shape--3"></div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav">
-    <a href="#home" class="nav__logo">
-      <span class="nav__logo-dot"></span>
-      <span>АБ</span>
-    </a>
-
-    <button class="nav__hamburger" aria-label="Меню">
-      <span></span><span></span><span></span>
-    </button>
-
-    <ul class="nav__links">
-      <li><a href="#contributor" class="nav__link">Open Source</a></li>
-      <li><a href="#professional" class="nav__link">Коммерция</a></li>
-      <li><a href="/ru/blog/" class="nav__link">Блог</a></li>
-      <li>
-        <a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="nav__link nav__telegram" aria-label="Telegram @aleksanderbor">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
-          <span>Telegram</span>
-        </a>
-      </li>
-      <li>
-        <div class="lang-toggle">
-          <a class="lang-toggle__btn" href="/">EN</a>
-          <a class="lang-toggle__btn active" href="/ru/">RU</a>
+    <main id="main">
+      <div class="g page-head">
+        <div class="c1-3">
+          <p class="lab">Проекты и заметки</p>
+          <p class="ct">Делаю инструменты, которые решают реальные задачи, — и выкладываю их в открытый доступ.</p>
+          <p class="lab" style="margin-top: 36px;">Темы</p>
+          <p class="small">Исследования · Open source · Machine learning · NLP · Безопасность LLM · Оптимизация</p>
+          <p class="lab" style="margin-top: 36px;">Обо мне</p>
+          <p class="small"><a href="/ru/about.html">Опыт, CV и контакты →</a></p>
         </div>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- ====== HERO ====== -->
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero__content">
-        <div class="hero__text">
-          <p class="hero__greeting">Привет, я</p>
-          <h1 class="hero__name">Александр Бородин</h1>
-          <p class="hero__role">Data Science / AI-агенты</p>
-          <p class="hero__intro">Студент МФТИ, объединяющий математику, машинное обучение и неуёмное любопытство к тому, как языковые модели думают — и как их сломать.</p>
-
-          <div class="hero__socials">
-            <a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="hero__social-link" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </a>
-            <a href="mailto:apdorodin765@gmail.com" class="hero__social-link" aria-label="Email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            </a>
-            <a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="hero__social-link" aria-label="Telegram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
-            </a>
+        <div class="c5-12">
+          <p class="lab">Главный проект · Open source</p>
+          <h1 class="pt"><a href="/ru/projects/idea-evolve.html" style="text-decoration: none;">Idea Evolve</a></h1>
+          <p class="lede">Эволюционная оптимизация кода через совместные рабочие сессии ИИ-агентов. Специализированные агенты Claude (архитекторы, исследователи) работают параллельно, эволюционируя решения сложных задач оптимизации.</p>
+          <figure class="fig">
+            <a class="thumb" href="/ru/projects/idea-evolve.html" style="display: block;"><img src="/assets/idea-evolve/overview.webp" alt="Дашборд Idea Evolve — прогресс скоров, таймлайн поколений и ключевые метрики за прогон." width="1400" height="900" fetchpriority="high"></a>
+            <figcaption>Множество Сидона: 66 → 105 за 7 автономных поколений. Вкладка Overview в дашборде — прогресс скоров, таймлайн поколений и ключевые метрики за прогон.</figcaption>
+          </figure>
+          <div class="alinks">
+            <a class="alink alink--ember" href="/ru/projects/idea-evolve.html"><i>→</i>Подробнее</a>
+            <a class="alink" href="https://github.com/aleksanderborodin/idea_evolve" rel="noopener"><i>↗</i>Смотреть на GitHub</a>
           </div>
         </div>
-
-        <div class="hero__photo-wrapper">
-          <div class="hero__photo-ring" aria-hidden="true"></div>
-          <img src="../assets/profile.webp" alt="Александр Бородин — специалист по Data Science и разработчик AI-агентов в МФТИ" class="hero__photo" width="286" height="286" loading="eager" fetchpriority="high" decoding="async">
-          <span class="hero__photo-label">ФПМИ МФТИ '27</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Diagonal divider -->
-  <div class="landing-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-      <path d="M0,0 L1440,60 L1440,100 L0,100 Z" fill="var(--bg-secondary)" opacity="0.5"/>
-      <path d="M0,30 Q360,80 720,50 T1440,70 L1440,100 L0,100 Z" fill="var(--bg-secondary)"/>
-    </svg>
-  </div>
-
-  <!-- Marquee strip -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__inner">
-      <span class="marquee__item">ИССЛЕДОВАНИЯ <span class="dot"></span></span>
-      <span class="marquee__item">OPEN SOURCE <span class="dot"></span></span>
-      <span class="marquee__item">MACHINE LEARNING <span class="dot"></span></span>
-      <span class="marquee__item">NLP <span class="dot"></span></span>
-      <span class="marquee__item">БЕЗОПАСНОСТЬ LLM <span class="dot"></span></span>
-      <span class="marquee__item">ОПТИМИЗАЦИЯ <span class="dot"></span></span>
-      <span class="marquee__item">ИССЛЕДОВАНИЯ <span class="dot"></span></span>
-      <span class="marquee__item">OPEN SOURCE <span class="dot"></span></span>
-      <span class="marquee__item">MACHINE LEARNING <span class="dot"></span></span>
-      <span class="marquee__item">NLP <span class="dot"></span></span>
-      <span class="marquee__item">БЕЗОПАСНОСТЬ LLM <span class="dot"></span></span>
-      <span class="marquee__item">ОПТИМИЗАЦИЯ <span class="dot"></span></span>
-    </div>
-  </div>
-
-  <!-- Wave divider -->
-  <div class="divider-wave" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-      <path d="M0,40 Q360,80 720,40 T1440,50 L1440,80 L0,80 Z" fill="var(--bg-secondary)"/>
-    </svg>
-  </div>
-
-  <!-- ====================================================================
-       OPEN SOURCE SECTION
-       ==================================================================== -->
-  <section class="section divider-diagonal" id="contributor" style="background:var(--bg-secondary)">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__label" style="--accent:var(--accent-contributor);color:var(--accent-contributor)">Проекты</span>
-        <h2 class="section-header__title">Open Source</h2>
-        <p class="section-header__desc">Мои открытые проекты.</p>
       </div>
 
-      <div class="grid-2 reveal">
-        <div class="card stagger">
-          <h3 class="card__title">Idea Evolve</h3>
-          <p class="card__desc">Эволюционная оптимизация кода через совместные рабочие сессии ИИ-агентов. Специализированные агенты Claude (архитекторы, исследователи) работают параллельно, эволюционируя решения сложных задач оптимизации.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Claude API</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Evolutionary</span></div>
-          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:0.5rem">
-            <a href="projects/idea-evolve.html" class="card__link" style="color:var(--accent-contributor)" aria-label="Подробнее о мульти-агентном фреймворке Idea Evolve"><span>Подробнее</span> <span>&rarr;</span></a>
-            <a href="https://github.com/aleksanderborodin/idea_evolve" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)"><span>Смотреть на GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
-          </div>
+      <section class="sec">
+        <div class="sec__head">
+          <p class="lab">01 — Open source</p>
+          <a class="tlink" href="https://github.com/aleksanderborodin" rel="noopener">@aleksanderborodin · 12 публичных репозиториев ↗</a>
         </div>
-        <div class="card stagger">
-          <h3 class="card__title">Yoola Explain</h3>
-          <p class="card__desc">Браузерное расширение, упрощающее пользовательские соглашения с помощью ИИ-генерируемых резюме. Извлекает текст ToS, отправляет в LLM через OpenRouter и возвращает структурированные сводки с ключевыми пунктами и предупреждениями. Мультиязычность и кэширование.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">JavaScript</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">FastAPI</span></div>
-          <a href="https://github.com/aleksanderborodin/yoola_explain" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor)">GitHub <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+        <div class="sec__body cards">
+          <article class="card">
+            <div class="frame"><span>02</span><b>Браузерное расширение</b></div>
+            <p class="lab">JavaScript · FastAPI</p>
+            <h2 class="ct"><a href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">Yoola Explain</a></h2>
+            <p class="small">Браузерное расширение, упрощающее пользовательские соглашения с помощью ИИ-генерируемых резюме. Извлекает текст ToS, отправляет в LLM через OpenRouter и возвращает структурированные сводки с ключевыми пунктами и предупреждениями. Мультиязычность и кэширование.</p>
+            <div class="card__links"><a class="tlink" href="https://github.com/aleksanderborodin/yoola_explain" rel="noopener">GitHub ↗</a></div>
+          </article>
+          <article class="card">
+            <div class="frame"><span>03</span><b>Безопасность LLM</b></div>
+            <p class="lab">Python · LLM APIs · Prompt Engineering</p>
+            <h2 class="ct"><a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" rel="noopener">Prefix Injection Jailbreak</a></h2>
+            <p class="small">Префиксные атаки на LLM, вдохновлённые экспериментами BBC по Choice Blindness. Имитация начала ответа модели на запрещённый запрос заставила Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.</p>
+            <div class="card__links">
+              <a class="tlink" href="/ru/blog/prefix-injection-jailbreak.html">Читать запись →</a>
+              <a class="tlink" href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="frame"><span>12</span><b>Репозитории</b></div>
+            <p class="lab">Профиль GitHub</p>
+            <h2 class="ct"><a href="https://github.com/aleksanderborodin" rel="noopener">@aleksanderborodin</a></h2>
+            <p class="small">12 публичных репозиториев</p>
+            <div class="card__links"><a class="tlink" href="https://github.com/aleksanderborodin" rel="noopener">Смотреть на GitHub ↗</a></div>
+          </article>
         </div>
-        <div class="card stagger" style="grid-column:1 / -1">
-          <h3 class="card__title">Prefix Injection Jailbreak</h3>
-          <p class="card__desc">Префиксные атаки на LLM, вдохновлённые экспериментами BBC по Choice Blindness. Имитация начала ответа модели на запрещённый запрос заставила Gemini 2.5 Pro и DeepSeek R1 завершать вредоносные ответы — почти 100% успех на MaliciousInstruct против нулевого базового уровня.</p>
-          <div style="margin-top:0.75rem"><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Python</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">LLM APIs</span><span class="card__tag" style="background:var(--accent-contributor-soft);color:var(--accent-contributor)">Prompt Engineering</span></div>
-          <a href="https://github.com/aleksanderborodin/prefix_injection_jailbreak" target="_blank" rel="noopener" class="card__link" style="color:var(--accent-contributor);margin-top:0.5rem"><span>Смотреть на GitHub</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
-        </div>
-      </div>
+      </section>
 
-      <!-- GitHub profile block -->
-      <div style="margin-top:var(--space-lg);background:var(--bg-dark);border-radius:var(--radius-xl);padding:var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;position:relative;overflow:hidden" class="reveal">
-        <div style="position:absolute;top:-50%;right:-10%;width:60%;height:200%;background:linear-gradient(135deg,transparent 40%,rgba(13,148,99,0.08) 100%);transform:rotate(-15deg);pointer-events:none"></div>
-        <div style="position:relative;z-index:1">
-          <span style="font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-contributor)">Профиль GitHub</span>
-          <h3 style="font-family:var(--font-heading);font-size:var(--step-2);font-weight:700;color:var(--text-on-dark);margin-top:0.25rem">@aleksanderborodin</h3>
-          <p style="font-size:0.95rem;color:var(--text-muted)">12 публичных репозиториев</p>
+      <section class="sec">
+        <div class="sec__head">
+          <p class="lab">02 — Блог</p>
+          <a class="tlink" href="/ru/blog/">Все записи →</a>
         </div>
-        <div style="position:relative;z-index:1">
-          <a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="btn" style="border-color:var(--accent-contributor);color:var(--accent-contributor)">
-            <span>Открыть GitHub</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       PROFESSIONAL SECTION
-       ==================================================================== -->
-  <section class="section" id="professional">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__label" style="--accent:var(--accent-professional);color:var(--accent-professional)">Опыт работы</span>
-        <h2 class="section-header__title">Профессиональный опыт</h2>
-        <p class="section-header__desc">Чем занимался и с какими результатами.</p>
-      </div>
-
-      <!-- Job card -->
-      <div class="card reveal" style="max-width:900px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
-          <h3 class="card__title" style="margin-bottom:0">Разработчик моделей и алгоритмов</h3>
-          <span class="card__tag" style="background:var(--accent-professional-soft);color:var(--accent-professional)">сентябрь 2024 — февраль 2025</span>
-        </div>
-        <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem">Розничный банк (клиентский проект)</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem">
-          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> Разработал и смоделировал алгоритм оптимизации инкассации; анализ исторических данных спрогнозировал увеличение годовой прибыли на 20 млн руб.</li>
-          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> Создал систему веб-скрапинга и анализа для извлечения ключевых данных с сайта ЦБ РФ, недоступных через API.</li>
-          <li style="font-size:0.95rem;color:var(--text-secondary);padding-left:1.2rem;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:6px;color:var(--accent-professional);font-size:0.7rem">&#9670;</span> Построил внутреннюю RAG-систему для поддержки бизнес-операций с документо-ориентированным Q&amp;A.</li>
-        </ul>
-        <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);margin-top:1rem">Python · NumPy · Pandas · RAG · Web Scraping</p>
-      </div>
-
-      <!-- Modelgate -->
-      <div class="card reveal" style="max-width:900px;margin-top:var(--space-md)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
-          <h3 class="card__title" style="margin-bottom:0">Продуктовый / AI-инженер</h3>
-          <span class="card__tag" style="background:var(--accent-professional-soft);color:var(--accent-professional)">январь — май 2026</span>
-        </div>
-        <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem">
-          <a href="https://modelgate.ru" target="_blank" rel="noopener" style="color:var(--accent-professional);font-weight:600">ModelGate.ru</a>
-        </p>
-        <p class="card__desc">API-шлюз и прокси-сервис для LLM. Построил core-функциональность платформы: API routing, публичный сайт и настройку домена; много работал с API провайдеров и интегрировал smart-router.</p>
-        <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);margin-top:1rem">Python · LLM API · Smart Routing · Product Design</p>
-      </div>
-
-      <!-- Skills -->
-      <div class="section-header reveal" style="margin-top:var(--space-xl)">
-        <span class="section-header__label" style="--accent:var(--accent-professional);color:var(--accent-professional)">Технические навыки</span>
-      </div>
-      <div class="grid-2 reveal">
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem">Программирование</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6">Python (продвинутый) · C++ (средний) · C · Assembler</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem">Data / ML</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6">PyTorch · NumPy · Pandas · PostgreSQL · Matplotlib · ClearML · Excel</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem">NLP / LLM</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6">BM25 · Эмбеддинги · RAG · LLM API · Оценка · Prompt Engineering</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem">Backend</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6">FastAPI · LangChain · LangGraph</div>
-        </div>
-        <div class="card stagger">
-          <div style="font-family:var(--font-heading);font-size:0.9rem;font-weight:700;color:var(--accent-professional);margin-bottom:0.4rem">Системы</div>
-          <div style="font-size:0.92rem;color:var(--text-secondary);line-height:1.6">Linux (администрирование домашнего сервера, рабочая станция)</div>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div style="margin-top:var(--space-xl);background:var(--bg-dark);border-radius:var(--radius-xl);padding:var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;position:relative;overflow:hidden" class="reveal">
-        <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(217,119,6,0.03) 40px,rgba(217,119,6,0.03) 80px);pointer-events:none"></div>
-        <div style="position:relative;z-index:1">
-          <span style="font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-professional)">Связаться</span>
-          <h3 style="font-size:var(--step-2);color:var(--text-on-dark);margin-top:0.25rem">Интересует сотрудничество или есть проект? Давайте обсудим.</h3>
-        </div>
-        <div style="display:flex;gap:var(--space-sm);position:relative;z-index:1;flex-wrap:wrap">
-          <a href="../assets/CV_Borodin_ru.pdf" download="CV_Borodin_ru.pdf" class="btn" style="border-color:var(--accent-professional);color:var(--accent-professional)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Скачать CV</span>
-          </a>
-          <a href="mailto:apdorodin765@gmail.com" class="btn" style="border-color:var(--text-muted);color:var(--text-on-dark)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span>Написать письмо</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <span class="footer__copy">&copy; 2026 Александр Бородин</span>
-        <ul class="footer__links">
-          <li><a href="https://github.com/aleksanderborodin" target="_blank" rel="noopener" class="footer__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            GitHub
+        <ul class="rows sec__body">
+          <li><a class="row" href="/ru/blog/top-llm-benchmarks.html">
+            <span class="row__d">11&nbsp;авг 2026</span>
+            <span><span class="row__t">Мой топ <em>бэнчмарков</em>.</span><span class="row__x">Artificial Analysis, DeepSWE и Arena отвечают на разные вопросы. Вот где каждая коллекция бенчмарков реально полезна.</span></span>
+            <span class="row__m">3 мин · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
           </a></li>
-          <li><a href="mailto:apdorodin765@gmail.com" class="footer__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Email
+          <li><a class="row" href="/ru/blog/cli-vs-mcp.html">
+            <span class="row__d">22&nbsp;мар 2026</span>
+            <span><span class="row__t">CLI против <em>MCP</em>.</span><span class="row__x">Агент с доступом к shell умеет пользоваться любым CLI ничуть не хуже MCP. Почему классический command-line — более простой и лучший дефолт для агентных систем.</span></span>
+            <span class="row__m">2 мин · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
           </a></li>
-          <li><a href="https://t.me/aleksanderbor" target="_blank" rel="noopener" class="footer__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 4.4 2.4 10.7c-.6.2-.6 1.1.1 1.3l4.9 1.6 1.9 6c.1.4.6.6.9.3l2.8-2.3 5.5 4c.4.3 1 .1 1.1-.4L22.3 5.5c.2-.7-.4-1.3-1.1-1.1z"/></svg>
-            Telegram
+          <li><a class="row" href="/ru/blog/pareto-llm-pricing.html">
+            <span class="row__d">26&nbsp;янв 2026</span>
+            <span><span class="row__t">Какие LLM имеют <em>смысл</em>.</span><span class="row__x">График интеллект × цена для сотен LLM показывает: большинство моделей бессмысленны. Вот Парето-фронт и четыре модели, которые стоит выбрать.</span></span>
+            <span class="row__m">3 мин · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="/ru/blog/llms-trained-to-guess.html">
+            <span class="row__d">8&nbsp;сен 2025</span>
+            <span><span class="row__t">Угадайка.</span><span class="row__x">Исследование OpenAI о галлюцинациях в одну фразу: LLM учат играть в угадайку. И это дёшево чинится.</span></span>
+            <span class="row__m">3 мин · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="/ru/blog/prefix-injection-jailbreak.html">
+            <span class="row__d">14&nbsp;авг 2025</span>
+            <span><span class="row__t">Префиксная атака.</span><span class="row__x">Эксперимент BBC про Choice Blindness, перенесённый в джейлбрейк LLM через префикс-инъекцию. Тест на 20 запросах из MalitiousInstruct.</span></span>
+            <span class="row__m">2 мин · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
+          </a></li>
+          <li><a class="row" href="/ru/blog/llms-not-just-statistics.html">
+            <span class="row__d">10&nbsp;авг 2025</span>
+            <span><span class="row__t">Не просто статистика.</span><span class="row__x">Таймлайн архитектурных и тренировочных изменений с 2020-го, который вывел LLM за рамки предсказания следующего токена.</span></span>
+            <span class="row__m">4 мин · EN/RU</span>
+            <span class="row__a" aria-hidden="true">→</span>
           </a></li>
         </ul>
-        <span class="footer__copy">Создано с любопытством и Claude Code</span>
-      </div>
-    </div>
-  </footer>
+      </section>
+    </main>
 
-  <!-- Scripts -->
-  <script src="../js/common.js" defer></script>
-  <script src="../js/landing.js" defer></script>
+    <footer class="foot">
+      <p class="lab">© 2026 Александр Бородин</p>
+      <ul class="lab">
+        <li><a href="https://github.com/aleksanderborodin" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://t.me/aleksanderbor" rel="noopener">Telegram ↗</a></li>
+        <li><a href="mailto:apdorodin765@gmail.com">Почта →</a></li>
+      </ul>
+    </footer>
+  </div>
 </body>
 </html>

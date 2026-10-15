@@ -13,6 +13,27 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/"/>
   </url>
 
+  <!-- About (EN + RU) -->
+  <url>
+    <loc>https://aleksanderborodin.github.io/about.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/about.html"/>
+  </url>
+
+  <url>
+    <loc>https://aleksanderborodin.github.io/ru/about.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksanderborodin.github.io/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksanderborodin.github.io/ru/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aleksanderborodin.github.io/about.html"/>
+  </url>
+
   <!-- RU home -->
   <url>
     <loc>https://aleksanderborodin.github.io/ru/</loc>
