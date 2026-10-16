@@ -1,11 +1,12 @@
 """Kiln diagrams for the project pages (EN + RU), built with Kiln/tools/kiln2.py.
+Kiln lives outside the repo: set KILN to its folder (default ~/Desktop/Kiln/Kiln).
 
 Usage: python3 scripts/project_diagrams.py OUT_DIR
 Writes OUT_DIR/<name>-<lang>.html; render each at 1200px wide (see render step in the README of Kiln).
 """
 import os, sys
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "Kiln", "tools"))
+KILN = os.environ.get("KILN", os.path.expanduser("~/Desktop/Kiln/Kiln"))
+sys.path.insert(0, os.path.join(KILN, "tools"))
 from kiln2 import *  # noqa: F401,F403
 from refs3 import icon, img, UNDER
 import icons3d
