@@ -207,11 +207,13 @@ a.step:hover .step__name { text-decoration: underline; text-underline-offset: 4p
 /* ---------- Spec table (1px grid, label above value) ---------- */
 .spec {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 3px solid var(--ink); margin-top: 36px;
+  border-top: 1px solid var(--ink); margin-top: 24px;
 }
 .spec--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .spec > div { border-bottom: 1px solid var(--rule); padding: 16px 16px 20px 0; }
-.spec > div + div { padding-left: 16px; border-left: 1px solid var(--rule); }
+.spec > div:not(:nth-child(3n+1)) { padding-left: 16px; border-left: 1px solid var(--rule); }
+.spec--2 > div:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+.spec--2 > div:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--rule); }
 .spec dt { font: 500 12px/16px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); }
 .spec dd { font: 400 18px/26px var(--font-sans); margin-top: 8px; }
 .spec dd small { display: block; font: 400 15px/22px var(--font-sans); color: var(--ink-muted); margin-top: 4px; }
@@ -231,8 +233,8 @@ a.step:hover .step__name { text-decoration: underline; text-underline-offset: 4p
 
 /* ---------- Code and tags ---------- */
 code, .code {
-  font-family: var(--font-mono); font-size: .88em;
-  background: var(--panel); padding: 1px 5px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: .8em; font-weight: 400;
+  background: var(--panel); padding: .1em .35em; border-radius: 4px; white-space: nowrap;
 }
 .code-panel {
   margin-top: 24px; background: var(--panel); padding: 20px 24px; border-radius: 12px;
@@ -255,6 +257,19 @@ code, .code {
 .article__notes dd { font: 400 14px/20px var(--font-sans); margin-top: 4px; }
 .article__body { grid-column: 1 / span 8; margin-top: 48px; }
 .article__wide { grid-column: 1 / -1; }
+
+/* Contents of a long page, in the notes column */
+.toc { padding-top: 12px; border-top: 1px solid var(--rule); }
+.article--long .article__notes { grid-row: 1; }
+.article__toc { grid-column: 10 / span 3; grid-row: 3; align-self: start; margin-top: 96px; }
+.toc ol { list-style: none; padding: 0; margin: 8px 0 0; }
+.toc li + li { margin-top: 6px; }
+.toc a { display: grid; grid-template-columns: 28px 1fr; font: 400 14px/20px var(--font-sans); color: var(--ink-2); text-decoration: none; }
+.toc a span { font: 500 12px/20px var(--font-mono); color: var(--dimmed); }
+.toc a:hover { color: var(--ink); }
+
+/* Paper figures: link to the full-size image */
+.paperfig .thumb { display: block; }
 
 .prose { font: 400 20px/32px var(--font-sans); max-width: 640px; }
 .prose > * + * { margin-top: 20px; }
@@ -303,7 +318,7 @@ code, .code {
 .job li::before { content: "—"; position: absolute; left: 0; color: var(--ink-muted); }
 
 /* ---------- 404 ---------- */
-.dotnum { font: 900 300px/280px var(--font-dot); letter-spacing: .02em; color: var(--ember); }
+.dotnum { font: 900 300px/280px var(--font-dot); letter-spacing: .02em; color: var(--ink); }
 
 /* ---------- Footer ---------- */
 .foot {
@@ -318,7 +333,8 @@ code, .code {
 @media (max-width: 1000px) {
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .article__head, .article__body { grid-column: 1 / span 9; }
-  .article__notes { grid-column: 1 / -1; grid-row: 2; margin-top: 24px; padding-top: 0; }
+  .article__notes, .article--long .article__notes { grid-column: 1 / -1; grid-row: 2; margin-top: 24px; padding-top: 0; }
+  .article__toc { display: none; }
   .article__notes dl { display: flex; flex-wrap: wrap; gap: 16px 36px; }
   .article__notes dl > div + div { margin-top: 0; }
 }
@@ -350,4 +366,14 @@ code, .code {
   .postnav a:last-child { text-align: left; }
   .dotnum { font-size: 180px; line-height: 170px; }
   .foot { margin-top: 96px; flex-direction: column; }
+  /* About: name and intro first, then photo and contacts */
+  .about__main { order: 1; margin-top: 0; }
+  .about__side { order: 2; margin-top: 72px; }
+  /* Paper figures stay legible: scroll sideways at 820px */
+  .paperfig .thumb { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .paperfig .thumb img { width: 820px; max-width: none; }
+  .paperfig figcaption::before { content: "← scroll →  "; font: 500 11px/16px var(--font-mono); letter-spacing: .1em; color: var(--dimmed); }
+  :lang(ru) .paperfig figcaption::before { content: "← прокрутка →  "; }
+  .spec > div, .spec--2 > div { padding-left: 0 !important; border-left: 0 !important; }
+  .toc { display: none; }
 }

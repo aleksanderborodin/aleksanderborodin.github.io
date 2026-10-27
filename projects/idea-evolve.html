@@ -119,7 +119,7 @@
     </header>
 
     <main id="main">
-      <article class="article g">
+      <article class="article article--long g">
         <header class="article__head">
           <p class="lab"><a href="/">Projects</a> · Open source</p>
           <h1 class="pt">Idea Evolve — Evolutionary Multi-Agent AI Framework</h1>
@@ -133,12 +133,25 @@
           </dl>
         </aside>
 
-        <figure class="fig article__wide">
-          <div class="thumb"><img src="/assets/diagrams/idea-evolve-en.webp" alt="Diagram. Panel (a), one Idea Evolve generation: the architect assigns roles, agents write and test code, the evaluator scores candidates, a critic audits the pipeline and knowledge, and the knowledge base (orange frame) grows. Panel (b): what worked goes to the next generation, which reads the knowledge base before writing." width="2400" height="1032" fetchpriority="high"></div>
+        <figure class="fig article__wide paperfig">
+          <a class="thumb" href="/assets/diagrams/idea-evolve-en.webp"><img src="/assets/diagrams/idea-evolve-en.webp" alt="Diagram. Panel (a), one Idea Evolve generation: the architect assigns roles, agents write and test code, the evaluator scores candidates, a critic audits the pipeline and knowledge, and the knowledge base (orange frame) grows. Panel (b): what worked goes to the next generation, which reads the knowledge base before writing." width="2400" height="1032" fetchpriority="high"></a>
           <figcaption>Panel (a): one generation. Each phase adds to the knowledge base, the only part that grows (orange frame). Panel (b): the next generation reads it before writing anything. Agent counts and candidate scores are example data; the Sidon result, 66 → 105 in 7 generations, is real.</figcaption>
         </figure>
+        <nav class="toc article__toc" aria-label="On this page">
+          <p class="lab">On this page</p>
+          <ol>
+            <li><a href="#s1"><span>01</span>Headline result</a></li>
+            <li><a href="#s2"><span>02</span>Problem</a></li>
+            <li><a href="#s3"><span>03</span>Approach</a></li>
+            <li><a href="#s4"><span>04</span>Pipeline</a></li>
+            <li><a href="#s5"><span>05</span>Agent types</a></li>
+            <li><a href="#s6"><span>06</span>Dashboard</a></li>
+            <li><a href="#s7"><span>07</span>Harnesses</a></li>
+            <li><a href="#s8"><span>08</span>Using it on your own problem</a></li>
+          </ol>
+        </nav>
 
-        <section class="sec article__body">
+        <section class="sec article__body" id="s1">
           <p class="lab">01 — Headline result</p>
           <h2 class="st">Sidon set: 66 → 105 in 7 autonomous generations</h2>
           <div class="keyfig">
@@ -152,19 +165,19 @@
             <figcaption>Dashboard Overview tab — score progression, generation timeline, and key metrics across a run.</figcaption>
           </figure>
         </div>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s2">
           <p class="lab">02 — Problem</p>
           <h2 class="st">Why single-agent LLM prompting stalls on hard problems</h2>
           <p class="body">Hard optimization problems resist single-shot LLM prompting. A single agent gets stuck in a local optimum, repeats the same ideas, and stops improving. The solution space is too large for one perspective to cover.</p>
           <p class="body">Best-of-N sampling from one model helps a little, but the samples are drawn from the same distribution — you get variance, not diversity. The failure mode is recognisable: after a few tries the model cycles through the same three approaches, never finding the fourth.</p>
         </section>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s3">
           <p class="lab">03 — Approach</p>
           <h2 class="st">Role-specialized agents plus a shared, growing knowledge base</h2>
           <p class="body">Idea Evolve runs 3–8 specialized agents in parallel inside each generation. Each agent writes candidate solutions and iterates on them for 40+ cycles. The best survive, get combined, and seed the next generation — a classic evolutionary loop, except the variation is produced by agents with different roles instead of random mutation.</p>
           <p class="body">What makes it compound is a <strong>shared knowledge base</strong>: after every generation an Evaluator extracts ideas, patterns, and facts into a growing hierarchy (State of Affairs → Clusters → Ideas/Patterns/Facts). The next generation's agents read that knowledge before writing anything, so lessons transfer across runs — the system literally gets smarter each generation.</p>
         </section>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s4">
           <p class="lab">04 — Pipeline</p>
           <h2 class="st">Six phases per generation</h2>
           <p class="body">A stateless orchestrator runs every generation through the same six phases. All state lives in files — if the orchestrator crashes, restart the same command and it resumes exactly where it left off, skipping completed agents and killing orphans.</p>
@@ -207,7 +220,7 @@
             <figcaption>Pipeline tab — per-agent status (waiting / running / done / failed) and the data flow between phases in one generation.</figcaption>
           </figure>
         </div>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s5">
           <p class="lab">05 — Agent types</p>
           <h2 class="st">Six specialized roles, one evolving population</h2>
           <p class="body">Each role contributes a different kind of variation. The orchestrator mixes them every generation so the population keeps genuine diversity — the thing vanilla best-of-N can't deliver.</p>
@@ -222,7 +235,7 @@
             <div><dt>Experimentator</dt><dd>Builds shared helper utilities that every other agent can call.</dd></div>
           </dl>
         </div>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s6">
           <p class="lab">06 — Dashboard</p>
           <h2 class="st">Inspect any run live, straight from the filesystem</h2>
           <p class="body">A Flask app reads directly from each run's directory — no database, no ingest job. It auto-detects every problem and attempt and renders six tabs: Overview, Pipeline, Architecture, Solutions, Knowledge, and Reports.</p>
@@ -247,13 +260,13 @@
             </figure>
           </div>
         </div>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s7">
           <p class="lab">07 — Harnesses</p>
           <h2 class="st">Route any agent through any provider</h2>
           <p class="body">Every agent session launches through a harness adapter. <strong>claude-code</strong> is the default; <strong>opencode</strong> is a second adapter that forwards to any provider OpenCode supports — Anthropic, OpenAI, Gemini, local models, or routed through a gateway like ModelGate. Both adapters expose the same contract, so timeout recovery and debrief work identically.</p>
           <p class="body">Override is per-role in a single YAML block — keep architects and evaluators on Claude for reasoning fidelity while routing explorers to a cheaper provider, or flip the default and keep only the architect on Claude. No code changes required.</p>
         </section>
-        <section class="sec article__body">
+        <section class="sec article__body" id="s8">
           <p class="lab">08 — Using it on your own problem</p>
           <h2 class="st">Drop a folder in <code>problems/</code> and run the orchestrator</h2>
           <p class="body">A new problem is a directory: <code>description.md</code>, <code>constraints.md</code>, an <code>evaluate.py</code> that scores candidates (results cached by content hash), a <code>validate.py</code> that enforces correctness, a <code>metrics.yaml</code> with fitness direction and target, plus <code>helpers/</code> and <code>initial_programs/</code>. The shipped examples — <code>gemm</code>, <code>permcodes</code>, <code>sidon</code> — are the best starting templates.</p>
