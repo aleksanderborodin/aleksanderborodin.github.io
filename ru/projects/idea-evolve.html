@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f3efe7">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -101,7 +101,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="preload" href="/assets/fonts/IBMPlexSansCondensed-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@900&display=swap">
   <link rel="stylesheet" href="/css/kiln.css">
 </head>
 <body>
@@ -133,8 +134,8 @@
         </aside>
 
         <figure class="fig article__wide">
-          <div class="thumb"><img src="/assets/diagrams/idea-evolve-ru.webp" alt="Схема: одно поколение Idea Evolve. Архитектор, работа агентов, оценщик, критик и финализация; оценщик пишет идеи, паттерны и факты в общую базу знаний, которую следующие агенты читают первой." width="2400" height="1184" fetchpriority="high"></div>
-          <figcaption>Как устроено одно поколение. Оранжевый цикл — то, за счёт чего система накапливает опыт: оценщик пишет идеи, паттерны и факты в общую базу знаний, а агенты следующего поколения читают её до того, как что-либо написать.</figcaption>
+          <div class="thumb"><img src="/assets/diagrams/idea-evolve-ru.webp" alt="Схема. Панель (a), одно поколение Idea Evolve: архитектор распределяет роли, агенты пишут и тестируют код, оценщик оценивает кандидатов, критик проверяет конвейер и знания, а база знаний (оранжевая рамка) растёт. Панель (b): то, что сработало, уходит следующему поколению, и оно читает базу знаний перед записью." width="2400" height="1032" fetchpriority="high"></div>
+          <figcaption>Панель (a): одно поколение. Каждая фаза пополняет базу знаний — единственное, что растёт (оранжевая рамка). Панель (b): следующее поколение читает её до того, как что-либо написать. Число агентов и оценки кандидатов — пример; результат реальный: множество Сидона, 66 → 105 за 7 поколений.</figcaption>
         </figure>
 
         <section class="sec article__body">

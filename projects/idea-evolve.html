@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f3efe7">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -101,7 +101,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Doto:wght@700&display=swap">
+  <link rel="preload" href="/assets/fonts/IBMPlexSansCondensed-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@900&display=swap">
   <link rel="stylesheet" href="/css/kiln.css">
 </head>
 <body>
@@ -133,8 +134,8 @@
         </aside>
 
         <figure class="fig article__wide">
-          <div class="thumb"><img src="/assets/diagrams/idea-evolve-en.webp" alt="Diagram: one Idea Evolve generation. Architect, agent work, evaluator, critic and finalize; the evaluator writes ideas, patterns and facts to a shared knowledge base that the next agents read first." width="2400" height="1184" fetchpriority="high"></div>
-          <figcaption>How one generation works. The orange loop is what makes the system compound: the evaluator writes ideas, patterns and facts to the shared knowledge base, and the next generation's agents read it before writing anything.</figcaption>
+          <div class="thumb"><img src="/assets/diagrams/idea-evolve-en.webp" alt="Diagram. Panel (a), one Idea Evolve generation: the architect assigns roles, agents write and test code, the evaluator scores candidates, a critic audits the pipeline and knowledge, and the knowledge base (orange frame) grows. Panel (b): what worked goes to the next generation, which reads the knowledge base before writing." width="2400" height="1032" fetchpriority="high"></div>
+          <figcaption>Panel (a): one generation. Each phase adds to the knowledge base, the only part that grows (orange frame). Panel (b): the next generation reads it before writing anything. Agent counts and candidate scores are example data; the Sidon result, 66 → 105 in 7 generations, is real.</figcaption>
         </figure>
 
         <section class="sec article__body">

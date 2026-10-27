@@ -4,12 +4,12 @@ Layout from Kiln/tools/preview.py: mark top left, mono label, two-line title, au
 Russian pages use the АБ mark and the Russian author line.
 
 Usage: python3 scripts/link_previews.py
-Needs the Kiln folder (KILN env var, default ~/Desktop/Kiln/Kiln) and JetBrains Mono
+Needs the Kiln folder (KILN env var, default ~/Desktop/Kiln) and JetBrains Mono
 static TTFs (FONT_DIR env var, default ~/.local/share/fonts/kiln).
 """
 import os, sys
 
-KILN = os.environ.get("KILN", os.path.expanduser("~/Desktop/Kiln/Kiln"))
+KILN = os.environ.get("KILN", os.path.expanduser("~/Desktop/Kiln"))
 os.environ.setdefault("FONT_DIR", os.path.expanduser("~/.local/share/fonts/kiln"))
 sys.path.insert(0, os.path.join(KILN, "tools"))
 from PIL import Image, ImageDraw  # noqa: E402
