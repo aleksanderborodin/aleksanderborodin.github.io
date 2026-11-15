@@ -39,8 +39,8 @@ def card(lang, label, line1, line2, scene, icon_box=(700, 70, 460, 490)):
 # name: (icon, {lang: (label, line1, line2)}) — titles shortened to two lines of at most 18 characters
 PAGES = {
     "home": (icons3d.wrench, {
-        "en": ("Projects and notes", "Alexander Borodin", "AI agents, LLMs"),
-        "ru": ("Проекты и заметки", "Александр Бородин", "AI-агенты и LLM")}),
+        "en": ("Generative design · Robotics", "Alexander Borodin", "ML Engineer"),
+        "ru": ("Проектирование · Робототехника", "Александр Бородин", "ML-инженер")}),
     "about": (icons3d.person, {
         "en": ("About", "Alexander Borodin", "Experience and CV"),
         "ru": ("Обо мне", "Александр Бородин", "Опыт и резюме")}),

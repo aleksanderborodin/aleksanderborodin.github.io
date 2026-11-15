@@ -1,0 +1,111 @@
+% Kiln CV template: a white drawing sheet, IBM Plex, ink rules, one ember thing (the mark).
+% The alternative Kiln-style CV (kept for later; the main CV is cv/CV_Borodin_EN.tex). Shared by cv/kiln/CV_Borodin_EN.tex and CV_Borodin_RU.tex. Build from the repo root with
+%   xelatex -output-directory=cv/build cv/kiln/CV_Borodin_EN.tex
+% Fonts: IBM Plex Sans Condensed and IBM Plex Mono from IBM's own release (Cyrillic included).
+
+\usepackage[a4paper,top=10mm,bottom=7mm,left=12mm,right=12mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[hidelinks,unicode]{hyperref}
+
+% ---------------------------------------------------------------- tokens (Kiln 4 · Colour)
+\definecolor{ink}{HTML}{16130F}
+\definecolor{ink2}{HTML}{605A52}
+\definecolor{dimmed}{HTML}{9F998F}
+\definecolor{rule}{HTML}{D1CDC6}
+\definecolor{ember}{HTML}{E84C14}
+
+% ---------------------------------------------------------------- type (Kiln 3 · Type)
+\setmainfont{IBM Plex Sans Cond}[BoldFont={IBM Plex Sans Cond SmBld}, ItalicFont={IBM Plex Sans Cond}]
+\newfontfamily\monofont{IBM Plex Mono Medm}[BoldFont={IBM Plex Mono SmBld}]
+\newfontfamily\labelfont{IBM Plex Mono Medm}[LetterSpace=11]
+
+\color{ink}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\emergencystretch=2em
+\raggedright
+
+\hyphenpenalty=10000 \exhyphenpenalty=10000   % ragged right, no broken words (Kiln 3 · Type)
+
+% the label column, used where a label names a row (skills)
+\newlength{\labw}\setlength{\labw}{25mm}
+\newlength{\bodyw}\setlength{\bodyw}{\dimexpr\textwidth-\labw\relax}
+
+% ---------------------------------------------------------------- pieces
+% Mono capitals with +0.11em, the label voice
+\newcommand{\lab}[1]{{\labelfont\fontsize{6.6}{9}\selectfont\color{ink2}\MakeUppercase{#1}}}
+% Dates and small technical facts in mono
+\newcommand{\mono}[1]{{\monofont\fontsize{7.4}{10}\selectfont\color{ink2}#1}}
+% A link shown as its address, quiet
+\newcommand{\addr}[2]{\href{#1}{\mono{#2}}}
+
+% Section: a heavy ink rule, then the label (the site's section pattern)
+\newcommand{\cvsection}[1]{%
+  \par\vspace{3pt}%
+  {\color{ink}\rule{\textwidth}{1.4pt}}\par
+  \vspace{2.5pt}\lab{#1}\par\vspace{3pt}%
+}
+
+% An entry: title left, date right in mono (the site's job row), place under it, then the list
+\newcommand{\entry}[4]{% #1 date, #2 title, #3 place, #4 list
+  \par\noindent{\bfseries\fontsize{9.8}{12}\selectfont #2}\hfill\mono{#1}\par
+  {\color{ink2}#3}\par
+  #4\par\vspace{3pt}%
+}
+
+% A labelled row: mono label left, text right (\leavevmode keeps both first baselines aligned)
+\newcommand{\row}[2]{%
+  \par\noindent
+  \parbox[t]{\labw}{\leavevmode\raggedright\mono{#1}}%
+  \parbox[t]{\dimexpr\linewidth-\labw\relax}{\leavevmode\raggedright #2}\par\vspace{2.5pt}%
+}
+
+% A one-line fact with its date on the right
+\newcommand{\fact}[2]{\par\noindent #1\hfill\mono{#2}\par\vspace{1pt}}
+
+\setlist[itemize]{leftmargin=1em,labelsep=0.35em,itemsep=0pt,topsep=1.5pt,parsep=0pt,partopsep=0pt}
+\renewcommand\labelitemi{{\color{dimmed}—}}
+
+% The photo, cropped square with Kiln's panel radius
+\newcommand{\photo}[2]{%
+  \begin{tikzpicture}
+    \clip[rounded corners=2.2mm] (0,0) rectangle (#2,#2);
+    \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=#2,height=#2]{#1}};
+  \end{tikzpicture}%
+}
+
+% Header: lockup left, contacts right, the heavy rule under it (the site header)
+\newcommand{\cvheader}[2]{% #1 lockup pdf, #2 contact lines
+  \noindent
+  \begin{minipage}[c]{0.5\textwidth}\includegraphics[height=11mm]{#1}\end{minipage}%
+  \begin{minipage}[c]{0.5\textwidth}\raggedleft #2\end{minipage}\par
+  \vspace{5pt}{\color{ink}\rule{\textwidth}{1.4pt}}\par\vspace{7pt}%
+}
+
+% Lede size (Russian sets wider, so its file may override this)
+\newcommand{\ledesize}{\fontsize{10}{12.6}\selectfont}
+
+% Title block: label, name, lede; photo on the right
+\newcommand{\cvtitle}[4]{% #1 label, #2 name, #3 lede, #4 photo file
+  \noindent
+  \begin{minipage}[t]{\dimexpr\textwidth-27mm\relax}
+    \raggedright\lab{#1}\par\vspace{3pt}
+    {\bfseries\fontsize{22}{25}\selectfont #2}\par\vspace{3pt}
+    {\ledesize\color{ink2}#3}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{22mm}\vspace{0pt}\photo{#4}{22mm}\end{minipage}\par
+}
+
+\fontsize{9}{11}\selectfont
+
+% Two columns of labelled rows (short values, e.g. skills)
+\newenvironment{twocol}{\par\noindent\begin{minipage}[t]{0.485\textwidth}}{\end{minipage}\par}
+\newcommand{\nextcol}{\end{minipage}\hfill\begin{minipage}[t]{0.485\textwidth}}

@@ -1,0 +1,82 @@
+\documentclass[9pt]{article}
+\input{cv/kiln/kiln-cv.tex}
+\hypersetup{
+  pdftitle={Alexander Borodin -- ML Engineer | LLMs \& AI Agents},
+  pdfauthor={Alexander Borodin},
+  pdfsubject={Curriculum vitae}
+}
+
+\begin{document}
+\fontsize{9}{11}\selectfont
+
+\cvheader{cv/kiln/lockup.pdf}{%
+  \href{mailto:apdorodin765@gmail.com}{\mono{apdorodin765@gmail.com}}\quad
+  \mono{+7 908 971 16 97}\par
+  \addr{https://github.com/aleksanderborodin}{github.com/aleksanderborodin}\quad
+  \addr{https://t.me/aleksanderbor}{t.me/aleksanderbor}\par
+  \addr{https://aleksanderborodin.github.io/}{aleksanderborodin.github.io}}
+
+\cvtitle{ML Engineer · LLMs and AI agents}{Alexander Borodin}%
+{ML engineer and Applied Mathematics and Physics student at MIPT. I build LLM systems, from RAG and model integrations to multi-agent workflows and agent-driven evolution: iterative search and improvement of solutions. My experience includes benchmark development, model evaluation, and applied optimization.}%
+{assets/profile-original.jpg}
+
+\cvsection{Experience}
+\entry{Feb–Aug 2026 · 6 months}{ML Engineer — Research Internship}{CKM, MIPT}{%
+\begin{itemize}
+  \item Developed LLM-based agents and benchmarks to evaluate their performance.
+  \item Worked on agent-driven evolution: systems in which agents iteratively generate, evaluate, and improve solutions.
+  \item Contributed to two research papers: one under review at ACL and another in preparation for submission.
+\end{itemize}}
+\entry{Jan–May 2026}{Product / AI Engineer}{\href{https://modelgate.ru}{ModelGate.ru} — LLM API gateway and proxy service}{%
+\begin{itemize}
+  \item Developed an LLM API gateway providing a unified interface to models from multiple providers.
+  \item Integrated provider APIs and implemented request routing with model and provider selection.
+  \item Built core service components, including the backend and public website. Stack: Python, LLM APIs.
+\end{itemize}}
+\entry{Sep 2024 – Feb 2025}{Model and Algorithm Developer}{Regional Bank, client project}{%
+\begin{itemize}
+  \item Developed a cash collection optimization algorithm; historical-data analysis projected a 20M RUB annual profit increase.
+  \item Built a CBR web-scraping/analysis pipeline for data unavailable via API and an internal document Q\&A RAG system.
+  \item Stack: Python, NumPy, Pandas, RAG, web scraping.
+\end{itemize}}
+
+\cvsection{Projects}
+\entry{2026}{Idea Evolve}{\addr{https://github.com/aleksanderborodin/idea_evolve}{github.com/aleksanderborodin/idea\_evolve}}{%
+\begin{itemize}
+  \item Evolutionary multi-agent framework: specialized Claude agents work in parallel across generations and build a shared knowledge base.
+  \item Improved Sidon set search from 66 to 105 elements in 7 autonomous generations, passing the √N ≈ 100 reference for N = 10,000.
+  \item Implemented role-specialized agents, resumable filesystem state, evaluation/knowledge extraction, and a Flask dashboard.
+  \item Stack: Python 3.12+, Claude Code CLI, OpenCode, Anthropic API, Flask, multi-agent orchestration.
+\end{itemize}}
+\entry{2025}{Prefix Injection Jailbreak}{\addr{https://github.com/aleksanderborodin/prefix_injection_jailbreak}{github.com/aleksanderborodin/prefix\_injection\_jailbreak}}{%
+\begin{itemize}
+  \item Researched Choice-Blindness-inspired prefix attacks; templates made Gemini 2.5 Pro and DeepSeek R1 complete MaliciousInstruct prompts with near-100\% success vs. a near-zero baseline.
+  \item Stack: Python, LLM APIs, model evaluation, prompt/context engineering.
+\end{itemize}}
+\entry{2025}{Yoola Explain}{\addr{https://github.com/aleksanderborodin/yoola_explain}{github.com/aleksanderborodin/yoola\_explain}}{%
+\begin{itemize}
+  \item Browser extension that extracts Terms of Service and returns structured LLM summaries: key points, data collection notes, and warnings.
+  \item Added multi-language support and caching. Stack: JavaScript, FastAPI, OpenRouter, LLM APIs.
+\end{itemize}}
+
+\cvsection{Education}
+\entry{2023–2027}{Bachelor's degree, Applied Mathematics and Physics}{FPMI MIPT, in progress · GPA 7.8/10}{%
+Coursework: mathematical analysis, probability, linear algebra, algorithms, computational complexity, ML, physics, economics.}
+
+\cvsection{Skills}
+\begin{twocol}
+\row{Programming}{Python advanced; C++ intermediate; C and Assembler basic code reading.}
+\row{Data / ML}{PyTorch basic; NumPy; Pandas; PostgreSQL; Matplotlib; ClearML; Excel.}
+\row{NLP / LLM}{BM25; embeddings; RAG; LLM APIs; evaluation; prompt/context engineering; jailbreak testing.}
+\nextcol
+\row{Agentic tools}{Claude Code CLI; OpenCode; multi-agent orchestration; filesystem-based workflows.}
+\row{Backend}{FastAPI; Flask; LangChain; LangGraph; Linux home server administration and workstation usage.}
+\row{Languages}{Russian native; English B2+ certified by MIPT placement test.}
+\end{twocol}
+
+\cvsection{Programs and achievements}
+\entry{Jul 21 – Aug 4, 2026}{\href{https://airi.net/ru/summer-school-2026/}{Summer with AIRI 2026} — Artificial Intelligence Summer School}{Final team project: \href{https://github.com/n4rly-boop/ideas-lake}{Ideas Lake}, long-term memory for evolutionary AI workflows using hybrid retrieval and a knowledge graph.}{}
+\fact{\textbf{Gold Medal}, \href{https://iepho.ru/}{International Experimental Physics Olympiad (IEPhO)}}{2023}
+\fact{\textbf{Prize-winner}, \href{https://vos.olimpiada.ru/}{All-Russian School Olympiad in Physics}, final stage — Grades 10 and 11}{2022, 2023}
+
+\end{document}

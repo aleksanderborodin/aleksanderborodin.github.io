@@ -1,0 +1,86 @@
+\documentclass[9pt]{article}
+\input{cv/kiln/kiln-cv.tex}
+\hypersetup{
+  pdftitle={Александр Бородин -- ML-инженер | LLM и AI-агенты},
+  pdfauthor={Александр Бородин},
+  pdfsubject={Резюме}
+}
+
+% Cyrillic sets wider: a quarter point smaller keeps the CV on one page
+\renewcommand{\ledesize}{\fontsize{9.6}{12.2}\selectfont}
+\setlength{\labw}{21mm}   % short Russian labels: give the values the width
+
+\begin{document}
+\fontsize{8.75}{10.5}\selectfont
+
+\cvheader{cv/kiln/lockup-ru.pdf}{%
+  \href{mailto:apdorodin765@gmail.com}{\mono{apdorodin765@gmail.com}}\quad
+  \mono{+7 908 971 16 97}\par
+  \addr{https://github.com/aleksanderborodin}{github.com/aleksanderborodin}\quad
+  \addr{https://t.me/aleksanderbor}{t.me/aleksanderbor}\par
+  \addr{https://aleksanderborodin.github.io/ru/}{aleksanderborodin.github.io/ru}}
+
+\cvtitle{ML-инженер · LLM и AI-агенты}{Александр Бородин}%
+{ML-инженер, студент ФПМИ МФТИ. Разрабатываю системы на~основе LLM: от~RAG и~интеграции моделей до~мультиагентных систем и~агентной эволюции~— итеративного поиска и~улучшения решений с~помощью агентов. Есть опыт построения бенчмарков, оценки моделей и~решения задач оптимизации.}%
+{assets/profile-original.jpg}
+
+\cvsection{Опыт работы}
+\entry{фев–авг 2026 · 6 мес}{ML-инженер~— исследовательская практика}{ЦКМ МФТИ}{%
+\begin{itemize}
+  \item Разрабатывал агентов на~основе LLM и~бенчмарки для оценки качества их работы.
+  \item Работал над агентной эволюцией: системами, в~которых агенты итеративно генерируют, проверяют и~улучшают решения.
+  \item Участвовал в~подготовке двух научных статей: одна находится на~рецензировании в~ACL, вторая готовится к~подаче.
+\end{itemize}}
+\entry{янв–май 2026}{Product / AI Engineer}{\href{https://modelgate.ru}{ModelGate.ru}~— LLM API-шлюз и~прокси-сервис}{%
+\begin{itemize}
+  \item Разрабатывал LLM API-шлюз с~единым интерфейсом для доступа к~моделям разных провайдеров.
+  \item Интегрировал API провайдеров и~реализовывал маршрутизацию запросов с~выбором модели и~провайдера.
+  \item Создавал основные компоненты сервиса, включая backend и~публичный сайт. Стек: Python, LLM API.
+\end{itemize}}
+\entry{сен 2024 – фев 2025}{Разработчик моделей и~алгоритмов}{Розничный банк, клиентский проект}{%
+\begin{itemize}
+  \item Разработал алгоритм оптимизации инкассации; анализ исторических данных дал прогноз +20~млн~руб. годовой прибыли.
+  \item Построил пайплайн для скрапинга и~анализа данных ЦБ РФ, недоступных через API, и~внутреннюю RAG-систему для вопросов по~документам.
+  \item Стек: Python, NumPy, Pandas, RAG, скрапинг.
+\end{itemize}}
+
+\cvsection{Проекты}
+\entry{2026}{Idea Evolve}{\addr{https://github.com/aleksanderborodin/idea_evolve}{github.com/aleksanderborodin/idea\_evolve}}{%
+\begin{itemize}
+  \item Эволюционный мультиагентный фреймворк: специализированные Claude-агенты работают параллельно по~поколениям и~строят общую базу знаний.
+  \item Улучшил поиск множества Сидона с~66 до~105 элементов за~7 автономных поколений, выше ориентира √N~≈~100 при N~=~10\,000.
+  \item Реализовал ролевую специализацию агентов, возобновляемое состояние, извлечение знаний и~Flask-дашборд.
+  \item Стек: Python 3.12+, Claude Code CLI, OpenCode, Anthropic API, Flask, мультиагентная оркестрация.
+\end{itemize}}
+\entry{2025}{Prefix Injection Jailbreak}{\addr{https://github.com/aleksanderborodin/prefix_injection_jailbreak}{github.com/aleksanderborodin/prefix\_injection\_jailbreak}}{%
+\begin{itemize}
+  \item Исследовал префиксные атаки, вдохновлённые Choice Blindness: шаблоны заставляли Gemini 2.5 Pro и~DeepSeek R1 завершать MaliciousInstruct-запросы почти в~100\% случаев против почти нулевого базового уровня.
+  \item Стек: Python, LLM API, оценка моделей, проектирование промптов и~контекста.
+\end{itemize}}
+\entry{2025}{Yoola Explain}{\addr{https://github.com/aleksanderborodin/yoola_explain}{github.com/aleksanderborodin/yoola\_explain}}{%
+\begin{itemize}
+  \item Браузерное расширение: извлекает Terms of Service и~возвращает структурированное LLM-резюме~— ключевые пункты, сбор данных и~предупреждения.
+  \item Добавил мультиязычность и~кэширование. Стек: JavaScript, FastAPI, OpenRouter, LLM API.
+\end{itemize}}
+
+\cvsection{Образование}
+\entry{2023–2027}{Бакалавриат, прикладная математика и~физика}{ФПМИ МФТИ, учусь · GPA 7.8/10}{%
+Курсы: матанализ, теория вероятностей, линейная алгебра, алгоритмы, вычислительная сложность, ML, физика, экономика.}
+
+\cvsection{Навыки}
+\begin{twocol}
+\row{Код}{Python: продвинутый; C++: средний; чтение кода на~C и~Assembler.}
+\row{Данные / ML}{PyTorch: базовый; NumPy; Pandas; PostgreSQL; Matplotlib; ClearML; Excel.}
+\row{NLP / LLM}{BM25; эмбеддинги; RAG; LLM API; оценка моделей; проектирование промптов и~контекста; тестирование джейлбрейков.}
+\nextcol
+\row{Агенты}{Claude Code CLI; OpenCode; мультиагентная оркестрация; файловые процессы.}
+\row{Бэкенд}{FastAPI; Flask; LangChain; LangGraph; Linux: домашний сервер и~рабочая станция.}
+\row{Языки}{Русский: родной; английский: B2+ по~placement test МФТИ.}
+\end{twocol}
+
+\cvsection{Образовательные программы и достижения}
+\entry{21 июл – 4 авг 2026}{\href{https://airi.net/ru/summer-school-2026/}{«Лето с~AIRI 2026»}~— летняя школа по~искусственному интеллекту}{Итоговый командный проект: \href{https://github.com/n4rly-boop/ideas-lake}{«Озеро идей»}~— долговременная память для эволюционных AI-систем с~гибридным поиском и~графом знаний.}{}
+\fact{\textbf{Золотая медаль}, \href{https://iepho.ru/}{Международная экспериментальная олимпиада по~физике (IEPhO)}}{2023}
+\fact{\textbf{Призёр заключительного этапа} \href{https://vos.olimpiada.ru/}{ВсОШ по~физике}~— 10 и~11 классы}{2022, 2023}
+
+\end{document}

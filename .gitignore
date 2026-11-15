@@ -28,3 +28,6 @@ yarn-error.log*
 # Python (local dev server artifacts)
 __pycache__/
 *.pyc
+
+# CV build output
+cv/build/
